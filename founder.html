@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sabrine Hammami · Founder, Areté</title>
+<meta name="description" content="Sabrine Hammami, Founder & CEO of Areté, the check engine light for decision-making.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a; --ink:#e8e8ea; --ink2:#9a9aa2; --ink3:#5a5a62; --ink4:#33333a;
+    --ice:#4fc4f5; --line:rgba(255,255,255,0.07);
+    --mono:'IBM Plex Mono','Courier New',monospace;
+    --sans:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+    --pad:clamp(28px,7vw,120px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:200;
+       -webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+  a{color:var(--ice);text-decoration:none;transition:opacity .25s,color .25s}
+  a:hover{opacity:.7}
+  .ice{color:var(--ice)}
+  .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.38em;text-transform:uppercase;
+           color:var(--ice);opacity:.85;display:block;margin-bottom:26px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 var(--pad)}
+
+  /* ── topbar + logo (the signal bars) ─────────────────── */
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;
+          justify-content:space-between;padding:26px var(--pad);
+          background:linear-gradient(180deg,rgba(10,10,10,.92),transparent)}
+  .logo{display:flex;align-items:center;gap:12px}
+  .bars{display:flex;align-items:flex-end;gap:4px}
+  .bars i{width:2px;border-radius:1px;background:var(--ice);display:block}
+  .bars i:nth-child(1){height:10px}.bars i:nth-child(2){height:16px}
+  .wm{font-family:var(--mono);font-size:11px;font-weight:300;letter-spacing:0.42em;
+      color:rgba(232,232,234,.5);text-transform:uppercase}
+  .top-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink2)}
+  .top-cta:hover{color:var(--ice);opacity:1}
+
+  /* corner registration ticks (instrument framing) */
+  .tick{position:fixed;width:13px;height:13px;z-index:30;pointer-events:none;opacity:.55}
+  .tick::before,.tick::after{content:'';position:absolute;background:var(--ink4)}
+  .tick::before{height:1px;width:100%}.tick::after{width:1px;height:100%}
+  .tk-tr{top:20px;right:20px}.tk-tr::before{right:0}.tk-tr::after{right:0}
+  .tk-bl{bottom:20px;left:20px}.tk-bl::before{bottom:0}.tk-bl::after{bottom:0}
+  .tk-br{bottom:20px;right:20px}.tk-br::before{bottom:0;right:0}.tk-br::after{bottom:0;right:0}
+
+  /* ── hero ────────────────────────────────────────────── */
+  .hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding-top:120px;padding-bottom:60px}
+  .cover-mark{display:flex;align-items:flex-end;gap:6px;margin-bottom:40px}
+  .cover-mark i{width:4px;border-radius:1px;background:var(--ice);display:block}
+  .cover-mark i:nth-child(1){height:20px}.cover-mark i:nth-child(2){height:32px}
+  .name{font-family:var(--sans);font-weight:200;font-size:clamp(48px,9vw,116px);line-height:.96;letter-spacing:-0.04em}
+  .role{font-family:var(--sans);font-weight:200;font-size:clamp(19px,2.4vw,28px);color:var(--ink2);
+        line-height:1.4;max-width:24ch;margin-top:30px}
+  .role b{color:var(--ink);font-weight:300}
+  .tag-row{display:flex;align-items:center;gap:20px;margin-top:48px}
+  .rule{width:clamp(90px,14vw,200px);height:1px;background:var(--ice);opacity:.5}
+  .tag{font-family:var(--mono);font-size:11px;letter-spacing:0.42em;text-transform:uppercase;color:var(--ice);white-space:nowrap}
+
+  /* ── section frame ───────────────────────────────────── */
+  section{padding:clamp(70px,11vw,150px) 0;border-top:1px solid var(--line)}
+  h2{font-family:var(--sans);font-weight:200;font-size:clamp(30px,4.4vw,58px);letter-spacing:-0.03em;line-height:1.05}
+  .lead{font-family:var(--sans);font-weight:200;font-size:clamp(19px,2.2vw,27px);color:var(--ink2);
+        line-height:1.45;max-width:30ch;margin-top:26px}
+  p.body{font-size:clamp(15px,1.5vw,17px);color:var(--ink2);max-width:62ch;margin-top:22px;line-height:1.65}
+  p.body b{color:var(--ink);font-weight:400}
+  .edit{color:var(--ice);border-left:1px solid var(--ice);padding-left:16px;opacity:.9}
+
+  .about-grid{display:grid;grid-template-columns:300px 1fr;gap:clamp(40px,6vw,90px);align-items:start}
+  .portrait{aspect-ratio:4/5;border:1px solid var(--line);background:#0d0d0f;position:relative;
+            display:flex;align-items:center;justify-content:center;filter:grayscale(1)}
+  .portrait .mono{font-family:var(--sans);font-weight:200;font-size:72px;color:#1c2a2e;letter-spacing:1px}
+  .portrait .ph{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:var(--mono);
+                font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink3)}
+
+  /* the loop */
+  .loop{margin-top:clamp(40px,6vw,70px);display:flex;flex-direction:column;gap:0}
+  .mnode{display:flex;gap:20px;align-items:flex-start;padding-bottom:34px;position:relative}
+  .mnode:not(:last-child)::after{content:'';position:absolute;left:5px;top:18px;bottom:-2px;width:1px;background:var(--line)}
+  .mdot{width:11px;height:11px;border-radius:50%;background:var(--ice);margin-top:6px;flex-shrink:0;position:relative;z-index:1}
+  .mname{font-family:var(--sans);font-weight:300;font-size:clamp(22px,2.6vw,30px);letter-spacing:-0.02em;line-height:1}
+  .msub{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink3);margin-top:9px;max-width:46ch;line-height:1.6}
+
+  /* signals / highlights */
+  .signals{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+           border:1px solid var(--line);margin-top:clamp(40px,5vw,60px)}
+  .sig{background:var(--bg);padding:30px 26px;display:flex;flex-direction:column;gap:12px;min-height:160px}
+  .sig .k{font-family:var(--mono);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink3)}
+  .sig .v{font-family:var(--sans);font-weight:200;font-size:clamp(22px,2.4vw,30px);letter-spacing:-0.02em;color:var(--ink);line-height:1.1}
+  .sig .v.ice{color:var(--ice);font-weight:300}
+  .sig .d{font-family:var(--mono);font-size:10px;letter-spacing:0.04em;color:var(--ink3);line-height:1.6;margin-top:auto}
+
+  /* contact */
+  .contact-cta{font-family:var(--sans);font-weight:200;font-size:clamp(26px,3.6vw,46px);letter-spacing:-0.02em;line-height:1.15;max-width:20ch}
+  .contact-cta a{font-weight:300}
+  .foot{margin-top:64px;display:flex;flex-direction:column;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;color:var(--ink3)}
+  .foot a{color:var(--ice)} .foot .who b{color:var(--ink);font-weight:400}
+
+  footer{border-top:1px solid var(--line);padding:28px var(--pad);display:flex;justify-content:space-between;
+         flex-wrap:wrap;gap:10px;font-family:var(--mono);font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--ink3)}
+
+  @media (max-width:760px){
+    .about-grid{grid-template-columns:1fr;gap:34px}.portrait{max-width:240px}
+    .signals{grid-template-columns:1fr}
+    .topbar .top-cta{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="tick tk-tr"></div><div class="tick tk-bl"></div><div class="tick tk-br"></div>
+
+<div class="topbar">
+  <a class="logo" href="https://areteprotocol.com"><span class="bars"><i></i><i></i></span><span class="wm">Areté</span></a>
+  <a class="top-cta" href="mailto:sabrine-hammami@areteprotocol.com?subject=Aret%C3%A9%20%C2%B7%20Hello">Contact</a>
+</div>
+
+<!-- HERO -->
+<header class="wrap hero">
+  <div class="cover-mark"><i></i><i></i></div>
+  <span class="eyebrow">Founder · CEO</span>
+  <h1 class="name">Sabrine<br>Hammami</h1>
+  <div class="role">I build the instrument that reads the <b>state behind a decision</b>. Before the call, not after.</div>
+  <div class="tag-row"><span class="rule"></span><span class="tag">Areté · Cognitive Integrity</span></div>
+</header>
+
+<!-- ABOUT -->
+<section><div class="wrap about-grid">
+  <div class="portrait"><img src="founder-portrait.jpg" alt="Sabrine Hammami, Founder &amp; CEO of Areté" style="width:100%;height:100%;object-fit:cover;object-position:54% 50%;display:block"></div>
+  <div>
+    <span class="eyebrow">Founder's note</span>
+    <h2>Why I started Areté.</h2>
+    <p class="body">We instrument everything. Steps, sleep, heart rate, revenue, every variable except the
+      one that quietly decides all the others: <b>the state of the mind at the moment it makes the call.</b>
+      The most consequential decisions a person makes go completely unmeasured. That state gets treated as
+      sacred, unknowable. I never believed that.</p>
+    <p class="body">I studied <b>philosophy and physics at LMU Munich</b>, two fields that ask the same
+      question from opposite ends: what makes a decision sound? Physics taught me that anything real leaves a
+      signal; you just have to build the instrument patient enough to read it. Philosophy taught me what is
+      actually at stake when a mind decides under load: reasoning, bias, integrity.</p>
+    <p class="body">Areté is the instrument I went looking for and couldn't find: a continuous, honest read
+      of your cognitive integrity, <b>delivered before the call, not after.</b> Not a personality test. A
+      check engine light for decision-making. I'm building it because the gap it closes is the one I've spent
+      my whole life staring into.</p>
+  </div>
+</div></section>
+
+<!-- CONTACT -->
+<section><div class="wrap">
+  <span class="eyebrow">Contact</span>
+  <div class="contact-cta">Building, partnering, or curious about decision integrity?
+    <a href="mailto:sabrine-hammami@areteprotocol.com?subject=Aret%C3%A9%20%C2%B7%20Hello">Let's talk →</a></div>
+  <div class="foot">
+    <span>email · <a href="mailto:sabrine-hammami@areteprotocol.com">sabrine-hammami@areteprotocol.com</a></span>
+    <span>web · <a href="https://areteprotocol.com">areteprotocol.com</a></span>
+    <span class="who"><b>Sabrine Hammami</b> · Founder &amp; CEO, Areté</span>
+  </div>
+</div></section>
+
+<footer>
+  <span>Areté · Cognitive Integrity Platform</span>
+  <span>Sabrine Hammami</span>
+</footer>
+
+</body>
+</html>

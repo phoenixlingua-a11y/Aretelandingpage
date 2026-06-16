@@ -214,6 +214,12 @@ body{
   .gauge{min-width:120px}
   .slide-foot{font-size:8px;letter-spacing:0.18em}
 }
+.lockcard{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:clamp(34px,5vw,60px);max-width:580px;text-decoration:none;border:1px solid var(--line);background:#0d0d0f;padding:22px 24px;position:relative;overflow:hidden;transition:border-color .25s,box-shadow .25s,transform .2s}
+.lockcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--ice),transparent);opacity:.45}
+.lockcard:hover{border-color:rgba(79,196,245,.4);box-shadow:0 0 30px rgba(79,196,245,.12);transform:translateY(-1px)}
+.lockcard-name{font-family:var(--sans);font-weight:300;font-size:clamp(15px,1.7vw,18px);color:var(--ink)}
+.lockcard-meta{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-top:7px}
+.lockcard-lock{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ice);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -235,7 +241,7 @@ body{
     <div class="cover-tag-row"><span class="cover-rule"></span><span class="cover-tag">Cognitive Integrity</span></div>
   </div>
   <div class="cue"><span>scroll</span><span class="ln"></span></div>
-  <div class="slide-foot"><span>Areté — cognitive integrity platform</span><span class="n">01 / 06</span></div>
+  <div class="slide-foot"><span>Areté — cognitive integrity platform</span><span class="n">01 / 08</span></div>
 </section>
 
 <!-- 02 · PROBLEM -->
@@ -246,7 +252,7 @@ body{
     <p class="stat-cap">lost every year because someone at the top made the wrong call at the wrong moment. <span class="hi">Not for lack of data, but because they couldn't see themselves clearly.</span></p>
     <div class="src">Source · McKinsey · Bain decision-quality research</div>
   </div>
-  <div class="slide-foot"><span>The problem</span><span class="n">02 / 06</span></div>
+  <div class="slide-foot"><span>The problem</span><span class="n">02 / 08</span></div>
 </section>
 
 <!-- 03 · WHY NOW -->
@@ -254,16 +260,25 @@ body{
   <div class="slide-inner">
     <span class="eyebrow">Why Now</span>
     <h2 class="statement" style="max-width:32ch">Capital is measured.<br><span class="dim">Operations are measured.</span><br><span class="ice">The mind running both is not.</span></h2>
+  </div>
+  <div class="slide-foot"><span>Why now</span><span class="n">03 / 08</span></div>
+</section>
+
+<!-- 04 · THE GAP (gauges) -->
+<section class="slide" id="unmeasured">
+  <div class="slide-inner">
+    <span class="eyebrow">The Gap</span>
+    <h2 class="statement" style="max-width:22ch;margin-bottom:clamp(44px,6vw,78px)">Two are instrumented.<br><span class="ice">The one that decides is not.</span></h2>
     <div class="gauges">
       <div class="gauge"><div class="g-name">Capital</div><div class="g-bar"><span class="g-fill"></span></div><div class="g-stat">Measured</div></div>
       <div class="gauge"><div class="g-name">Operations</div><div class="g-bar"><span class="g-fill"></span></div><div class="g-stat">Measured</div></div>
       <div class="gauge off"><div class="g-name">Judgment</div><div class="g-bar"></div><div class="g-stat">Unmeasured</div></div>
     </div>
   </div>
-  <div class="slide-foot"><span>The gap</span><span class="n">03 / 06</span></div>
+  <div class="slide-foot"><span>The gap</span><span class="n">04 / 08</span></div>
 </section>
 
-<!-- 04 · THE DECISION RECORD -->
+<!-- 05 · THE DECISION RECORD -->
 <section class="slide" id="record">
   <div class="slide-inner">
     <div class="rec-grid">
@@ -334,7 +349,7 @@ body{
       </div>
     </div>
   </div>
-  <div class="slide-foot"><span>The decision record</span><span class="n">04 / 06</span></div>
+  <div class="slide-foot"><span>The decision record</span><span class="n">05 / 08</span></div>
 </section>
 
 <!-- 05 · HOW -->
@@ -385,10 +400,27 @@ body{
       </div>
     </div>
   </div>
-  <div class="slide-foot"><span>The loop</span><span class="n">05 / 06</span></div>
+  <div class="slide-foot"><span>The loop</span><span class="n">06 / 08</span></div>
 </section>
 
-<!-- 06 · CLOSE -->
+<!-- 07 · THE INSTRUMENT (live, locked) -->
+<section class="slide" id="instrument">
+  <div class="slide-inner">
+    <span class="eyebrow">The Instrument</span>
+    <h2 class="statement" style="max-width:16ch">It is already <span class="ice">live.</span></h2>
+    <p class="sub">Not a deck. A working instrument, running today. Calibrated, not distributed.</p>
+    <a class="lockcard" href="mailto:sabrine-hammami@areteprotocol.com?subject=Aret%C3%A9%20%C2%B7%20Instrument%20access">
+      <div>
+        <div class="lockcard-name">Areté · Cognitive Integrity Engine</div>
+        <div class="lockcard-meta">Live · by access</div>
+      </div>
+      <div class="lockcard-lock">&#128274;&nbsp; Request access &rarr;</div>
+    </a>
+  </div>
+  <div class="slide-foot"><span>The instrument</span><span class="n">07 / 08</span></div>
+</section>
+
+<!-- 08 · CLOSE -->
 <section class="slide" id="close">
   <div class="slide-inner">
     <span class="eyebrow">Access</span>

@@ -240,6 +240,14 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .slide{position:relative;z-index:1}
 #unmeasured .gauge:not(.off) .g-fill{background:linear-gradient(180deg,rgba(79,196,245,.52) 0%,rgba(79,196,245,.04) 100%) !important;box-shadow:inset 0 2px 0 0 var(--ice),0 0 60px rgba(79,196,245,.14) !important}
 #unmeasured .gauge .g-bar{background:rgba(255,255,255,0.025) !important}
+/* proof */
+.signals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,5vw,60px);width:100%;max-width:980px}
+.sig{display:flex;flex-direction:column;gap:14px;padding-top:22px;border-top:1px solid var(--line)}
+.sig-num{font-family:var(--sans);font-weight:200;font-size:clamp(46px,7vw,82px);letter-spacing:-0.04em;color:var(--ice);line-height:1}
+.sig-num .sub-mark{font-size:.46em;color:var(--ink2);margin-left:2px;letter-spacing:0}
+.sig-name{font-family:var(--sans);font-weight:200;font-size:clamp(32px,4.4vw,54px);letter-spacing:-0.02em;color:var(--ink);line-height:1.02}
+.sig-label{font-family:var(--sans);font-weight:300;font-size:clamp(12px,1.4vw,15px);color:var(--ink2);line-height:1.5}
+@media (max-width:760px){.signals-grid{grid-template-columns:1fr;gap:24px}}
 </style>
 </head>
 <body>
@@ -262,7 +270,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
     <div class="cover-tag-row"><span class="cover-rule"></span><span class="cover-tag">Cognitive Integrity</span></div>
   </div>
   <div class="cue"><span>scroll</span><span class="ln"></span></div>
-  <div class="slide-foot"><span>Areté · cognitive integrity platform</span><span class="n">01 / 05</span></div>
+  <div class="slide-foot"><span>Areté · cognitive integrity platform</span><span class="n">01 / 06</span></div>
 </section>
 
 <!-- 02 · PROBLEM -->
@@ -273,7 +281,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
     <p class="stat-cap">lost every year because someone at the top made the wrong call at the wrong moment. <span class="hi">Not for lack of data, but because they couldn't see themselves clearly.</span></p>
     <div class="src">Source · McKinsey · Bain decision-quality research</div>
   </div>
-  <div class="slide-foot"><span>The problem</span><span class="n">02 / 05</span></div>
+  <div class="slide-foot"><span>The problem</span><span class="n">02 / 06</span></div>
 </section>
 
 <!-- 03 · THE GAP (statement) -->
@@ -282,7 +290,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
     <span class="eyebrow">Why Now</span>
     <h2 class="statement" style="max-width:32ch">Capital is measured.<br><span class="dim">Operations are measured.</span><br><span class="ice">The mind running both is not.</span></h2>
   </div>
-  <div class="slide-foot"><span>The gap</span><span class="n">03 / 05</span></div>
+  <div class="slide-foot"><span>The gap</span><span class="n">03 / 06</span></div>
 </section>
 
 <!-- 05 · HOW -->
@@ -333,7 +341,21 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
       </div>
     </div>
   </div>
-  <div class="slide-foot"><span>The loop</span><span class="n">04 / 05</span></div>
+  <div class="slide-foot"><span>The loop</span><span class="n">04 / 06</span></div>
+</section>
+
+<!-- 05b · PROOF / SIGNALS -->
+<section class="slide" id="signals">
+  <div class="slide-inner">
+    <span class="eyebrow">Where it stands</span>
+    <h2 class="statement" style="max-width:18ch;margin-bottom:clamp(40px,5vw,66px)">Not a pitch. <span class="ice">A program already moving.</span></h2>
+    <div class="signals-grid">
+      <div class="sig"><div class="sig-num">300<span class="sub-mark">+</span></div><div class="sig-label">Pilot cohort launching inside a German federal institution</div></div>
+      <div class="sig"><div class="sig-num">81.2<span class="sub-mark">%</span></div><div class="sig-label">Clinically-adjacent accuracy of the onboarding read</div></div>
+      <div class="sig"><div class="sig-name">SMU<br>Tunisia</div><div class="sig-label">Incubated</div></div>
+    </div>
+  </div>
+  <div class="slide-foot"><span>Where it stands</span><span class="n">05 / 06</span></div>
 </section>
 
 <!-- 08 · CLOSE -->

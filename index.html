@@ -248,6 +248,21 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .sig-name{font-family:var(--sans);font-weight:200;font-size:clamp(32px,4.4vw,54px);letter-spacing:-0.02em;color:var(--ink);line-height:1.02}
 .sig-label{font-family:var(--sans);font-weight:300;font-size:clamp(12px,1.4vw,15px);color:var(--ink2);line-height:1.5}
 @media (max-width:760px){.signals-grid{grid-template-columns:1fr;gap:24px}}
+/* solution / watch */
+.rec-grid{display:grid;grid-template-columns:1.05fr minmax(280px,400px);gap:clamp(40px,6vw,96px);align-items:center;width:100%}
+.rec-copy .sub{margin-top:30px}
+.rec-readout{margin-top:34px;display:flex;gap:0;border-top:1px solid var(--line);padding-top:20px;max-width:440px}
+.rec-stat{flex:1;display:flex;flex-direction:column;gap:6px;border-right:1px solid var(--line);padding-right:18px}
+.rec-stat:last-child{border-right:0;padding-right:0;padding-left:18px}
+.rec-stat:nth-child(2){padding-left:18px}
+.rec-stat .k{font-family:var(--mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink3)}
+.rec-stat .v{font-family:var(--sans);font-weight:200;font-size:clamp(22px,2.4vw,30px);letter-spacing:-0.02em;line-height:1}
+.rec-stat .v.ice{color:var(--ice);font-weight:300}
+.watch-wrap{display:flex;justify-content:center}
+.watch{width:100%;max-width:360px;height:auto;display:block;overflow:visible}
+.cis-arc{stroke-dasharray:452;stroke-dashoffset:452;transition:stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1) .25s}
+.slide.in .cis-arc{stroke-dashoffset:131}
+@media (max-width:820px){.rec-grid{grid-template-columns:1fr;gap:14px}.rec-copy{order:1}.watch-wrap{order:2;justify-content:flex-start}.watch{max-width:230px;margin-top:6px}}
 </style>
 </head>
 <body>
@@ -266,11 +281,10 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
     <div class="cover-mark"><i></i><i></i></div>
     <h1 class="cover-line">The check engine light <span class="ice">for decision-making.</span></h1>
     <p class="sub">A continuous read of cognitive integrity for the people whose calls cannot be undone.</p>
-    <div class="cover-sig">Before the call. <span class="ice">Not after.</span></div>
     <div class="cover-tag-row"><span class="cover-rule"></span><span class="cover-tag">Cognitive Integrity</span></div>
   </div>
   <div class="cue"><span>scroll</span><span class="ln"></span></div>
-  <div class="slide-foot"><span>Areté · cognitive integrity platform</span><span class="n">01 / 06</span></div>
+  <div class="slide-foot"><span>Areté · cognitive integrity platform</span><span class="n">01 / 08</span></div>
 </section>
 
 <!-- 02 · PROBLEM -->
@@ -281,7 +295,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
     <p class="stat-cap">lost every year because someone at the top made the wrong call at the wrong moment. <span class="hi">Not for lack of data, but because they couldn't see themselves clearly.</span></p>
     <div class="src">Source · McKinsey · Bain decision-quality research</div>
   </div>
-  <div class="slide-foot"><span>The problem</span><span class="n">02 / 06</span></div>
+  <div class="slide-foot"><span>The problem</span><span class="n">02 / 08</span></div>
 </section>
 
 <!-- 03 · THE GAP (statement) -->
@@ -290,7 +304,52 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
     <span class="eyebrow">Why Now</span>
     <h2 class="statement" style="max-width:32ch">Capital is measured.<br><span class="dim">Operations are measured.</span><br><span class="ice">The mind running both is not.</span></h2>
   </div>
-  <div class="slide-foot"><span>The gap</span><span class="n">03 / 06</span></div>
+  <div class="slide-foot"><span>The gap</span><span class="n">03 / 08</span></div>
+</section>
+
+<!-- 04 · THE SOLUTION -->
+<section class="slide" id="solution">
+  <div class="slide-inner">
+    <div class="rec-grid">
+      <div class="rec-copy">
+        <span class="eyebrow">The Solution</span>
+        <h2 class="statement" style="max-width:13ch">One number. One verdict. <span class="ice">Before you act.</span></h2>
+        <p class="sub">A single read of cognitive integrity, surfacing the hidden biases and blind spots you can't catch in the moment, scored against your own baseline and delivered on the wrist, not in a dashboard you check after the fact.</p>
+        <div class="rec-readout">
+          <div class="rec-stat"><span class="k">CIS today</span><span class="v ice">71</span></div>
+          <div class="rec-stat"><span class="k">Your baseline</span><span class="v">87</span></div>
+          <div class="rec-stat"><span class="k">Drift</span><span class="v">−16</span></div>
+        </div>
+      </div>
+      <div class="watch-wrap">
+        <svg class="watch" viewBox="0 0 360 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Smartwatch showing a cognitive integrity score of 71 against a baseline of 87">
+          <defs>
+            <linearGradient id="caseGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e1e23"/><stop offset="1" stop-color="#101012"/></linearGradient>
+            <linearGradient id="bandGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#19191d"/><stop offset="1" stop-color="#0d0d0f"/></linearGradient>
+            <linearGradient id="glassGloss" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.07"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+            <filter id="watchShadow" x="-40%" y="-20%" width="180%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+          </defs>
+          <ellipse cx="180" cy="430" rx="118" ry="16" fill="#000000" opacity="0.55" filter="url(#watchShadow)"/>
+          <path d="M118 30 L242 30 L232 96 L128 96 Z" fill="url(#bandGrad)"/>
+          <path d="M128 374 L232 374 L242 446 L118 446 Z" fill="url(#bandGrad)"/>
+          <rect x="312" y="212" width="11" height="44" rx="5" fill="#26262c"/>
+          <rect x="45" y="74" width="270" height="322" rx="66" fill="url(#caseGrad)" stroke="#ffffff" stroke-opacity="0.09"/>
+          <rect x="62" y="91" width="236" height="288" rx="52" fill="#08080a"/>
+          <text x="180" y="124" font-family="IBM Plex Mono,monospace" font-size="10" letter-spacing="3" fill="#4fc4f5" text-anchor="middle">DECISION RECORD</text>
+          <g transform="rotate(-90 180 224)">
+            <circle cx="180" cy="224" r="72" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="5"/>
+            <circle class="cis-arc" cx="180" cy="224" r="72" fill="none" stroke="#4fc4f5" stroke-width="6" stroke-linecap="round"/>
+          </g>
+          <text x="180" y="234" font-family="IBM Plex Sans,sans-serif" font-weight="200" font-size="74" letter-spacing="-3" fill="#4fc4f5" text-anchor="middle">71</text>
+          <text x="180" y="262" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="2.5" fill="#5a5a62" text-anchor="middle">CIS · / 100</text>
+          <line x1="118" y1="306" x2="242" y2="306" stroke="#ffffff" stroke-opacity="0.07"/>
+          <text x="180" y="330" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="1.5" fill="#9a9aa2" text-anchor="middle">16 BELOW BASELINE 87</text>
+          <rect x="62" y="91" width="236" height="288" rx="52" fill="url(#glassGloss)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="slide-foot"><span>The solution</span><span class="n">04 / 08</span></div>
 </section>
 
 <!-- 05 · HOW -->
@@ -341,7 +400,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
       </div>
     </div>
   </div>
-  <div class="slide-foot"><span>The loop</span><span class="n">04 / 06</span></div>
+  <div class="slide-foot"><span>The loop</span><span class="n">05 / 08</span></div>
 </section>
 
 <!-- 05b · PROOF / SIGNALS -->
@@ -355,7 +414,15 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
       <div class="sig"><div class="sig-name">SMU<br>Tunisia</div><div class="sig-label">Incubated</div></div>
     </div>
   </div>
-  <div class="slide-foot"><span>Where it stands</span><span class="n">05 / 06</span></div>
+  <div class="slide-foot"><span>Where it stands</span><span class="n">06 / 08</span></div>
+</section>
+
+<!-- 06 · THE PROMISE -->
+<section class="slide" id="promise">
+  <div class="slide-inner" style="align-items:center;justify-content:center;text-align:center">
+    <h2 class="statement" style="font-size:clamp(44px,8.5vw,108px);max-width:none;line-height:1.03;letter-spacing:-0.04em">Before the call.<br><span class="ice">Not after.</span></h2>
+  </div>
+  <div class="slide-foot"><span>The promise</span><span class="n">07 / 08</span></div>
 </section>
 
 <!-- 08 · CLOSE -->

@@ -214,12 +214,22 @@ body{
   .gauge{min-width:120px}
   .slide-foot{font-size:8px;letter-spacing:0.18em}
 }
-.lockcard{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:clamp(34px,5vw,60px);max-width:580px;text-decoration:none;border:1px solid var(--line);background:#0d0d0f;padding:22px 24px;position:relative;overflow:hidden;transition:border-color .25s,box-shadow .25s,transform .2s}
-.lockcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--ice),transparent);opacity:.45}
-.lockcard:hover{border-color:rgba(79,196,245,.4);box-shadow:0 0 30px rgba(79,196,245,.12);transform:translateY(-1px)}
-.lockcard-name{font-family:var(--sans);font-weight:300;font-size:clamp(15px,1.7vw,18px);color:var(--ink)}
-.lockcard-meta{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-top:7px}
-.lockcard-lock{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ice);white-space:nowrap}
+.instr-screen{position:relative;width:100%;max-width:380px;aspect-ratio:1/1;margin-top:clamp(30px,4.5vw,50px);border:1px solid var(--line);background:#0b0b0d;overflow:hidden;box-shadow:0 30px 70px -30px rgba(0,0,0,.8)}
+.instr-screen::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--ice),transparent);opacity:.5;z-index:3}
+.instr-glimpse{position:absolute;inset:0;padding:26px 28px;display:flex;flex-direction:column;filter:blur(1.5px);opacity:.5}
+.instr-bar{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
+.instr-logo{display:inline-flex;align-items:flex-end;color:rgba(232,232,234,.55);letter-spacing:.34em}
+.instr-logo i{width:2px;background:var(--ice);display:inline-block}
+.instr-logo i:nth-child(1){height:8px;margin-right:2px}.instr-logo i:nth-child(2){height:13px}
+.instr-live{display:flex;align-items:center;gap:6px;color:var(--ice)}
+.instr-dot{width:5px;height:5px;border-radius:50%;background:var(--ice);box-shadow:0 0 8px var(--ice)}
+.instr-num{font-family:var(--sans);font-weight:200;font-size:clamp(80px,16vw,108px);letter-spacing:-5px;color:var(--ice);line-height:1;margin-top:auto}
+.instr-glabel{font-family:var(--mono);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink3);margin-top:8px}
+.instr-veil{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;background:rgba(8,8,10,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.instr-lock-ic{font-size:26px;filter:drop-shadow(0 0 14px rgba(79,196,245,.45))}
+.instr-cta{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ice);border:1px solid var(--ice);padding:13px 28px;text-decoration:none;background:rgba(79,196,245,0.05);transition:background .25s,color .25s,box-shadow .25s}
+.instr-cta:hover{background:var(--ice);color:#06080a;box-shadow:0 0 30px rgba(79,196,245,.45)}
+.instr-note{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3)}
 </style>
 </head>
 <body>
@@ -291,7 +301,6 @@ body{
           <div class="rec-stat"><span class="k">Your baseline</span><span class="v">87</span></div>
           <div class="rec-stat"><span class="k">Drift</span><span class="v">−16</span></div>
         </div>
-        <div class="rec-verdict">Before the call. <span class="ice">Not after.</span></div>
       </div>
 
       <div class="watch-wrap">
@@ -408,14 +417,18 @@ body{
   <div class="slide-inner">
     <span class="eyebrow">The Instrument</span>
     <h2 class="statement" style="max-width:16ch">It is already <span class="ice">live.</span></h2>
-    <p class="sub">Not a deck. A working instrument, running today. Calibrated, not distributed.</p>
-    <a class="lockcard" href="mailto:sabrine-hammami@areteprotocol.com?subject=Aret%C3%A9%20%C2%B7%20Instrument%20access">
-      <div>
-        <div class="lockcard-name">Areté · Cognitive Integrity Engine</div>
-        <div class="lockcard-meta">Live · by access</div>
+    <div class="instr-screen">
+      <div class="instr-glimpse">
+        <div class="instr-bar"><span class="instr-logo"><i></i><i></i>&nbsp;&nbsp;Areté</span><span class="instr-live"><span class="instr-dot"></span> Live</span></div>
+        <div class="instr-num">71</div>
+        <div class="instr-glabel">Cognitive Integrity</div>
       </div>
-      <div class="lockcard-lock">&#128274;&nbsp; Request access &rarr;</div>
-    </a>
+      <div class="instr-veil">
+        <div class="instr-lock-ic">&#128274;</div>
+        <a class="instr-cta" href="mailto:sabrine-hammami@areteprotocol.com?subject=Aret%C3%A9%20%C2%B7%20Instrument%20access">Request access &rarr;</a>
+        <div class="instr-note">Calibrated, not distributed</div>
+      </div>
+    </div>
   </div>
   <div class="slide-foot"><span>The instrument</span><span class="n">07 / 08</span></div>
 </section>

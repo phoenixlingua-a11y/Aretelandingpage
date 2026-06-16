@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Areté · The check engine light for decision-making</title>
-<meta name="description" content="Areté is the check engine light for decision-making — a continuous read of cognitive integrity that warns you before the call, not after.">
+<meta name="description" content="Areté is the check engine light for decision-making. A continuous read of cognitive integrity that warns you before the call, not after.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Sans:wght@200;300;400&display=swap" rel="stylesheet">
@@ -214,22 +214,17 @@ body{
   .gauge{min-width:120px}
   .slide-foot{font-size:8px;letter-spacing:0.18em}
 }
-.instr-screen{position:relative;width:100%;max-width:380px;aspect-ratio:1/1;margin-top:clamp(30px,4.5vw,50px);border:1px solid var(--line);background:#0b0b0d;overflow:hidden;box-shadow:0 30px 70px -30px rgba(0,0,0,.8)}
-.instr-screen::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--ice),transparent);opacity:.5;z-index:3}
-.instr-glimpse{position:absolute;inset:0;padding:26px 28px;display:flex;flex-direction:column;filter:blur(1.5px);opacity:.5}
-.instr-bar{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
-.instr-logo{display:inline-flex;align-items:flex-end;color:rgba(232,232,234,.55);letter-spacing:.34em}
-.instr-logo i{width:2px;background:var(--ice);display:inline-block}
-.instr-logo i:nth-child(1){height:8px;margin-right:2px}.instr-logo i:nth-child(2){height:13px}
-.instr-live{display:flex;align-items:center;gap:6px;color:var(--ice)}
-.instr-dot{width:5px;height:5px;border-radius:50%;background:var(--ice);box-shadow:0 0 8px var(--ice)}
-.instr-num{font-family:var(--sans);font-weight:200;font-size:clamp(80px,16vw,108px);letter-spacing:-5px;color:var(--ice);line-height:1;margin-top:auto}
-.instr-glabel{font-family:var(--mono);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink3);margin-top:8px}
-.instr-veil{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;background:rgba(8,8,10,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.instr-lock-ic{font-size:26px;filter:drop-shadow(0 0 14px rgba(79,196,245,.45))}
-.instr-cta{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ice);border:1px solid var(--ice);padding:13px 28px;text-decoration:none;background:rgba(79,196,245,0.05);transition:background .25s,color .25s,box-shadow .25s}
-.instr-cta:hover{background:var(--ice);color:#06080a;box-shadow:0 0 30px rgba(79,196,245,.45)}
-.instr-note{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3)}
+.instr-grid{display:grid;grid-template-columns:1fr minmax(230px,310px);gap:clamp(34px,6vw,72px);align-items:center;width:100%}
+.instr-copy{display:flex;flex-direction:column;align-items:flex-start}
+.instr-copy .sub{margin-top:22px;max-width:44ch}
+.instr-copy .instr-cta{margin-top:30px}
+.instr-screen-col{display:flex;justify-content:center}
+.instr-svg{width:100%;max-width:300px;height:auto;display:block;filter:drop-shadow(0 34px 64px rgba(0,0,0,.6))}
+.instr-cta{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ice);border:1px solid var(--ice);padding:14px 30px;text-decoration:none;background:rgba(79,196,245,0.05);transition:background .25s,color .25s,box-shadow .25s}
+.instr-cta:hover{background:var(--ice);color:#06080a;box-shadow:0 0 34px rgba(79,196,245,.45)}
+.cover-sig{font-family:var(--sans);font-weight:200;font-size:clamp(22px,2.8vw,34px);letter-spacing:-0.02em;color:var(--ink2);margin-top:clamp(28px,4vw,44px)}
+.cover-sig .ice{color:var(--ice);font-weight:300}
+@media (max-width:780px){.instr-grid{grid-template-columns:1fr;gap:32px}.instr-screen-col{order:2;justify-content:flex-start}.instr-copy{order:1}.instr-svg{max-width:240px}}
 </style>
 </head>
 <body>
@@ -247,11 +242,12 @@ body{
   <div class="slide-inner">
     <div class="cover-mark"><i></i><i></i></div>
     <h1 class="cover-line">The check engine light <span class="ice">for decision-making.</span></h1>
-    <p class="sub">A continuous read of cognitive integrity for the people whose calls cannot be undone — warning them before the decision, not after.</p>
+    <p class="sub">A continuous read of cognitive integrity for the people whose calls cannot be undone.</p>
+    <div class="cover-sig">Before the call. <span class="ice">Not after.</span></div>
     <div class="cover-tag-row"><span class="cover-rule"></span><span class="cover-tag">Cognitive Integrity</span></div>
   </div>
   <div class="cue"><span>scroll</span><span class="ln"></span></div>
-  <div class="slide-foot"><span>Areté — cognitive integrity platform</span><span class="n">01 / 08</span></div>
+  <div class="slide-foot"><span>Areté · cognitive integrity platform</span><span class="n">01 / 07</span></div>
 </section>
 
 <!-- 02 · PROBLEM -->
@@ -262,30 +258,20 @@ body{
     <p class="stat-cap">lost every year because someone at the top made the wrong call at the wrong moment. <span class="hi">Not for lack of data, but because they couldn't see themselves clearly.</span></p>
     <div class="src">Source · McKinsey · Bain decision-quality research</div>
   </div>
-  <div class="slide-foot"><span>The problem</span><span class="n">02 / 08</span></div>
-</section>
-
-<!-- 03 · WHY NOW -->
-<section class="slide" id="why">
-  <div class="slide-inner">
-    <span class="eyebrow">Why Now</span>
-    <h2 class="statement" style="max-width:32ch">Capital is measured.<br><span class="dim">Operations are measured.</span><br><span class="ice">The mind running both is not.</span></h2>
-  </div>
-  <div class="slide-foot"><span>Why now</span><span class="n">03 / 08</span></div>
+  <div class="slide-foot"><span>The problem</span><span class="n">02 / 07</span></div>
 </section>
 
 <!-- 04 · THE GAP (gauges) -->
 <section class="slide" id="unmeasured">
   <div class="slide-inner">
     <span class="eyebrow">The Gap</span>
-    <h2 class="statement" style="max-width:22ch;margin-bottom:clamp(44px,6vw,78px)">Two are instrumented.<br><span class="ice">The one that decides is not.</span></h2>
     <div class="gauges">
       <div class="gauge"><div class="g-name">Capital</div><div class="g-bar"><span class="g-fill"></span></div><div class="g-stat">Measured</div></div>
       <div class="gauge"><div class="g-name">Operations</div><div class="g-bar"><span class="g-fill"></span></div><div class="g-stat">Measured</div></div>
       <div class="gauge off"><div class="g-name">Judgment</div><div class="g-bar"></div><div class="g-stat">Unmeasured</div></div>
     </div>
   </div>
-  <div class="slide-foot"><span>The gap</span><span class="n">04 / 08</span></div>
+  <div class="slide-foot"><span>The gap</span><span class="n">03 / 07</span></div>
 </section>
 
 <!-- 05 · THE DECISION RECORD -->
@@ -295,7 +281,7 @@ body{
       <div class="rec-copy">
         <span class="eyebrow">The Product</span>
         <h2 class="statement" style="max-width:13ch">One number. One verdict. <span class="ice">Before you act.</span></h2>
-        <p class="sub">A single read of cognitive integrity — surfacing the hidden biases and blind spots you can't catch in the moment — scored against your own baseline and delivered on the wrist, not in a dashboard you check after the fact.</p>
+        <p class="sub">A single read of cognitive integrity, surfacing the hidden biases and blind spots you can't catch in the moment, scored against your own baseline and delivered on the wrist, not in a dashboard you check after the fact.</p>
         <div class="rec-readout">
           <div class="rec-stat"><span class="k">CIS today</span><span class="v ice">71</span></div>
           <div class="rec-stat"><span class="k">Your baseline</span><span class="v">87</span></div>
@@ -350,7 +336,6 @@ body{
           <!-- divider + sublabels -->
           <line x1="118" y1="306" x2="242" y2="306" stroke="#ffffff" stroke-opacity="0.07"/>
           <text x="180" y="330" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="1.5" fill="#9a9aa2" text-anchor="middle">16 BELOW BASELINE 87</text>
-          <text x="180" y="356" font-family="IBM Plex Sans,sans-serif" font-weight="300" font-size="14" letter-spacing="-0.3" fill="#4fc4f5" text-anchor="middle">Before the call.</text>
 
           <!-- glass gloss -->
           <rect x="62" y="91" width="236" height="288" rx="52" fill="url(#glassGloss)"/>
@@ -358,7 +343,7 @@ body{
       </div>
     </div>
   </div>
-  <div class="slide-foot"><span>The decision record</span><span class="n">05 / 08</span></div>
+  <div class="slide-foot"><span>The decision record</span><span class="n">04 / 07</span></div>
 </section>
 
 <!-- 05 · HOW -->
@@ -369,7 +354,7 @@ body{
 
     <div class="flow">
       <!-- desktop: horizontal loop -->
-      <svg class="flow-svg" viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Calibrate, then monitor, then intercept — re-checked before every call">
+      <svg class="flow-svg" viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Calibrate, then monitor, then intercept, re-checked before every call">
         <defs>
           <marker id="ah" markerWidth="11" markerHeight="11" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
             <path d="M0 0 L8 4 L0 8" fill="none" stroke="#4fc4f5" stroke-width="1.3"/>
@@ -409,28 +394,54 @@ body{
       </div>
     </div>
   </div>
-  <div class="slide-foot"><span>The loop</span><span class="n">06 / 08</span></div>
+  <div class="slide-foot"><span>The loop</span><span class="n">05 / 07</span></div>
 </section>
 
 <!-- 07 · THE INSTRUMENT (live, locked) -->
 <section class="slide" id="instrument">
   <div class="slide-inner">
-    <span class="eyebrow">The Instrument</span>
-    <h2 class="statement" style="max-width:16ch">It is already <span class="ice">live.</span></h2>
-    <div class="instr-screen">
-      <div class="instr-glimpse">
-        <div class="instr-bar"><span class="instr-logo"><i></i><i></i>&nbsp;&nbsp;Areté</span><span class="instr-live"><span class="instr-dot"></span> Live</span></div>
-        <div class="instr-num">71</div>
-        <div class="instr-glabel">Cognitive Integrity</div>
-      </div>
-      <div class="instr-veil">
-        <div class="instr-lock-ic">&#128274;</div>
+    <div class="instr-grid">
+      <div class="instr-copy">
+        <span class="eyebrow">The Instrument</span>
+        <h2 class="statement" style="max-width:13ch">It is already <span class="ice">live.</span></h2>
+        <p class="sub">Not a concept on a slide. A real instrument, running today, that reads the state behind a decision before you make the call. I keep access close, so everyone who uses it is calibrated by hand, one person at a time.</p>
         <a class="instr-cta" href="mailto:sabrine-hammami@areteprotocol.com?subject=Aret%C3%A9%20%C2%B7%20Instrument%20access">Request access &rarr;</a>
-        <div class="instr-note">Calibrated, not distributed</div>
+      </div>
+      <div class="instr-screen-col">
+        <svg class="instr-svg" viewBox="0 0 380 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Areté live instrument, by access">
+          <defs>
+            <linearGradient id="iCase" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#17171c"/><stop offset="1" stop-color="#0c0c0e"/></linearGradient>
+            <linearGradient id="iGloss" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.06"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+            <radialGradient id="iHalo" cx="50%" cy="44%" r="56%"><stop offset="0" stop-color="#4fc4f5" stop-opacity="0.10"/><stop offset="1" stop-color="#4fc4f5" stop-opacity="0"/></radialGradient>
+          </defs>
+          <rect x="16" y="12" width="348" height="446" rx="30" fill="url(#iCase)" stroke="#ffffff" stroke-opacity="0.09"/>
+          <rect x="30" y="26" width="320" height="418" rx="20" fill="#08080a"/>
+          <rect x="30" y="26" width="320" height="418" rx="20" fill="url(#iHalo)"/>
+          <rect x="30" y="26" width="320" height="2" fill="#4fc4f5" opacity="0.4"/>
+          <rect x="52" y="54" width="3" height="9" rx="1.5" fill="#4fc4f5"/>
+          <rect x="57" y="48" width="3" height="15" rx="1.5" fill="#4fc4f5"/>
+          <text x="70" y="62" font-family="IBM Plex Mono,monospace" font-size="11" letter-spacing="4" fill="rgba(232,232,234,.5)">ARET&#201;</text>
+          <circle cx="312" cy="57" r="3.2" fill="#4fc4f5"><animate attributeName="opacity" values="1;.3;1" dur="2.4s" repeatCount="indefinite"/></circle>
+          <text x="303" y="61" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="2.5" fill="#4fc4f5" text-anchor="end">LIVE</text>
+          <g transform="translate(190,212)">
+            <circle r="80" fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="6"/>
+            <circle r="80" fill="none" stroke="#4fc4f5" stroke-width="6" stroke-linecap="round" stroke-dasharray="503" stroke-dashoffset="146" transform="rotate(-90)"/>
+            <text y="16" font-family="IBM Plex Sans,sans-serif" font-weight="200" font-size="80" letter-spacing="-3" fill="#4fc4f5" text-anchor="middle">71</text>
+            <text y="46" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="2.5" fill="#5a5a62" text-anchor="middle">CIS &#183; / 100</text>
+          </g>
+          <text x="190" y="346" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing="3" fill="#9a9aa2" text-anchor="middle">COGNITIVE INTEGRITY</text>
+          <line x1="74" y1="372" x2="306" y2="372" stroke="#ffffff" stroke-opacity="0.06"/>
+          <g transform="translate(151,398)">
+            <rect x="0" y="2" width="13" height="10" rx="2" fill="none" stroke="#5a5a62" stroke-width="1.4"/>
+            <path d="M2.5 2 V -1.5 A 4 4 0 0 1 10.5 -1.5 V 2" fill="none" stroke="#5a5a62" stroke-width="1.4"/>
+            <text x="22" y="11" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="2.5" fill="#5a5a62">SEALED &#183; BY ACCESS</text>
+          </g>
+          <rect x="30" y="26" width="320" height="418" rx="20" fill="url(#iGloss)"/>
+        </svg>
       </div>
     </div>
   </div>
-  <div class="slide-foot"><span>The instrument</span><span class="n">07 / 08</span></div>
+  <div class="slide-foot"><span>The instrument</span><span class="n">06 / 07</span></div>
 </section>
 
 <!-- 08 · CLOSE -->

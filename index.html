@@ -1,485 +1,2190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Areté · The check engine light for decision-making</title>
-<meta name="description" content="Areté is the check engine light for decision-making. A continuous read of cognitive integrity that warns you before the call, not after.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&family=IBM+Plex+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d1118">
+<link rel="preload" href="assets/fonts/Italiana-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/CrimsonPro-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/CrimsonPro-Italic.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/DMMono-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Organization","name":"The Areté Protocol","alternateName":"Areté","url":"https://areteprotocol.com/",
+  "description":"The check engine light for decision-making. A continuous read of cognitive integrity for the people whose calls cannot be undone.",
+  "email":"sabrine-hammami@areteprotocol.com",
+  "founder":{"@type":"Person","name":"Sabrine Hammami","jobTitle":"Founder, The Areté Protocol"}},
+ {"@type":"WebSite","name":"Areté · The Cognitive Integrity Protocol","url":"https://areteprotocol.com/","inLanguage":["en","de","fr"]}
+]}
+</script>
+<title>Areté · The Cognitive Integrity Protocol</title>
+<meta name="description" content="The check engine light for decision-making. A sixty-second daily reading of your cognitive state, and a gate you consult before the calls that cannot be undone.">
+<link rel="canonical" href="https://areteprotocol.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Areté · The Cognitive Integrity Protocol">
+<meta property="og:description" content="The check engine light for decision-making. The instrument is live.">
+<meta property="og:url" content="https://areteprotocol.com/">
+<meta property="og:image" content="https://areteprotocol.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Areté · The Cognitive Integrity Protocol">
+<meta name="twitter:description" content="The check engine light for decision-making. The instrument is live.">
+<meta name="twitter:image" content="https://areteprotocol.com/assets/og.png">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
+/* ───────────────────────────────────────────────────────────────────────────
+   ARETÉ · areteprotocol.com
+   The site that reads its visitor. Two voices: serif = the founder speaking,
+   mono = the instrument speaking. Obsidian, one cold accent. Zero libraries,
+   zero external fonts, zero third-party requests.
+   ─────────────────────────────────────────────────────────────────────────── */
+/* self-hosted type (OFL) — the site's own voice, no external requests */
+@font-face{font-family:'Italiana';src:url('assets/fonts/Italiana-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Crimson Pro';src:url('assets/fonts/CrimsonPro-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Crimson Pro';src:url('assets/fonts/CrimsonPro-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'DM Mono';src:url('assets/fonts/DMMono-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Nothing You Could Do';src:url('assets/fonts/NothingYouCouldDo-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
 :root{
-  --bg:#0a0a0a;
-  --ink:#e8e8ea;
-  --ink2:#9a9aa2;
-  --ink3:#5a5a62;
-  --ink4:#33333a;
-  --ice:#4fc4f5;
-  --line:rgba(255,255,255,0.07);
-  --mono:'IBM Plex Mono','Courier New',monospace;
-  --sans:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
-  --pad:clamp(28px,7vw,120px);
+  --bg:#0d1118; --bg2:#161a24;
+  --ink:#f2f4f8; --ink2:#c6c9d2; --ink3:#9da0ac; --ink4:#6b6e7a;
+  --ice:#4fc4f5; --steel:#7fb2d6; --crit:#b4535f;
+  --ice-dim:rgba(79,196,245,0.10); --ice-border:rgba(79,196,245,0.32);
+  --grid:rgba(255,255,255,0.08); --grid2:rgba(255,255,255,0.15);
+  --display:'Italiana',"Iowan Old Style",Palatino,Georgia,serif;
+  --serif:'Crimson Pro',"Iowan Old Style",Palatino,"Palatino Linotype",Georgia,serif;
+  --mono:'DM Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:Inter,-apple-system,"Segoe UI",system-ui,sans-serif;
+  --ramp:linear-gradient(160deg,#1a7aa8,#0f5a80);
+  --r:2px;
+  color-scheme:dark;
 }
-
-html{
-  background:var(--bg);
-  scroll-snap-type:y proximity;
-  scroll-behavior:smooth;
-}
-body{
-  background:var(--bg);
-  color:var(--ink);
-  font-family:var(--sans);
-  font-weight:300;
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-  overflow-x:hidden;
-}
-
-/* ── one idea per screen ─────────────────────────── */
-.slide{
-  position:relative;
-  min-height:100vh;min-height:100svh;
-  padding:120px var(--pad) 110px;
-  display:flex;flex-direction:column;justify-content:center;
-  scroll-snap-align:start;
-}
-.slide-inner{width:100%;max-width:1080px;margin:0 auto}
-
-/* gentle present-on-enter (off for reduced motion) */
-.slide-inner > *{opacity:0;transform:translateY(14px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.slide.in .slide-inner > *{opacity:1;transform:none}
-.slide.in .slide-inner > *:nth-child(2){transition-delay:.08s}
-.slide.in .slide-inner > *:nth-child(3){transition-delay:.16s}
-.slide.in .slide-inner > *:nth-child(4){transition-delay:.24s}
-
-/* ── type ─────────────────────────────────────────── */
-.statement{
-  font-family:var(--sans);font-weight:200;
-  font-size:clamp(36px,6vw,84px);line-height:1.05;letter-spacing:-0.03em;
-  max-width:18ch;
-}
-.ice{color:var(--ice);font-weight:300}
-.statement .dim{color:var(--ink2)}
-.sub{
-  font-family:var(--sans);font-weight:300;
-  font-size:clamp(16px,1.8vw,21px);line-height:1.6;color:var(--ink2);
-  max-width:46ch;margin-top:34px;
-}
-.sub .hi{color:var(--ink)}
-.src{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink3);margin-top:28px}
-
-/* ── chrome · minimal ─────────────────────────────── */
-.topbar{
-  position:fixed;top:0;left:0;right:0;z-index:40;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:26px var(--pad);
-  background:linear-gradient(180deg,rgba(10,10,10,0.9),transparent);
-}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.bars{display:flex;align-items:flex-end;gap:4px}
-.bars i{width:2px;border-radius:1px;background:var(--ice);display:block}
-.bars i:nth-child(1){height:10px}.bars i:nth-child(2){height:16px}
-.wm{font-family:var(--mono);font-size:11px;font-weight:300;letter-spacing:0.42em;color:rgba(232,232,234,0.5);text-transform:uppercase}
-.top-cta{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink2);text-decoration:none;transition:color .25s}
-.top-cta:hover,.top-cta:focus-visible{color:var(--ice)}
-
-.counter{
-  position:fixed;bottom:24px;right:var(--pad);z-index:40;
-  font-family:var(--mono);font-size:11px;letter-spacing:0.28em;color:var(--ink3);
-  pointer-events:none;
-}
-.counter b{color:var(--ink2);font-weight:400}
-
-.cue{
-  position:absolute;bottom:42px;left:50%;transform:translateX(-50%);
-  font-family:var(--mono);font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--ink3);
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-}
-.cue .ln{width:1px;height:34px;background:linear-gradient(180deg,var(--ink3),transparent);animation:cue 2.4s ease-in-out infinite}
-@keyframes cue{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
-
-/* ── cover ────────────────────────────────────────── */
-.cover .slide-inner{max-width:1000px}
-.cover-mark{display:flex;align-items:flex-end;gap:6px;margin-bottom:40px}
-.cover-mark i{width:4px;border-radius:1px;background:var(--ice);display:block}
-.cover-mark i:nth-child(1){height:20px}.cover-mark i:nth-child(2){height:32px}
-.cover-line{font-family:var(--sans);font-weight:200;font-size:clamp(40px,7vw,96px);line-height:1.02;letter-spacing:-0.035em;max-width:15ch}
-
-/* ── single stat ──────────────────────────────────── */
-.stat-num{font-family:var(--sans);font-weight:200;color:var(--ice);font-size:clamp(96px,18vw,236px);line-height:.9;letter-spacing:-0.05em}
-.stat-num .small{font-size:.4em;color:var(--ink2);margin-left:8px;letter-spacing:-0.02em}
-.stat-cap{font-family:var(--sans);font-weight:200;font-size:clamp(20px,2.6vw,32px);line-height:1.35;color:var(--ink2);max-width:26ch;margin-top:48px}
-.stat-cap .hi{color:var(--ice)}
-
-/* ── decision record · the wearable (signature) ────── */
-.rec-grid{display:grid;grid-template-columns:1.05fr minmax(280px,400px);gap:clamp(40px,6vw,96px);align-items:center;width:100%}
-.rec-copy .sub{margin-top:30px}
-.rec-readout{margin-top:34px;display:flex;gap:0;border-top:1px solid var(--line);padding-top:20px;max-width:440px}
-.rec-stat{flex:1;display:flex;flex-direction:column;gap:6px;border-right:1px solid var(--line);padding-right:18px}
-.rec-stat:last-child{border-right:0;padding-right:0;padding-left:18px}
-.rec-stat:nth-child(2){padding-left:18px}
-.rec-stat .k{font-family:var(--mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink3)}
-.rec-stat .v{font-family:var(--sans);font-weight:200;font-size:clamp(22px,2.4vw,30px);letter-spacing:-0.02em;line-height:1}
-.rec-stat .v.ice{color:var(--ice);font-weight:300}
-.rec-verdict{margin-top:36px;font-family:var(--sans);font-weight:200;font-size:clamp(22px,2.6vw,30px);letter-spacing:-0.02em;color:var(--ink)}
-.watch-wrap{display:flex;justify-content:center}
-.watch{width:100%;max-width:360px;height:auto;display:block;overflow:visible}
-.cis-arc{stroke-dasharray:452;stroke-dashoffset:452;transition:stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1) .25s}
-.slide.in .cis-arc{stroke-dashoffset:131}
-
-/* ── how · the loop ───────────────────────────────── */
-.flow{margin-top:clamp(44px,6vw,76px);width:100%;max-width:940px}
-.flow-svg{width:100%;height:auto;display:block;overflow:visible}
-.flow-mobile{display:none}
-.mnode{display:flex;gap:20px;align-items:flex-start;padding-bottom:30px;position:relative}
-.mnode:not(:last-child)::after{content:'';position:absolute;left:5px;top:20px;bottom:-2px;width:1px;background:var(--line)}
-.mdot{width:11px;height:11px;border-radius:50%;background:var(--ice);margin-top:7px;flex-shrink:0;position:relative;z-index:1}
-.mdot.off{background:none;border:1px solid var(--ink2)}
-.mname{font-family:var(--sans);font-weight:300;font-size:28px;letter-spacing:-0.02em;line-height:1}
-.msub{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink3);margin-top:9px}
-.flow-loop{margin-top:6px;font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ice);opacity:.85}
-
-/* ── close ────────────────────────────────────────── */
-.form{display:flex;max-width:440px;border-bottom:1px solid rgba(255,255,255,0.18);margin-top:36px}
-.form input{flex:1;background:transparent;border:0;outline:0;color:var(--ink);font-family:var(--mono);font-size:14px;letter-spacing:0.03em;padding:15px 4px}
-.form input::placeholder{color:var(--ink3)}
-.form-wrap:focus-within .form{border-color:var(--ice)}
-.form button{background:transparent;border:0;cursor:pointer;color:var(--ice);font-family:var(--mono);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;padding:0 6px;transition:opacity .25s}
-.form button:hover,.form button:focus-visible{opacity:.7}
-.form-note{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:0.05em;color:var(--ink3);min-height:16px;transition:color .25s}
-.form-note.ok{color:var(--ice)}
-.close-foot{margin-top:54px;display:flex;flex-direction:column;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;color:var(--ink3)}
-.close-foot a{color:var(--ice);text-decoration:none}
-.close-foot .who{color:var(--ink2);text-transform:none;letter-spacing:0.04em}
-.close-foot .who b{color:var(--ink);font-weight:400}
-
-/* ── instrument framing · corner registration ticks ── */
-.tick{position:fixed;width:13px;height:13px;z-index:30;pointer-events:none;opacity:.55}
-.tick::before,.tick::after{content:'';position:absolute;background:var(--ink4)}
-.tick::before{height:1px;width:100%}.tick::after{width:1px;height:100%}
-.tk-bl{bottom:20px;left:20px}.tk-bl::before{bottom:0}.tk-bl::after{bottom:0}
-.tk-br{bottom:20px;right:20px}.tk-br::before{bottom:0;right:0}.tk-br::after{bottom:0;right:0}
-.tk-tr{top:20px;right:20px}.tk-tr::before{right:0}.tk-tr::after{right:0}
-
-@media (max-width:820px){
-  .rec-grid{grid-template-columns:1fr;gap:14px}
-  .rec-copy{order:1}
-  .watch-wrap{order:2;justify-content:flex-start}
-  .watch{max-width:230px;margin-top:6px}
-}
-@media (max-width:760px){
-  .flow-svg{display:none}
-  .flow-mobile{display:flex;flex-direction:column}
-  .tick{display:none}
-}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{max-width:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(79,196,245,0.25)}
+/* the scrollbar wears the house colors (default Windows chrome clashes) */
+html{scrollbar-color:rgba(255,255,255,0.18) rgba(13,17,24,0.7)}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:rgba(13,17,24,0.7)}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.14);border-radius:6px;border:3px solid rgba(13,17,24,0.9)}
+::-webkit-scrollbar-thumb:hover{background:rgba(79,196,245,0.35)}
+a{color:inherit}
+:focus-visible{outline:none;box-shadow:0 0 0 1.5px rgba(79,196,245,0.8),0 0 0 3.5px rgba(79,196,245,0.14);border-radius:4px}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .slide-inner > *{opacity:1;transform:none;transition:none}
-  .cue .ln{animation:none}
-  .cis-arc{stroke-dashoffset:131;transition:none}
-  .gauge:not(.off) .g-fill{width:100%;transition:none}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
 }
-/* ── deck frame · per-slide composition ─────────────── */
-.slide{position:relative}
-.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.38em;text-transform:uppercase;color:var(--ice);opacity:.85;display:block;margin-bottom:clamp(22px,2.6vw,38px)}
-.slide-foot{position:absolute;left:var(--pad);right:var(--pad);bottom:22px;display:flex;justify-content:space-between;align-items:center;padding-top:13px;border-top:1px solid var(--line);font-family:var(--mono);font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:var(--ink3);z-index:4}
-.slide-foot .n{color:var(--ink2)}
 
-/* cover tag row */
-.cover-tag-row{display:flex;align-items:center;gap:20px;margin-top:clamp(32px,4vw,48px)}
-.cover-rule{width:clamp(110px,16vw,240px);height:1px;background:var(--ice);opacity:.5}
-.cover-tag{font-family:var(--mono);font-size:11px;letter-spacing:0.46em;text-transform:uppercase;color:var(--ice);white-space:nowrap}
+/* fixed atmosphere layers — the app's own weather */
+#field{position:fixed;inset:0;z-index:0;pointer-events:none}
+.aurora{position:fixed;inset:-20%;z-index:0;pointer-events:none;filter:blur(90px);opacity:.34}
+.aurora span{position:absolute;border-radius:50%;will-change:transform}
+.a1{width:38vw;height:38vw;left:-8%;top:-16%;background:radial-gradient(circle,rgba(79,196,245,0.6),transparent 65%);animation:drift1 28s ease-in-out infinite}
+.a2{width:28vw;height:28vw;right:-6%;top:8%;background:radial-gradient(circle,rgba(127,178,214,0.4),transparent 68%);opacity:.6;animation:drift2 34s ease-in-out infinite}
+.a3{width:22vw;height:22vw;left:38%;bottom:-14%;background:radial-gradient(circle,rgba(79,196,245,0.35),transparent 70%);opacity:.4;animation:drift1 38s ease-in-out infinite reverse}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(4%,3%)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-3%,5%)}}
+#scan{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,0.013) 0 1px,transparent 1px 4px);
+  animation:scan 18s linear infinite}
+@keyframes scan{to{transform:translateY(4px)}}
+body::before{content:"";position:fixed;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 70%,rgba(0,0,0,0.20) 100%)}
+#prog{position:fixed;top:0;left:0;height:2px;width:0;background:var(--ice);z-index:60;opacity:.7;
+  box-shadow:0 0 10px rgba(79,196,245,0.45)}
+@media (prefers-reduced-motion:reduce){.aurora span,#scan{animation:none !important}}
 
-/* problem · stat hero (deck stat-hero) */
-.stat-num{font-size:clamp(118px,19vw,300px);text-shadow:0 0 55px rgba(79,196,245,0.18)}
+#skip{position:fixed;top:-60px;left:14px;z-index:300;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ice);background:var(--bg2);border:1px solid var(--ice-border);
+  border-radius:var(--r);padding:9px 14px;text-decoration:none;transition:top .25s}
+#skip:focus{top:14px}
 
-/* why-now · measured vs unmeasured gauges */
-.gauges{margin-top:clamp(48px,6vw,82px);display:flex;gap:clamp(26px,5vw,68px);flex-wrap:wrap}
-.gauge{display:flex;flex-direction:column;gap:15px;min-width:148px;flex:1}
-.gauge .g-name{font-family:var(--sans);font-weight:200;font-size:clamp(22px,2.3vw,30px);letter-spacing:-0.02em;color:var(--ink);line-height:1}
-.gauge.off .g-name{color:var(--ink2)}
-.gauge .g-bar{height:2px;background:rgba(255,255,255,0.1);position:relative}
-.gauge .g-fill{position:absolute;left:0;top:0;height:2px;width:0;background:var(--ice);transition:width 1.2s cubic-bezier(.16,1,.3,1)}
-.slide.in .gauge:not(.off) .g-fill{width:100%}
-.gauge.off .g-bar{background:transparent;border-top:1px dashed var(--ink3)}
-.gauge .g-stat{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ice)}
-.gauge.off .g-stat{color:var(--ink3)}
-
-@media (max-width:760px){
-  .gauges{gap:24px}
-  .gauge{min-width:120px}
-  .slide-foot{font-size:8px;letter-spacing:0.18em}
+/* the page prints like an issued document: paper, ink, no theatre */
+@media print{
+  :root{--bg:#ffffff;--bg2:#ffffff;--ink:#111;--ink2:#333;--ink3:#555;--ink4:#777;
+    --grid:rgba(0,0,0,0.15);--grid2:rgba(0,0,0,0.25);--ice:#0f5a80;--steel:#33607e;--ice-dim:transparent;--ice-border:rgba(0,0,0,0.3)}
+  #field,.aurora,#scan,#prog,#ret,#orb,#transit,#ticker,#spine,#boot,#quick,#live,#worldline,
+  .doors,.sealbtn,.sharego,.sharemsg,#lang,.hcta,nav,.freenote{display:none !important}
+  body::before,#creedband::before,#creedband::after,section[data-num]::before{display:none !important}
+  body{background:#fff}
+  header{position:static;background:#fff}
+  .rev,.docs .doc{opacity:1 !important;transform:none !important}
+  .wordmark span{transform:none !important}
+  .frame{background:#fff;box-shadow:none}
+  section{padding-top:48px;padding-bottom:16px}
+  #creedband{background:#fff}
 }
-.instr-grid{display:grid;grid-template-columns:1fr minmax(230px,310px);gap:clamp(34px,6vw,72px);align-items:center;width:100%}
-.instr-copy{display:flex;flex-direction:column;align-items:flex-start}
-.instr-copy .sub{margin-top:22px;max-width:44ch}
-.instr-copy .instr-cta{margin-top:30px}
-.instr-screen-col{display:flex;justify-content:center}
-.instr-svg{width:100%;max-width:300px;height:auto;display:block;filter:drop-shadow(0 34px 64px rgba(0,0,0,.6))}
-.instr-cta{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ice);border:1px solid var(--ice);padding:14px 30px;text-decoration:none;background:rgba(79,196,245,0.05);transition:background .25s,color .25s,box-shadow .25s}
-.instr-cta:hover{background:var(--ice);color:#06080a;box-shadow:0 0 34px rgba(79,196,245,.45)}
-.cover-sig{font-family:var(--sans);font-weight:200;font-size:clamp(22px,2.8vw,34px);letter-spacing:-0.02em;color:var(--ink2);margin-top:clamp(28px,4vw,44px)}
-.cover-sig .ice{color:var(--ice);font-weight:300}
-@media (max-width:780px){.instr-grid{grid-template-columns:1fr;gap:32px}.instr-screen-col{order:2;justify-content:flex-start}.instr-copy{order:1}.instr-svg{max-width:240px}}
-/* gap-fill */
-#unmeasured .gauges{display:flex;align-items:stretch;gap:clamp(22px,4.5vw,60px);height:min(50vh,460px);margin-top:clamp(30px,5vh,58px);width:100%}
-#unmeasured .gauge{flex:1;display:flex;flex-direction:column;min-width:0}
-#unmeasured .gauge .g-bar{order:1;flex:1;width:100%;height:auto;background:rgba(255,255,255,0.035);position:relative;overflow:hidden;border:0}
-#unmeasured .gauge:not(.off) .g-fill{position:absolute;left:0;bottom:0;top:auto;width:100%!important;height:100%!important;background:linear-gradient(180deg,var(--ice),rgba(79,196,245,.4));box-shadow:0 0 44px rgba(79,196,245,.22)}
-#unmeasured .gauge.off .g-bar{background:transparent;border:1px dashed var(--ink4)}
-#unmeasured .gauge .g-name{order:2;margin-top:22px;font-size:clamp(22px,2.4vw,32px);font-weight:200;color:var(--ink)}
-#unmeasured .gauge.off .g-name{color:var(--ink2)}
-#unmeasured .gauge .g-stat{order:3;margin-top:9px}
-/* premium-pass */
-html,body{background:radial-gradient(125% 78% at 50% -6%,rgba(79,196,245,0.055) 0%,transparent 48%),radial-gradient(100% 62% at 50% 114%,rgba(255,255,255,0.012) 0%,transparent 58%),#08080a !important}
-body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.02;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.slide{position:relative;z-index:1}
-#unmeasured .gauge:not(.off) .g-fill{background:linear-gradient(180deg,rgba(79,196,245,.52) 0%,rgba(79,196,245,.04) 100%) !important;box-shadow:inset 0 2px 0 0 var(--ice),0 0 60px rgba(79,196,245,.14) !important}
-#unmeasured .gauge .g-bar{background:rgba(255,255,255,0.025) !important}
-/* proof */
-.signals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,5vw,60px);width:100%;max-width:980px}
-.sig{display:flex;flex-direction:column;gap:14px;padding-top:22px;border-top:1px solid var(--line)}
-.sig-num{font-family:var(--sans);font-weight:200;font-size:clamp(46px,7vw,82px);letter-spacing:-0.04em;color:var(--ice);line-height:1}
-.sig-num .sub-mark{font-size:.46em;color:var(--ink2);margin-left:2px;letter-spacing:0}
-.sig-name{font-family:var(--sans);font-weight:200;font-size:clamp(32px,4.4vw,54px);letter-spacing:-0.02em;color:var(--ink);line-height:1.02}
-.sig-label{font-family:var(--sans);font-weight:300;font-size:clamp(12px,1.4vw,15px);color:var(--ink2);line-height:1.5}
-@media (max-width:760px){.signals-grid{grid-template-columns:1fr;gap:24px}}
-/* solution / watch */
-.rec-grid{display:grid;grid-template-columns:1.05fr minmax(280px,400px);gap:clamp(40px,6vw,96px);align-items:center;width:100%}
-.rec-copy .sub{margin-top:30px}
-.rec-readout{margin-top:34px;display:flex;gap:0;border-top:1px solid var(--line);padding-top:20px;max-width:440px}
-.rec-stat{flex:1;display:flex;flex-direction:column;gap:6px;border-right:1px solid var(--line);padding-right:18px}
-.rec-stat:last-child{border-right:0;padding-right:0;padding-left:18px}
-.rec-stat:nth-child(2){padding-left:18px}
-.rec-stat .k{font-family:var(--mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink3)}
-.rec-stat .v{font-family:var(--sans);font-weight:200;font-size:clamp(22px,2.4vw,30px);letter-spacing:-0.02em;line-height:1}
-.rec-stat .v.ice{color:var(--ice);font-weight:300}
-.watch-wrap{display:flex;justify-content:center}
-.watch{width:100%;max-width:360px;height:auto;display:block;overflow:visible}
-.cis-arc{stroke-dasharray:452;stroke-dashoffset:452;transition:stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1) .25s}
-.slide.in .cis-arc{stroke-dashoffset:131}
-@media (max-width:820px){.rec-grid{grid-template-columns:1fr;gap:14px}.rec-copy{order:1}.watch-wrap{order:2;justify-content:flex-start}.watch{max-width:230px;margin-top:6px}}
+
+/* ── Arabic wears the house right-to-left. Joined script forbids letter-spacing;
+   the brand lockups alone keep their Latin tracking. ── */
+html[dir=rtl] body *{letter-spacing:normal !important}
+html[dir=rtl] .wordmark{letter-spacing:.14em !important;direction:ltr}
+html[dir=rtl] .wmsub{letter-spacing:.52em !important}
+html[dir=rtl] .brand{direction:ltr}
+html[dir=rtl] .brand b{letter-spacing:.30em !important}
+html[dir=rtl] .brand i{letter-spacing:.34em !important}
+html[dir=rtl] #live,html[dir=rtl] .oblig,html[dir=rtl] .numline{border-left:0;border-right:2px solid var(--ice);padding-left:0;padding-right:14px}
+html[dir=rtl] .pull{border-left:0;border-right:2px solid var(--ice);padding-left:0;padding-right:26px}
+html[dir=rtl] section[data-num]::before{right:auto;left:22px}
+html[dir=rtl] #argument .essay .lead::first-letter{font-size:inherit;float:none;padding:0}
+@media (min-width:1181px){
+  html[dir=rtl] #spine{left:auto;right:26px}
+  html[dir=rtl] #spine a.on::before{left:auto;right:-12px}
+  html[dir=rtl] #spine a::after{left:auto;right:26px}
+}
+html[dir=rtl] #orb{right:auto;left:2vw}
+html[dir=rtl] .mnote i{color:var(--steel)}
+
+/* the boot */
+#boot{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;
+  transition:opacity .7s ease, visibility .7s}
+#boot.off{opacity:0;visibility:hidden}
+#bootlog{font-family:var(--mono);font-size:12.5px;color:var(--ink3);line-height:2.1;min-width:280px}
+#bootlog .on{color:var(--ink2)}
+#bootlog .ice{color:var(--ice)}
+
+/* header */
+header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:26px;
+  padding:16px 28px;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+header.stuck{background:rgba(13,17,24,0.82);backdrop-filter:blur(14px);border-bottom-color:var(--grid)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{display:block;transition:filter .3s}
+.brand svg rect:nth-of-type(2){animation:barpulse 7s ease-in-out infinite}
+@keyframes barpulse{0%,100%{opacity:.55}50%{opacity:1}}
+.bwrap{display:block;line-height:1}
+.brand b{display:block;font-family:var(--display);font-weight:400;font-size:19px;letter-spacing:.30em;color:var(--ink);
+  transition:color .3s}
+.brand .bi{color:var(--ice)}
+.brand i{display:block;font-style:normal;font-family:var(--mono);font-size:7.5px;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--ink4);margin-top:4px;transition:color .3s}
+.brand:hover b{color:#fff}
+.brand:hover i{color:var(--steel)}
+.brand:hover svg{filter:drop-shadow(0 0 6px rgba(79,196,245,0.6))}
+nav{display:flex;gap:22px;margin-left:auto}
+nav a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);
+  text-decoration:none;transition:color .25s;position:relative}
+nav a::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0;background:var(--ice);transition:width .3s ease}
+nav a:hover{color:var(--ice)}
+nav a:hover::after{width:100%}
+.hcta{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ice);
+  text-decoration:none;background:rgba(13,17,24,0.5);padding:10px 18px;border-radius:var(--r);white-space:nowrap;
+  border:1px solid var(--ice-border);
+  transition:color .35s ease,transform .25s ease,box-shadow .45s ease,border-color .35s ease}
+.hcta:hover{transform:translateY(-1px);color:#fff;border-color:rgba(79,196,245,0.9);
+  box-shadow:inset 0 -3em 0 0 #135a80,0 8px 26px rgba(26,122,168,0.4)}
+#lang{display:flex;gap:5px}
+#lang button{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink4);background:none;
+  border:1px solid transparent;border-radius:var(--r);padding:5px 8px;cursor:pointer;transition:color .25s,border-color .25s,background .25s}
+#lang button:hover{color:var(--ink2)}
+#lang button.on{color:var(--ice);border-color:var(--ice-border);background:var(--ice-dim)}
+@media (max-width:900px){nav{display:none}#lang{margin-left:auto}}
+@media (max-width:640px){
+  header{gap:12px;padding:13px 18px}
+  .hcta{display:none}
+  .brand i{display:none}
+  .brand b{font-size:16px;letter-spacing:.24em}
+  #lang{gap:2px}
+  #lang button{padding:5px 7px;font-size:9.5px}
+}
+
+/* shared layout — sections use padding-top/bottom ONLY */
+.col{max-width:1080px;margin:0 auto;padding-left:28px;padding-right:28px;position:relative;z-index:3}
+section{padding-top:170px;padding-bottom:60px;position:relative}
+/* ghost numerals: each chamber carries its number like a plate on a door */
+section[data-num]::before{content:attr(data-num);position:absolute;top:110px;right:22px;
+  font-family:var(--display);font-size:clamp(120px,17vw,250px);line-height:1;color:var(--ink);
+  opacity:.05;pointer-events:none;z-index:0}
+.kick{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.42em;text-transform:uppercase;
+  color:var(--ink3);display:flex;align-items:center;gap:16px}
+.kick::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ice);flex:none;
+  animation:housepulse 7s ease-in-out infinite;box-shadow:0 0 12px rgba(79,196,245,0.55)}
+@keyframes housepulse{0%,100%{opacity:.55;transform:scale(.85)}50%{opacity:1;transform:scale(1)}}
+.kick .n{color:var(--ink4)}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(34px,4.8vw,58px);line-height:1.14;
+  letter-spacing:.015em;margin-top:26px;max-width:19em}
+
+/* reveals */
+.rev{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s ease}
+.rev.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rev{opacity:1;transform:none}}
+
+/* ── HERO ── */
+#hero{min-height:100svh;display:flex;align-items:center;position:relative;padding-top:120px;padding-bottom:80px}
+#orb{position:absolute;right:2vw;top:50%;transform:translateY(-50%);z-index:1;pointer-events:none;opacity:.9}
+.hero-in{position:relative;z-index:3}
+.wordmark{font-family:var(--display);font-weight:400;font-size:clamp(68px,11.5vw,158px);letter-spacing:.14em;line-height:1;
+  margin-top:26px;margin-left:-4px;color:var(--ink);overflow:hidden;padding-bottom:.06em}
+.wordmark span{display:inline-block;transform:translateY(1.15em);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+body.lit .wordmark span{transform:none}
+body.lit .wordmark span:nth-child(2){transition-delay:.06s}
+body.lit .wordmark span:nth-child(3){transition-delay:.12s}
+body.lit .wordmark span:nth-child(4){transition-delay:.18s}
+body.lit .wordmark span:nth-child(5){transition-delay:.26s}
+.wordmark .wi{color:var(--ice)}
+/* one pass of light across the wordmark, once the letters have risen */
+.wordmark{position:relative}
+.wordmark::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,0.20) 50%,transparent 58%);
+  transform:translateX(-130%)}
+body.lit .wordmark::after{animation:sweep 1.7s ease 1.1s 1 forwards}
+@keyframes sweep{to{transform:translateX(130%)}}
+.wmsub{font-family:var(--mono);font-size:12px;letter-spacing:.52em;text-transform:uppercase;color:var(--ink3);
+  margin-top:16px;display:flex;align-items:center;gap:18px}
+.wmsub::after{content:"";flex:none;width:56px;height:1px;background:var(--ice);opacity:.6}
+.hline{font-family:var(--serif);font-size:clamp(19px,2.2vw,27px);color:var(--ink2);margin-top:22px;max-width:26em}
+#live{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink3);margin-top:36px;
+  border-left:2px solid var(--ice);padding-left:14px;min-height:1.6em}
+#live b{color:var(--ice);font-weight:500}
+.doors{display:flex;align-items:center;gap:26px;margin-top:34px;flex-wrap:wrap}
+/* the gate button: obsidian glass, ice voice, corner ticks like the frames.
+   Idle, it beckons with a slow glow; touched, it floods with the ramp from
+   below while a light passes across. Nothing shouts; everything invites. */
+.btn{display:inline-block;position:relative;overflow:hidden;background:rgba(13,17,24,0.55);color:var(--ice);
+  text-decoration:none;font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  padding:17px 34px;border-radius:var(--r);border:1px solid var(--ice-border);cursor:pointer;
+  transition:color .35s ease,border-color .35s ease,box-shadow .5s ease,transform .25s ease;
+  animation:btnbeckon 7s ease-in-out infinite}
+@keyframes btnbeckon{0%,100%{box-shadow:0 0 0 rgba(79,196,245,0)}50%{box-shadow:0 0 24px rgba(79,196,245,0.16)}}
+.btn::before{content:"";position:absolute;inset:5px;pointer-events:none;opacity:.8;transition:opacity .35s;
+  background:
+    linear-gradient(var(--ice),var(--ice)) left top/9px 1px,
+    linear-gradient(var(--ice),var(--ice)) left top/1px 9px,
+    linear-gradient(var(--ice),var(--ice)) right top/9px 1px,
+    linear-gradient(var(--ice),var(--ice)) right top/1px 9px,
+    linear-gradient(var(--ice),var(--ice)) left bottom/9px 1px,
+    linear-gradient(var(--ice),var(--ice)) left bottom/1px 9px,
+    linear-gradient(var(--ice),var(--ice)) right bottom/9px 1px,
+    linear-gradient(var(--ice),var(--ice)) right bottom/1px 9px;
+  background-repeat:no-repeat}
+.btn::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,0.22) 50%,transparent 60%);
+  transform:translateX(-130%);transition:transform .7s ease}
+.btn:hover{animation:none;color:#fff;border-color:rgba(79,196,245,0.9);transform:translateY(-1px);
+  box-shadow:inset 0 -4em 0 0 #135a80,0 14px 40px rgba(26,122,168,0.35)}
+.btn:hover::before{opacity:.45}
+.btn:hover::after{transform:translateX(130%)}
+.ghost{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);
+  text-decoration:none;transition:color .25s;position:relative}
+.ghost::after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:0;background:var(--ice);transition:width .3s ease}
+.ghost:hover{color:var(--ice)}
+.ghost:hover::after{width:100%}
+.flinks a{position:relative}
+.flinks a::after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:0;background:var(--ice);transition:width .3s ease}
+.flinks a:hover::after{width:100%}
+.btn:active{transform:translateY(0) scale(.99)}
+.fi{transition:border-color .25s ease}
+.fi:focus{border-color:var(--ice-border)}
+.role{transition:color .25s,border-color .25s,background .25s}
+.role:not(.on):hover{color:var(--ink2);border-color:rgba(255,255,255,0.28)}
+.freenote{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--steel);margin-top:16px}
+#worldline{font-family:var(--serif);font-style:italic;font-size:15.5px;color:var(--ink4);margin-top:24px;
+  min-height:1.6em;transition:opacity .7s ease}
+.byline{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ink4);margin-top:46px}
+@media (max-width:1180px){
+  #orb{right:auto;left:50%;top:38%;transform:translate(-50%,-50%);opacity:.3}
+}
+
+/* ── the ticker ── */
+#ticker{position:relative;z-index:3;overflow:hidden;border-bottom:1px solid var(--grid);
+  padding:13px 0;background:rgba(13,17,24,0.4)}
+#ticker .tk{display:flex;white-space:nowrap;width:max-content;animation:tickmove 52s linear infinite;will-change:transform}
+#ticker span{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink4)}
+@keyframes tickmove{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){#ticker .tk{animation:none}}
+
+/* ── the spine (≥1181px): chambers numbered down the left edge ── */
+#spine{display:none}
+@media (min-width:1181px){
+  #spine{display:grid;position:fixed;left:26px;top:50%;transform:translateY(-50%);gap:16px;z-index:40}
+  #spine a{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink4);
+    text-decoration:none;position:relative;transition:color .3s}
+  #spine a:hover{color:var(--ice)}
+  #spine a.on{color:var(--ice)}
+  #spine a.on::before{content:"";position:absolute;left:-12px;top:50%;transform:translateY(-50%);
+    width:5px;height:1px;background:var(--ice)}
+  #spine a::after{content:attr(data-label);position:absolute;left:26px;top:50%;transform:translateY(-50%);
+    font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);
+    opacity:0;transition:opacity .3s;white-space:nowrap;pointer-events:none}
+  #spine a:hover::after,#spine a.on::after{opacity:.85}
+}
+
+/* ── hollow letters: the one word each headline leaves unfilled ── */
+.hollow{font-style:normal;color:transparent;-webkit-text-stroke:1.1px var(--ink)}
+
+/* ── the reticle (pointer:fine): the page's own crosshair ── */
+@media (pointer:fine){
+  #ret{position:fixed;z-index:200;pointer-events:none;width:30px;height:30px;margin:-15px 0 0 -15px;
+    border:1px solid rgba(79,196,245,0.55);border-radius:50%;
+    transition:transform .18s ease,opacity .25s;transform:scale(1);opacity:0}
+  #ret::after{content:"";position:absolute;left:50%;top:50%;width:3.5px;height:3.5px;margin:-1.75px 0 0 -1.75px;
+    border-radius:50%;background:var(--ice)}
+  #ret.live{opacity:1}
+  #ret.hot{transform:scale(1.7);border-color:rgba(79,196,245,0.85)}
+  #ret.off{opacity:0}
+}
+@media (pointer:coarse),(prefers-reduced-motion:reduce){#ret{display:none}}
+
+/* ── THE TRANSIT ribbon (the app's sky) ── */
+#transit{position:relative;z-index:3;border-top:1px solid var(--grid);border-bottom:1px solid var(--grid);
+  background:linear-gradient(180deg,rgba(24,32,52,0.6),rgba(13,17,24,0.2))}
+#sky{display:block;width:100%;height:170px;cursor:crosshair}
+.tcap{position:absolute;left:50%;transform:translateX(-50%);bottom:10px;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink4);white-space:nowrap;pointer-events:none}
+.tcap #tclock{color:var(--steel)}
+@media (max-width:700px){#sky{height:120px}.tcap{letter-spacing:.18em}}
+
+/* ── ARGUMENT (serif voice) ── */
+#argument .essay{font-family:var(--serif);font-size:clamp(18px,1.9vw,22px);line-height:1.85;color:var(--ink2);
+  max-width:38em;margin-top:34px}
+#argument .essay p+p{margin-top:1.5em}
+#argument .essay .lead::first-letter{font-size:3.4em;float:left;line-height:.82;padding-right:12px;color:var(--ink)}
+#argument .essay em{color:var(--ink);font-style:italic}
+.pull{font-family:var(--serif);font-size:clamp(22px,2.6vw,30px);line-height:1.5;color:var(--ink);
+  border-left:2px solid var(--ice);padding-left:26px;margin:2.2em 0;max-width:24em}
+
+/* ── MIRROR (mono voice) ── */
+#mirror .mhead{font-family:var(--display);font-size:clamp(30px,4vw,50px);line-height:1.2;margin-top:26px;max-width:20em}
+#mlines{margin-top:44px;display:grid;gap:22px;max-width:44em}
+.ml{font-family:var(--mono);font-size:clamp(13.5px,1.5vw,16px);line-height:1.8;color:var(--ink4);
+  border-bottom:1px solid var(--grid);padding-bottom:20px;min-height:2em}
+.ml.lit{color:var(--ink2)}
+.ml b{color:var(--ice);font-weight:500}
+.ml .caret{display:inline-block;width:.6em;color:var(--ice);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.mafter{margin-top:40px;max-width:36em;color:var(--ink2);font-size:17px;line-height:1.8}
+.mafter .honest{font-family:var(--serif);font-size:clamp(19px,2vw,24px);color:var(--ink);line-height:1.6;margin-top:18px}
+.mnote{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);margin-top:26px}
+.mnote i{font-style:normal;color:var(--steel)}
+
+/* ── the weighing (the Egyptian interlude) ── */
+#weigh{position:relative;z-index:3;border-top:1px solid var(--grid);border-bottom:1px solid var(--grid);
+  padding:74px 28px;background:linear-gradient(180deg,rgba(24,32,52,0.18),rgba(13,17,24,0.04))}
+.wgrid{max-width:880px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:34px;justify-items:center;text-align:center}
+@media (min-width:760px){
+  .wgrid{grid-template-columns:250px 1fr;gap:64px;align-items:center;justify-items:start;text-align:left}
+  html[dir=rtl] .wgrid{text-align:right}
+}
+#scale{display:block}
+#scale .beamgrp{transform-origin:140px 40px;animation:weighbeam 9s ease-in-out infinite alternate}
+@keyframes weighbeam{from{transform:rotate(1.5deg)}to{transform:rotate(-1.1deg)}}
+@media (prefers-reduced-motion:reduce){#scale .beamgrp{animation:none}}
+.wtxt{max-width:30em}
+.wserif{font-family:var(--serif);font-size:clamp(17px,1.9vw,21px);line-height:1.75;color:var(--ink2)}
+.wcap{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink4);margin-top:16px}
+
+/* ── INSTRUMENT (frames) ── */
+.oblig{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);
+  margin-top:24px;border-left:2px solid var(--ice);padding-left:14px;line-height:2}
+
+/* ── the one-screen version (the operator's fast lane) ── */
+#quick{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;
+  background:rgba(5,6,10,0.78);backdrop-filter:blur(8px)}
+#quick.on{display:flex}
+.qcard{background:var(--bg2);border:1px solid var(--grid2);border-radius:var(--r);max-width:580px;
+  width:calc(100% - 40px);padding:36px 38px;position:relative;max-height:86svh;overflow:auto}
+.qcard .qk{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ice)}
+.qcard h3{font-family:var(--display);font-weight:400;font-size:30px;margin-top:14px}
+.qcard ul{list-style:none;margin-top:20px;display:grid;gap:12px}
+.qcard li{font-size:15.5px;color:var(--ink2);line-height:1.65;padding-left:18px;position:relative}
+.qcard li::before{content:"·";color:var(--ice);position:absolute;left:0;font-weight:700}
+.qcard li b{color:var(--ink);font-weight:500}
+.qdoors{display:flex;gap:20px;margin-top:28px;align-items:center;flex-wrap:wrap}
+#qclose{position:absolute;top:10px;right:14px;background:none;border:0;color:var(--ink3);font-size:22px;
+  cursor:pointer;line-height:1;padding:6px}
+#qclose:hover{color:var(--ice)}
+.qbtn{background:none;border:0;padding:0;cursor:pointer}
+.frames{display:grid;gap:26px;margin-top:52px;perspective:900px}
+.frame{border:1px solid var(--grid2);border-radius:var(--r);background:rgba(26,30,40,0.85);position:relative;
+  padding:30px 30px 26px;overflow:hidden;transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease}
+.frame::before{content:"";position:absolute;inset:0;border-radius:var(--r);pointer-events:none;
+  background:linear-gradient(180deg,rgba(79,196,245,0.06),transparent 34%);transition:opacity .35s}
+.frame:hover{transform:translateY(-3px);border-color:var(--ice-border);box-shadow:0 18px 50px rgba(0,0,0,0.5)}
+.frame:hover::before{opacity:1.6}
+.tick{position:absolute;width:9px;height:9px;border:1px solid var(--ink4)}
+.tick.tl{top:10px;left:10px;border-right:0;border-bottom:0}
+.tick.tr{top:10px;right:10px;border-left:0;border-bottom:0}
+.tick.bl{bottom:10px;left:10px;border-right:0;border-top:0}
+.tick.br{bottom:10px;right:10px;border-left:0;border-top:0}
+.fbadges{display:flex;gap:10px;flex-wrap:wrap}
+.badge{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);
+  border:1px solid var(--grid2);padding:5px 10px;border-radius:var(--r);white-space:nowrap}
+.badge.ice{color:var(--ice);border-color:var(--ice-border);background:var(--ice-dim)}
+.badge.rose{color:var(--crit);border-color:rgba(180,83,95,0.4);background:rgba(180,83,95,0.08)}
+.ftitle{font-family:var(--serif);font-size:24px;margin-top:20px}
+.fbody{margin-top:16px;display:grid;gap:12px}
+.frow{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.fk{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);min-width:120px}
+.fv{font-family:var(--mono);font-size:14px;color:var(--ink2)}
+.fv b{color:var(--ink);font-weight:500}
+.fnum{font-family:var(--mono);font-weight:300;font-size:clamp(54px,7vw,84px);line-height:1;color:var(--ink);
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.fnum small{font-size:.3em;color:var(--ink4);letter-spacing:.2em;font-weight:400}
+.fverdict{font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--steel);margin-top:8px}
+.fquote{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--ink2);line-height:1.6;max-width:30em}
+.fcounter{font-size:15px;color:var(--ink2);max-width:34em;line-height:1.7}
+.fcounter b{color:var(--ink);font-weight:500}
+.fcap{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink4);margin-top:22px}
+.prow{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12.5px;color:var(--ink2)}
+.prow .nm{min-width:104px;color:var(--ink)}
+.pbar{flex:1;height:3px;background:var(--grid);border-radius:2px;position:relative;min-width:80px}
+.pbar i{position:absolute;left:0;top:0;bottom:0;border-radius:2px;background:var(--steel);
+  width:0;transition:width 1.1s ease .5s}
+.pbar.hot i{background:var(--crit)}
+.frame.in .pbar i{width:var(--w)}
+/* the dial fills itself when the frame arrives */
+.dial .dv{stroke-dasharray:0 100;transition:stroke-dasharray 1.4s cubic-bezier(.4,0,.2,1) .4s}
+.frame.in .dial .dv{stroke-dasharray:53.25 46.75}
+.pstate{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink4);min-width:110px;text-align:right}
+#pulse{display:none;margin-top:34px;border:1px solid var(--ice-border);background:var(--ice-dim);border-radius:var(--r);
+  padding:16px 22px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--ink2)}
+#pulse b{color:var(--ice);font-weight:600}
+.issue{margin-top:70px}
+.issue .ih{font-family:var(--display);font-size:clamp(26px,3.2vw,40px);color:var(--ink)}
+.issue .isub{color:var(--ink3);margin-top:12px;max-width:36em;font-size:15.5px;line-height:1.7}
+.docs{margin-top:30px;border-top:1px solid var(--grid2)}
+.doc{display:flex;gap:16px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--grid)}
+.doc b{font-family:var(--serif);font-weight:400;font-size:17px;color:var(--ink);white-space:nowrap}
+.doc span{font-family:var(--mono);font-size:11px;color:var(--ink4);letter-spacing:.04em;line-height:1.7}
+.doc.flag b{color:var(--ice)}
+/* the catalogue prints itself, row by row */
+.docs .doc{opacity:0;transform:translateY(12px);transition:opacity .7s ease,transform .7s ease}
+.issue.in .doc{opacity:1;transform:none}
+.docs .doc:nth-child(2){transition-delay:.06s}.docs .doc:nth-child(3){transition-delay:.12s}
+.docs .doc:nth-child(4){transition-delay:.18s}.docs .doc:nth-child(5){transition-delay:.24s}
+.docs .doc:nth-child(6){transition-delay:.30s}.docs .doc:nth-child(7){transition-delay:.36s}
+.docs .doc:nth-child(8){transition-delay:.42s}.docs .doc:nth-child(9){transition-delay:.48s}
+@media (min-width:900px){.docs{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}}
+@media (min-width:900px){.frames{grid-template-columns:1fr 1fr}.frame.wide{grid-column:1/-1}}
+
+/* ── WITNESS ── */
+#witness .wwait{margin-top:40px;max-width:36em}
+#witness .wline{font-family:var(--display);font-size:clamp(28px,3.4vw,42px);line-height:1.4;color:var(--ink)}
+#witness .wsub{margin-top:20px;color:var(--ink3);font-size:15.5px;line-height:1.8;max-width:32em}
+#witness .wchip{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ice);border:1px solid var(--ice-border);background:var(--ice-dim);padding:6px 12px 6px 24px;
+  border-radius:var(--r);margin-top:24px;position:relative}
+#witness .wchip::before{content:"";position:absolute;left:10px;top:50%;transform:translateY(-50%);
+  width:5px;height:5px;border-radius:50%;background:var(--ice);animation:housepulse 7s ease-in-out infinite}
+#witness .wquote{font-family:var(--serif);font-size:clamp(24px,3.2vw,38px);line-height:1.5;color:var(--ink);
+  max-width:24em;margin-top:40px}
+#witness .wquote::before{content:"\201C";color:var(--ice);margin-right:2px}
+#witness .wwho{display:flex;align-items:center;gap:16px;margin-top:28px}
+#witness .wwho img{width:52px;height:52px;border-radius:50%;object-fit:cover;filter:grayscale(1);border:1px solid var(--grid2)}
+#witness .wwho .wn{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--ink2)}
+#witness .wwho .wt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink4);margin-top:4px}
+
+/* ── the closing verdict at the door ── */
+#close-read{display:none;margin-top:44px;margin-bottom:8px;border:1px solid var(--ice-border);background:var(--ice-dim);
+  border-radius:var(--r);padding:24px 26px;max-width:640px}
+#close-read .crk{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ice);margin-bottom:14px}
+#close-read .crbody{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+#close-read .crl{font-family:var(--mono);font-size:13px;line-height:2;color:var(--ink2);flex:1;min-width:240px}
+#close-read .crl b{color:var(--ink);font-weight:500}
+#close-read .crf{font-family:var(--serif);font-style:italic;font-size:17.5px;color:var(--ink);margin-top:14px}
+.seal{flex:none;text-align:center}
+.seal canvas{display:block;width:132px;height:132px;border:1px solid var(--grid2);border-radius:var(--r);background:rgba(13,17,24,0.5)}
+.seal .sk{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink4);margin-top:8px}
+.sealbtn{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);
+  background:none;border:1px solid var(--grid2);border-radius:var(--r);padding:6px 10px;margin-top:8px;cursor:pointer;
+  transition:color .25s,border-color .25s}
+.sealbtn:hover{color:var(--ice);border-color:var(--ice-border)}
+.sharego{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ice);margin-top:18px;text-align:left}
+.sharego:hover{color:var(--ink)}
+.sharemsg{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--steel);min-height:1.5em;margin-top:6px}
+
+/* ── EVIDENCE ── */
+.ledger{margin-top:46px;border-top:1px solid var(--grid2);max-width:52em}
+.lrow{display:grid;grid-template-columns:220px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--grid)}
+.lrow .lk{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink4);padding-top:3px}
+.lrow .lv{color:var(--ink2);font-size:16px;line-height:1.7;max-width:34em}
+.lrow .lv b{color:var(--ink);font-weight:500}
+.lrow .lv i{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--steel);letter-spacing:.06em}
+@media (max-width:640px){.lrow{grid-template-columns:1fr;gap:6px}}
+/* the governance spec plate: answers asked in the order institutions ask them */
+.gov{margin-top:64px;max-width:52em}
+.govh{font-family:var(--display);font-size:clamp(24px,2.8vw,34px);color:var(--ink)}
+.govsub{margin-top:10px;color:var(--ink3);font-size:15px;line-height:1.7;max-width:36em}
+.gspec{margin-top:24px;border-top:1px solid var(--grid2)}
+.grow{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--grid)}
+.gk{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel);padding-top:2px}
+.gv{font-family:var(--mono);font-size:12.5px;color:var(--ink2);line-height:1.8}
+@media (max-width:560px){.grow{grid-template-columns:1fr;gap:4px}}
+.edoors{display:flex;gap:26px;margin-top:40px;flex-wrap:wrap}
+#creedband{position:relative;z-index:3;border-top:1px solid var(--grid);border-bottom:1px solid var(--grid);
+  padding:96px 28px;text-align:center;
+  background:linear-gradient(180deg,rgba(24,32,52,0.30),rgba(13,17,24,0.06))}
+#creedband::before{content:"";position:absolute;top:50px;left:50%;transform:translateX(-50%);
+  width:7px;height:7px;border-radius:50%;background:var(--ice);
+  box-shadow:0 0 12px rgba(79,196,245,0.55);animation:housepulse 7s ease-in-out infinite}
+#creedband::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(760px,82vw);height:240px;pointer-events:none;
+  background:radial-gradient(ellipse,rgba(79,196,245,0.07),transparent 70%)}
+.cb{font-family:var(--display);font-weight:400;font-size:clamp(30px,4.6vw,60px);line-height:1.35;color:var(--ink)}
+
+/* ── COHORT / ACCESS ── */
+#access .price{margin-top:30px;max-width:36em;color:var(--ink2);font-size:17px;line-height:1.8}
+#access .price b{color:var(--ink);font-weight:500}
+.form{margin-top:44px;max-width:560px;display:grid;gap:16px}
+.roles{display:flex;gap:10px}
+.role{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);
+  border:1px solid var(--grid2);background:transparent;padding:10px 18px;border-radius:10px;cursor:pointer}
+.role.on{color:var(--ice);border-color:var(--ice-border);background:var(--ice-dim)}
+.fi{background:var(--bg2);border:1px solid var(--grid2);border-radius:var(--r);color:var(--ink);
+  font-family:var(--sans);font-size:15px;padding:14px 16px;width:100%}
+.fi::placeholder{color:var(--ink4)}
+textarea.fi{min-height:110px;resize:vertical}
+.lchk{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--ink3);cursor:pointer}
+.lchk input{width:17px;height:17px;accent-color:#1a7aa8}
+#amsg{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--steel);min-height:1.6em}
+.polyg{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink4);line-height:1.8}
+.numline{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--steel);margin-top:22px;
+  max-width:44em;line-height:1.9;border-left:2px solid var(--ice);padding-left:14px}
+.opendoor{margin-top:64px;border-top:1px solid var(--grid);padding-top:40px;max-width:560px}
+.opendoor .odh{font-family:var(--display);font-size:clamp(22px,2.6vw,30px);color:var(--ink)}
+.opendoor .odb{margin-top:14px;color:var(--ink3);font-size:15.5px;line-height:1.8}
+.opendoor .ghost{display:inline-block;margin-top:18px}
+#amsg.ok{color:var(--ice)}
+
+/* ── FOUNDER ── */
+#founder .fgrid{display:grid;gap:36px;margin-top:52px;align-items:start}
+@media (min-width:640px){#founder .fgrid{grid-template-columns:190px 1fr;gap:48px}}
+#founder figure{max-width:190px;overflow:hidden;border-radius:var(--r)}
+#founder figure img{width:100%;height:auto;display:block;border-radius:var(--r);filter:grayscale(1);border:1px solid var(--grid2);
+  transition:filter .6s ease,transform .6s ease}
+#founder figure:hover img{filter:grayscale(.3);transform:scale(1.025)}
+#founder figcaption{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink4);margin-top:14px}
+#founder .fstory{font-family:var(--serif);font-size:clamp(17px,1.8vw,20px);line-height:1.9;color:var(--ink2);max-width:34em}
+#founder .fstory p+p{margin-top:1.4em}
+#founder .fstory em{color:var(--ink)}
+.langs{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink4);margin-top:26px}
+.fsig{font-family:'Nothing You Could Do',cursive;font-size:27px;color:var(--steel);margin-top:24px;
+  transform:rotate(-2deg);opacity:.85}
+.fmail{display:inline-block;font-family:var(--mono);font-size:12.5px;color:var(--steel);text-decoration:none;margin-top:14px;letter-spacing:.05em}
+.fmail:hover{color:var(--ice)}
+.dial{margin-top:6px}
+.fv,.crl,#live,.ml{font-variant-numeric:tabular-nums}
+
+/* footer */
+footer{padding:90px 0 60px;border-top:1px solid var(--grid);margin-top:120px}
+footer .col{display:grid;gap:22px}
+.fbrand{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink3)}
+.fdisc{font-size:13.5px;color:var(--ink4);max-width:44em;line-height:1.7}
+.flinks{display:flex;gap:24px;flex-wrap:wrap}
+.flinks a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink4);text-decoration:none}
+.flinks a:hover{color:var(--ice)}
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <a href="#cover" class="logo"><span class="bars"><i></i><i></i></span><span class="wm">Areté</span></a>
-  <nav style="display:flex;align-items:center;gap:clamp(18px,3vw,30px)">
-    <a href="founder.html" class="top-cta">Founder</a>
-    <a href="mailto:sabrine-hammami@areteprotocol.com?subject=Aret%C3%A9%20%C2%B7%20Access%20request" class="top-cta">Request access</a>
+<a id="skip" href="#argument">Skip to content</a>
+<canvas id="field" aria-hidden="true"></canvas>
+<div id="ret" aria-hidden="true"></div>
+<div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div id="scan" aria-hidden="true"></div>
+<div id="prog" aria-hidden="true"></div>
+
+<div id="boot" aria-hidden="true"><div id="bootlog"></div></div>
+
+<header id="hd">
+  <a class="brand" href="#top" aria-label="Areté">
+    <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect x="11" y="14" width="4" height="12" fill="#7fb2d6"/><rect x="18" y="7" width="4" height="19" fill="#4fc4f5"/></svg>
+    <span class="bwrap"><b>ARET<span class="bi">É</span></b><i>The Areté Protocol</i></span>
+  </a>
+  <nav aria-label="Sections">
+    <a href="#argument">The argument</a>
+    <a href="#mirror">The mirror</a>
+    <a href="#instrument">The instrument</a>
+    <a href="#evidence">Evidence</a>
+    <a href="#founder">Founder</a>
   </nav>
+  <div id="lang" role="group" aria-label="Language">
+    <button data-l="en" class="on" type="button">EN</button><button data-l="de" type="button">DE</button><button data-l="fr" type="button">FR</button><button data-l="es" type="button">ES</button><button data-l="ar" type="button">ع</button>
+  </div>
+  <a class="hcta" id="hd-app" href="#" rel="noopener">Enter the instrument</a>
+</header>
+
+<!-- ── HERO ── -->
+<section id="hero" aria-label="Areté">
+  <canvas id="orb" width="560" height="560" aria-hidden="true"></canvas>
+  <div class="col hero-in">
+    <div class="kick">The Cognitive Integrity Protocol</div>
+    <div class="wordmark" role="heading" aria-level="1" aria-label="Areté"><span aria-hidden="true">A</span><span aria-hidden="true">R</span><span aria-hidden="true">E</span><span aria-hidden="true">T</span><span class="wi" aria-hidden="true">É</span></div>
+    <div class="wmsub">The Areté Protocol</div>
+    <p class="hline">The check engine light for decision-making. A continuous read of cognitive integrity for the people whose calls cannot be undone.</p>
+    <p id="live" aria-live="off">READING YOU · CHANNEL OPEN</p>
+    <div class="doors">
+      <a class="btn" id="door-read" href="#" rel="noopener">Take the sixty-second read</a>
+      <a class="ghost" href="#argument">Begin with the argument ↓</a>
+      <button class="ghost qbtn" id="q60" type="button">In a hurry: the one-screen version</button>
+    </div>
+    <p class="freenote">The read is free · sixty seconds · the verdict is sealed until you claim it</p>
+    <p id="worldline" dir="auto" aria-hidden="true">The check engine light for decision-making.</p>
+    <p class="byline">Sabrine Hammami · Founder, The Areté Protocol</p>
+  </div>
+</section>
+
+<!-- ── THE TRANSIT · the app's living sky, keeping the visitor's local time ── -->
+<div id="transit" aria-hidden="true">
+  <canvas id="sky"></canvas>
+  <div class="tcap"><span id="tclock">·</span> · YOUR LOCAL SKY · THE RING CLOSES AS YOU READ</div>
 </div>
 
-<!-- 01 · COVER -->
-<section class="slide cover" id="cover">
-  <div class="slide-inner">
-    <div class="cover-mark"><i></i><i></i></div>
-    <h1 class="cover-line">The check engine light <span class="ice">for decision-making.</span></h1>
-    <p class="sub">A continuous read of cognitive integrity for the people whose calls cannot be undone.</p>
-    <div class="cover-tag-row"><span class="cover-rule"></span><span class="cover-tag">Cognitive Integrity</span></div>
+<!-- the protocol ticker: the instrument names its organs, endlessly -->
+<div id="ticker" aria-hidden="true"><div class="tk">
+  <span>The Cognitive Integrity Protocol&ensp;·&ensp;The Reading&ensp;·&ensp;The Intercept&ensp;·&ensp;The Record&ensp;·&ensp;The Forecast&ensp;·&ensp;The Practice&ensp;·&ensp;Thirty Places&ensp;·&ensp;Frankfurt&ensp;·&ensp;Nothing Leaves The Tab&ensp;·&ensp;</span>
+  <span>The Cognitive Integrity Protocol&ensp;·&ensp;The Reading&ensp;·&ensp;The Intercept&ensp;·&ensp;The Record&ensp;·&ensp;The Forecast&ensp;·&ensp;The Practice&ensp;·&ensp;Thirty Places&ensp;·&ensp;Frankfurt&ensp;·&ensp;Nothing Leaves The Tab&ensp;·&ensp;</span>
+</div></div>
+
+<!-- the spine: the page's own wayfinding instrument -->
+<nav id="spine" aria-label="Chambers">
+  <a href="#argument" data-label="The argument">01</a>
+  <a href="#mirror" data-label="The mirror">02</a>
+  <a href="#instrument" data-label="The instrument">03</a>
+  <a href="#witness" data-label="The witness">04</a>
+  <a href="#evidence" data-label="The evidence">05</a>
+  <a href="#access" data-label="Access">06</a>
+  <a href="#founder" data-label="Founder">07</a>
+</nav>
+
+<!-- ── I · THE ARGUMENT ── -->
+<section id="argument" data-num="01">
+  <div class="col">
+    <div class="kick rev"><span class="n">01</span> The argument</div>
+    <h2 class="rev">Every serious domain eventually got an instrument. Judgment never did.</h2>
+    <div class="essay">
+      <p class="lead rev" id="ess1">Money got the audit. Aviation got the flight recorder. Medicine got the vital signs monitor. The one system all of them depend on, the mind of the person making the call, still runs unmeasured. Capital is measured. Operations are measured. The mind running both is not.</p>
+      <p class="rev" id="ess2">You are not equally intelligent every day. You know this. What you cannot know from the inside is <em>which day this is</em>, because degradation does not arrive as fog. It arrives as certainty: the conviction that this call is obvious, that it cannot wait, that you have seen this before. A compromised state does not feel compromised. That is what makes it expensive. A mistimed acquisition, a wrong senior hire, one irreversible commitment signed in a hot state: any of them costs more than a decade of measurement. And you do not need a boardroom to know the shape of this. Everyone has signed something irreversible on the wrong day: a resignation, a message, a purchase, a promise. The stakes scale; the mechanism does not.</p>
+      <p class="pull rev" id="essPull">My worst decisions and my best ones felt identical. Identical.</p>
+      <p class="rev" id="ess3">Areté is the instrument for that gap. A sixty-second daily reading of your cognitive state against your own baseline, not against an average. A gate you consult before the calls that cannot be undone. It does not tell you what to decide. It tells you <em>who is deciding</em>.</p>
+    </div>
   </div>
-  <div class="cue"><span>scroll</span><span class="ln"></span></div>
-  <div class="slide-foot"><span>Areté · cognitive integrity platform</span><span class="n">01 / 08</span></div>
 </section>
 
-<!-- 02 · PROBLEM -->
-<section class="slide" id="problem">
-  <div class="slide-inner">
-    <span class="eyebrow">The Cost</span>
-    <div class="stat-num">$1.4<span class="small">trillion</span></div>
-    <p class="stat-cap">lost every year because someone at the top made the wrong call at the wrong moment. <span class="hi">Not for lack of data, but because they couldn't see themselves clearly.</span></p>
-    <div class="src">Source · McKinsey · Bain decision-quality research</div>
+<!-- ── II · THE MIRROR ── -->
+<section id="mirror" data-num="02">
+  <div class="col">
+    <div class="kick rev"><span class="n">02</span> The mirror</div>
+    <h2 class="mhead rev">While you read the argument, this page was reading <em class="hollow">you</em>.</h2>
+    <div id="msentinel" style="height:1px"></div>
+    <div id="mlines">
+      <div class="ml" data-k="dwell"></div>
+      <div class="ml" data-k="travel"></div>
+      <div class="ml" data-k="pace"></div>
+      <div class="ml" data-k="still"></div>
+      <div class="ml" data-k="away"></div>
+    </div>
+    <div class="mafter rev">
+      <p id="maf1">Minutes of a stranger, read from a cursor. It proves one thing only: <b style="color:var(--ink);font-weight:500">state is visible from the outside.</b></p>
+      <p class="honest">A page can meet a visitor. It takes a protocol to know an operator: physiology, behaviour and a decision record, held against a baseline that is yours alone.</p>
+    </div>
+    <p class="mnote rev">Computed in this tab · transmitted <i>nowhere</i></p>
   </div>
-  <div class="slide-foot"><span>The problem</span><span class="n">02 / 08</span></div>
 </section>
 
-<!-- 03 · THE GAP (statement) -->
-<section class="slide" id="why">
-  <div class="slide-inner">
-    <span class="eyebrow">Why Now</span>
-    <h2 class="statement" style="max-width:32ch">Capital is measured.<br><span class="dim">Operations are measured.</span><br><span class="ice">The mind running both is not.</span></h2>
+<!-- the weighing: the oldest instrument of judgment, in hairline -->
+<div id="weigh">
+  <div class="wgrid">
+    <svg id="scale" viewBox="0 0 280 190" width="240" height="163" aria-hidden="true" fill="none">
+      <g class="beamgrp">
+        <line x1="62" y1="40" x2="218" y2="40" stroke="#7fb2d6" stroke-width="1.2" opacity="0.85"/>
+        <line x1="140" y1="34" x2="140" y2="46" stroke="#7fb2d6" stroke-width="1" opacity="0.6"/>
+        <line x1="62" y1="40" x2="62" y2="92" stroke="#7fb2d6" stroke-width="0.8" opacity="0.55"/>
+        <line x1="218" y1="40" x2="218" y2="92" stroke="#7fb2d6" stroke-width="0.8" opacity="0.55"/>
+        <path d="M40 92 Q62 108 84 92" stroke="#7fb2d6" stroke-width="1" opacity="0.8"/>
+        <path d="M196 92 Q218 108 240 92" stroke="#7fb2d6" stroke-width="1" opacity="0.8"/>
+        <path d="M55 74 q-3 -12 7 -14 q10 -2 10 8 q0 10 -8 16 q-8 -4 -9 -10 Z" stroke="#9fc9df" stroke-width="1" opacity="0.9"/>
+        <path d="M62 60 h-6 M62 60 h6" stroke="#9fc9df" stroke-width="0.8" opacity="0.5"/>
+        <path d="M218 88 C210 72 212 52 224 40 C226 56 226 74 218 88 Z" stroke="#4fc4f5" stroke-width="1" opacity="0.9"/>
+        <path d="M218 80 l6 -4 M217 70 l6 -4 M217 60 l5 -4" stroke="#4fc4f5" stroke-width="0.7" opacity="0.6"/>
+      </g>
+      <circle cx="140" cy="30" r="3.2" stroke="#4fc4f5" stroke-width="1" opacity="0.9"/>
+      <line x1="140" y1="46" x2="140" y2="164" stroke="#7fb2d6" stroke-width="1.2" opacity="0.85"/>
+      <line x1="118" y1="170" x2="162" y2="170" stroke="#7fb2d6" stroke-width="1.2" opacity="0.85"/>
+      <line x1="128" y1="164" x2="152" y2="164" stroke="#7fb2d6" stroke-width="0.8" opacity="0.5"/>
+    </svg>
+    <div class="wtxt">
+      <p class="wserif" id="wserif">The oldest image of judgment is a scale: a heart weighed against a feather, before the verdict was spoken. Four thousand years later, Areté rebuilds the weighing as an instrument.</p>
+      <p class="wcap" id="wcap">Ma'at · The Weighing of the Heart · c. 1275 BC</p>
+    </div>
   </div>
-  <div class="slide-foot"><span>The gap</span><span class="n">03 / 08</span></div>
-</section>
+</div>
 
-<!-- 04 · THE SOLUTION -->
-<section class="slide" id="solution">
-  <div class="slide-inner">
-    <div class="rec-grid">
-      <div class="rec-copy">
-        <span class="eyebrow">The Solution</span>
-        <h2 class="statement" style="max-width:13ch">One number. One verdict. <span class="ice">Before you act.</span></h2>
-        <p class="sub">A single read of cognitive integrity, surfacing the hidden biases and blind spots you can't catch in the moment, scored against your own baseline and delivered on the wrist, not in a dashboard you check after the fact.</p>
-        <div class="rec-readout">
-          <div class="rec-stat"><span class="k">CIS today</span><span class="v ice">71</span></div>
-          <div class="rec-stat"><span class="k">Your baseline</span><span class="v">87</span></div>
-          <div class="rec-stat"><span class="k">Drift</span><span class="v">−16</span></div>
+<!-- ── III · THE INSTRUMENT ── -->
+<section id="instrument" data-num="03">
+  <div class="col">
+    <div class="kick rev"><span class="n">03</span> The instrument</div>
+    <h2 class="rev">Not a dashboard. A <em class="hollow">verdict</em>.</h2>
+    <p class="oblig rev">The whole obligation · 60 seconds at morning coffee · the gate before calls that cannot be undone · discreet at work</p>
+
+    <div class="frames">
+      <div class="frame rev" id="f1">
+        <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+        <div class="fbadges"><span class="badge ice">The reading</span><span class="badge">60 seconds · daily</span><span class="badge">vs your own baseline</span></div>
+        <div class="ftitle">The Standing</div>
+        <div class="fbody">
+          <svg class="dial" viewBox="0 0 160 160" width="150" height="150" aria-hidden="true">
+            <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1" pathLength="96" stroke-dasharray="0.5 3.5" transform="rotate(135 80 80)"/>
+            <circle cx="80" cy="80" r="62" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3" pathLength="100" stroke-dasharray="75 25" transform="rotate(135 80 80)"/>
+            <circle class="dv" cx="80" cy="80" r="62" fill="none" stroke="#4fc4f5" stroke-width="3" pathLength="100" stroke-dasharray="53.25 46.75" transform="rotate(135 80 80)" stroke-linecap="round" opacity="0.9"/>
+            <text x="80" y="88" text-anchor="middle" font-family="DM Mono,ui-monospace,monospace" font-size="42" fill="#eef0f3">71</text>
+            <text x="80" y="108" text-anchor="middle" font-family="DM Mono,ui-monospace,monospace" font-size="9" letter-spacing="3" fill="#55555f">CIS</text>
+          </svg>
+          <div class="frow"><span class="fk">Your baseline</span><span class="fv"><b>87</b></span></div>
+          <div class="frow"><span class="fk">Drift</span><span class="fv"><b>&minus;16</b> · widening for 3 days</span></div>
+          <div class="fverdict">OFF BASELINE · PREFER REVERSIBLE CALLS TODAY</div>
         </div>
+        <div class="fcap">Illustrative frame · the instrument itself is live</div>
       </div>
-      <div class="watch-wrap">
-        <svg class="watch" viewBox="0 0 360 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Smartwatch showing a cognitive integrity score of 71 against a baseline of 87">
-          <defs>
-            <linearGradient id="caseGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e1e23"/><stop offset="1" stop-color="#101012"/></linearGradient>
-            <linearGradient id="bandGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#19191d"/><stop offset="1" stop-color="#0d0d0f"/></linearGradient>
-            <linearGradient id="glassGloss" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.07"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
-            <filter id="watchShadow" x="-40%" y="-20%" width="180%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
-          </defs>
-          <ellipse cx="180" cy="430" rx="118" ry="16" fill="#000000" opacity="0.55" filter="url(#watchShadow)"/>
-          <path d="M118 30 L242 30 L232 96 L128 96 Z" fill="url(#bandGrad)"/>
-          <path d="M128 374 L232 374 L242 446 L118 446 Z" fill="url(#bandGrad)"/>
-          <rect x="312" y="212" width="11" height="44" rx="5" fill="#26262c"/>
-          <rect x="45" y="74" width="270" height="322" rx="66" fill="url(#caseGrad)" stroke="#ffffff" stroke-opacity="0.09"/>
-          <rect x="62" y="91" width="236" height="288" rx="52" fill="#08080a"/>
-          <text x="180" y="124" font-family="IBM Plex Mono,monospace" font-size="10" letter-spacing="3" fill="#4fc4f5" text-anchor="middle">DECISION RECORD</text>
-          <g transform="rotate(-90 180 224)">
-            <circle cx="180" cy="224" r="72" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="5"/>
-            <circle class="cis-arc" cx="180" cy="224" r="72" fill="none" stroke="#4fc4f5" stroke-width="6" stroke-linecap="round"/>
-          </g>
-          <text x="180" y="234" font-family="IBM Plex Sans,sans-serif" font-weight="200" font-size="74" letter-spacing="-3" fill="#4fc4f5" text-anchor="middle">71</text>
-          <text x="180" y="262" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="2.5" fill="#5a5a62" text-anchor="middle">CIS · / 100</text>
-          <line x1="118" y1="306" x2="242" y2="306" stroke="#ffffff" stroke-opacity="0.07"/>
-          <text x="180" y="330" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="1.5" fill="#9a9aa2" text-anchor="middle">16 BELOW BASELINE 87</text>
-          <rect x="62" y="91" width="236" height="288" rx="52" fill="url(#glassGloss)"/>
-        </svg>
+
+      <div class="frame rev" id="f2">
+        <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+        <div class="fbadges"><span class="badge ice">The intercept</span><span class="badge">before the call, not after</span></div>
+        <div class="ftitle">The Intercept</div>
+        <div class="fbody">
+          <p class="fquote">"We should double the position. This cannot wait until Monday."</p>
+          <div class="fbadges"><span class="badge rose">Sunk cost · pattern conf 0.81</span><span class="badge rose">Urgency inflation</span></div>
+          <p class="fcounter"><b>The counter:</b> name what you would decide if the money already spent belonged to a stranger. If the answer changes, the position is holding you, not the reverse.</p>
+          <div class="fverdict">VERDICT · HOLD 24 HOURS</div>
+        </div>
+        <div class="fcap">Illustrative frame · the instrument itself is live</div>
       </div>
-    </div>
-  </div>
-  <div class="slide-foot"><span>The solution</span><span class="n">04 / 08</span></div>
-</section>
 
-<!-- 05 · HOW -->
-<section class="slide" id="how">
-  <div class="slide-inner">
-    <span class="eyebrow">How It Works</span>
-    <h2 class="statement" style="max-width:20ch">The protocol runs the loop. <span class="ice">You make the call.</span></h2>
-
-    <div class="flow">
-      <!-- desktop: horizontal loop -->
-      <svg class="flow-svg" viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Calibrate, then monitor, then intercept, re-checked before every call">
-        <defs>
-          <marker id="ah" markerWidth="11" markerHeight="11" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-            <path d="M0 0 L8 4 L0 8" fill="none" stroke="#4fc4f5" stroke-width="1.3"/>
-          </marker>
-        </defs>
-
-        <!-- return arc: re-checked before every call -->
-        <path d="M 810 150 C 810 72, 480 72, 480 146" fill="none" stroke="#4fc4f5" stroke-width="1.2" opacity="0.55" marker-end="url(#ah)"/>
-        <text x="645" y="60" font-family="IBM Plex Mono" font-size="11" letter-spacing="3" fill="#5a5a62" text-anchor="middle">BEFORE EVERY CALL</text>
-
-        <!-- connectors -->
-        <line x1="202" y1="150" x2="430" y2="150" stroke="#4fc4f5" stroke-width="1.2" marker-end="url(#ah)"/>
-        <line x1="532" y1="150" x2="760" y2="150" stroke="#4fc4f5" stroke-width="1.2" marker-end="url(#ah)"/>
-
-        <!-- nodes -->
-        <circle cx="150" cy="150" r="6" fill="none" stroke="#9a9aa2" stroke-width="1.2"/>
-        <circle cx="480" cy="150" r="6" fill="#4fc4f5"/>
-        <circle cx="810" cy="150" r="6" fill="#4fc4f5"/>
-
-        <!-- names -->
-        <text x="150" y="122" font-family="IBM Plex Sans" font-weight="300" font-size="23" fill="#e8e8ea" text-anchor="middle">Calibrate</text>
-        <text x="480" y="122" font-family="IBM Plex Sans" font-weight="300" font-size="23" fill="#e8e8ea" text-anchor="middle">Monitor</text>
-        <text x="810" y="122" font-family="IBM Plex Sans" font-weight="300" font-size="23" fill="#4fc4f5" text-anchor="middle">Intercept</text>
-
-        <!-- subs -->
-        <text x="150" y="192" font-family="IBM Plex Mono" font-size="11" letter-spacing="2" fill="#5a5a62" text-anchor="middle">YOUR BASELINE</text>
-        <text x="480" y="192" font-family="IBM Plex Mono" font-size="11" letter-spacing="2" fill="#5a5a62" text-anchor="middle">BODY · BEHAVIOR · CONTEXT</text>
-        <text x="810" y="192" font-family="IBM Plex Mono" font-size="11" letter-spacing="2" fill="#5a5a62" text-anchor="middle">BEFORE THE CALL</text>
-      </svg>
-
-      <!-- mobile: vertical loop -->
-      <div class="flow-mobile">
-        <div class="mnode"><span class="mdot off"></span><div><div class="mname">Calibrate</div><div class="msub">your baseline</div></div></div>
-        <div class="mnode"><span class="mdot"></span><div><div class="mname">Monitor</div><div class="msub">body · behavior · context</div></div></div>
-        <div class="mnode"><span class="mdot"></span><div><div class="mname ice">Intercept</div><div class="msub">before the call</div></div></div>
-        <div class="flow-loop">↻ re-checked before every call</div>
+      <div class="frame wide rev" id="f3">
+        <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+        <div class="fbadges"><span class="badge ice">The practice</span><span class="badge">for coaches and advisors</span><span class="badge">named consent only</span></div>
+        <div class="ftitle">The Practice</div>
+        <div class="fbody">
+          <div class="prow"><span class="nm">Client A</span><div class="pbar"><i style="--w:72%"></i></div><span class="pstate">Steady</span></div>
+          <div class="prow"><span class="nm">Client B</span><div class="pbar"><i style="--w:44%"></i></div><span class="pstate">Drifting</span></div>
+          <div class="prow"><span class="nm">Client C</span><div class="pbar hot"><i style="--w:18%"></i></div><span class="pstate">Near the line</span></div>
+          <p class="fcounter" style="margin-top:10px">A practitioner's cockpit: each client's standing, the burnout line, and the session preparation written from their record. Clients join by explicit, named consent. The practitioner sees signals and preparation, <b>never their answers</b>: that rule is enforced in code, not in a promise.</p>
+        </div>
+        <div class="fcap">Illustrative frame · the instrument itself is live</div>
       </div>
     </div>
-  </div>
-  <div class="slide-foot"><span>The loop</span><span class="n">05 / 08</span></div>
-</section>
 
-<!-- 05b · PROOF / SIGNALS -->
-<section class="slide" id="signals">
-  <div class="slide-inner">
-    <span class="eyebrow">Where it stands</span>
-    <h2 class="statement" style="max-width:18ch;margin-bottom:clamp(40px,5vw,66px)">Not a pitch. <span class="ice">A program already moving.</span></h2>
-    <div class="signals-grid">
-      <div class="sig"><div class="sig-num">300<span class="sub-mark">+</span></div><div class="sig-label">Pilot cohort launching inside a German federal institution</div></div>
-      <div class="sig"><div class="sig-num">81.2<span class="sub-mark">%</span></div><div class="sig-label">Clinically-adjacent accuracy of the onboarding read</div></div>
-      <div class="sig"><div class="sig-name">SMU<br>Tunisia</div><div class="sig-label">Incubated</div></div>
-    </div>
-  </div>
-  <div class="slide-foot"><span>Where it stands</span><span class="n">06 / 08</span></div>
-</section>
+    <div id="pulse" role="status"></div>
 
-<!-- 06 · THE PROMISE -->
-<section class="slide" id="promise">
-  <div class="slide-inner" style="align-items:center;justify-content:center;text-align:center">
-    <h2 class="statement" style="font-size:clamp(44px,8.5vw,108px);max-width:none;line-height:1.03;letter-spacing:-0.04em">Before the call.<br><span class="ice">Not after.</span></h2>
-  </div>
-  <div class="slide-foot"><span>The promise</span><span class="n">07 / 08</span></div>
-</section>
-
-<!-- 08 · CLOSE -->
-<section class="slide" id="close">
-  <div class="slide-inner">
-    <span class="eyebrow">Access</span>
-    <h2 class="statement">The instrument is<br><span class="ice">already live.</span></h2>
-    <div class="form-wrap">
-      <div class="form">
-        <input id="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" placeholder="you@company.com" aria-label="Email address">
-        <button id="submit" type="button">Request →</button>
+    <div class="issue rev">
+      <p class="ih">Dashboards show. Areté issues.</p>
+      <p class="isub">Nine documents no other software can write, because no other software has measured the judge.</p>
+      <div class="docs">
+        <div class="doc" id="doc1"><b>The Verdict</b><span>proceed or hold, before the call.</span></div>
+        <div class="doc" id="doc2"><b>The Decision Memorandum</b><span>the state of the judge, on record at signature.</span></div>
+        <div class="doc" id="doc3"><b>The Pre-Mortem</b><span>the failure, written before the decision can author it.</span></div>
+        <div class="doc" id="doc4"><b>The Counterweight</b><span>the strongest case against you, argued by your opposite.</span></div>
+        <div class="doc" id="doc5"><b>The Handover Brief</b><span>the decision moves; the compromised state does not.</span></div>
+        <div class="doc" id="doc6"><b>The Weekly Letter</b><span>the week, written by your record.</span></div>
+        <div class="doc" id="doc7"><b>The Condition Card</b><span>your state at the door of the room, minutes before.</span></div>
+        <div class="doc flag" id="doc8"><b>The Dossier</b><span>one decision, fully read. The flagship.</span></div>
+        <div class="doc" id="doc9"><b>The Board Memo</b><span>cognitive capital, aggregate only, board-ready.</span></div>
       </div>
-      <div class="form-note" id="note" role="status">Operators admitted in cohorts, on a rolling basis.</div>
     </div>
-    <div class="close-foot">
-      <span class="who"><b>Sabrine Hammami</b> · Founder · Physics &amp; Philosophy · Tunis / München</span>
-      <span><a href="mailto:sabrine-hammami@areteprotocol.com?subject=Aret%C3%A9%20%C2%B7%20Live%20protocol%20request">See the live protocol →</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="mailto:sabrine-hammami@areteprotocol.com?subject=Aret%C3%A9%20%C2%B7%20Investor%20inquiry">Investor? Request the deck →</a></span>
+
+    <div class="issue rev" id="difference">
+      <p class="ih" id="dfh">The difference</p>
+      <p class="isub" id="dfsub">Adjacent categories, and why they are not this.</p>
+      <div class="gspec">
+        <div class="grow"><span class="gk" id="d1k">Wearables</span><span class="gv" id="d1">Read the body and stop at the neck. Areté reads the judgment.</span></div>
+        <div class="grow"><span class="gk" id="d2k">Dashboards</span><span class="gv" id="d2">Inform the decision. Areté measures the decider.</span></div>
+        <div class="grow"><span class="gk" id="d3k">Coaching</span><span class="gv" id="d3">Arrives after the call. The gate stands before it.</span></div>
+        <div class="grow"><span class="gk" id="d4k">Wellness</span><span class="gv" id="d4">Comforts. An instrument measures, gates, and stands behind a ledger.</span></div>
+      </div>
+    </div>
+
+    <p class="oblig rev" id="surfline">What this page shows is the surface. The instrument shows the rest only from inside.</p>
+    <a class="ghost rev" id="door-read4" href="#" rel="noopener" style="display:inline-block;margin-top:18px">Enter through the sixty-second read →</a>
+  </div>
+</section>
+
+<!-- ── IV · THE WITNESS ── -->
+<section id="witness" data-num="04">
+  <div class="col">
+    <div class="kick rev"><span class="n">04</span> The witness</div>
+    <div id="wbody" class="rev"></div>
+  </div>
+</section>
+
+<!-- ── V · THE EVIDENCE ── -->
+<section id="evidence" data-num="05">
+  <div class="col">
+    <div class="kick rev"><span class="n">05</span> Where the evidence stands</div>
+    <h2 class="rev">Never claim more than the evidence carries.</h2>
+    <div class="ledger rev">
+      <div class="lrow"><div class="lk">Signature recovery</div><div class="lv"><b>71&ndash;84%</b> exact recovery across synthetic cohorts. <i>Labelled synthetic, because it is.</i></div></div>
+      <div class="lrow"><div class="lk">Human validation</div><div class="lv"><b>Underway.</b> A four-week practitioner cohort began in August 2026 under a pre-registered protocol. Results publish either way.</div></div>
+      <div class="lrow"><div class="lk">The forecast</div><div class="lv"><b>Locked below ten readings.</b> The instrument refuses to guess before it has your rhythm.</div></div>
+      <div class="lrow"><div class="lk">Clinical claims</div><div class="lv"><b>None.</b></div></div>
+    </div>
+    <div class="gov rev">
+      <p class="govh" id="govh">The governance</p>
+      <p class="govsub" id="govsub">Written for the people who ask where the data lives before they ask what the product does.</p>
+      <div class="gspec">
+        <div class="grow"><span class="gk" id="g1k">Residency</span><span class="gv" id="g1">EU-hosted, Frankfurt. The data does not leave the jurisdiction.</span></div>
+        <div class="grow"><span class="gk" id="g2k">Access</span><span class="gv" id="g2">Leaders and practitioners see signals, never answers. Named consent, enforced in code.</span></div>
+        <div class="grow"><span class="gk" id="g3k">Record</span><span class="gv" id="g3">State-at-signature on the decision record. Export and erasure are operator rights, not requests.</span></div>
+        <div class="grow"><span class="gk" id="g4k">Telemetry</span><span class="gv" id="g4">Zero third parties. Zero trackers. The site and the instrument hold the same rule.</span></div>
+        <div class="grow"><span class="gk" id="g5k">Sovereign</span><span class="gv" id="g5">Private single-tenant instances for councils, boards and institutions. By conversation.</span></div>
+      </div>
+    </div>
+    <div class="edoors rev">
+      <a class="ghost" id="door-evidence" href="#" rel="noopener">The live evidence ledger →</a>
+      <a class="ghost" id="door-protocol" href="#" rel="noopener">The pre-registered protocol →</a>
     </div>
   </div>
 </section>
+
+<!-- the creed, full-bleed: the one sentence the whole company stands on -->
+<div id="creedband">
+  <p class="cb rev">Negative results ship too.<br>The honesty is the product.</p>
+</div>
+
+<!-- ── V · THE COHORT ── -->
+<section id="access" data-num="06">
+  <div class="col">
+    <div class="kick rev"><span class="n">06</span> Access</div>
+    <h2 class="rev">Thirty places. By application.</h2>
+    <p class="oblig rev">For the seats where error compounds · principals · founders · funds · boards · heads of institutions</p>
+    <p class="price rev">Areté is priced like the counsel it replaces, not the software it resembles. Terms are set in conversation, after application. The founding cohort enters on different terms: they pay in data and in testimony, and they are named in the validation report if they choose to be. <b>Every application is read personally.</b></p>
+    <p class="numline rev" id="numline">Every operator carries a number, stamped on their record from the first day. Numbers one to thirty belong to the founding edition.</p>
+    <div id="crsentinel" style="height:1px"></div>
+    <div id="close-read" aria-live="polite">
+      <div class="crk">This page's read of you</div>
+      <div class="crbody">
+        <div class="crl" id="crlines"></div>
+        <div class="seal"><canvas id="seal" width="264" height="264"></canvas><div class="sk" id="sealk">Your visit, drawn</div>
+          <button class="sealbtn" id="sealbtn" type="button">Keep the seal ↓</button></div>
+      </div>
+      <div class="crf">Whatever you decide, notice that something noticed.</div>
+      <button class="sharego qbtn" id="sharego" type="button">Send this to someone who decides too fast →</button>
+      <p class="sharemsg" id="sharemsg" aria-live="polite"></p>
+    </div>
+    <form class="form rev" id="aform" novalidate>
+      <div class="roles" role="group" aria-label="I am applying as">
+        <button type="button" class="role on" data-r="Operator">Operator</button>
+        <button type="button" class="role" data-r="Practitioner">Practitioner · coach</button>
+      </div>
+      <input class="fi" id="a-email" type="email" autocomplete="email" placeholder="you@company.com" aria-label="Email">
+      <textarea class="fi" id="a-ctx" maxlength="500" placeholder="One sentence: what do you decide, and what does a wrong call cost?" aria-label="Context"></textarea>
+      <label class="lchk"><input type="checkbox" id="a-letter"> Send me The Letter: one honest page, when there is something to say. No marketing, ever.</label>
+      <div><button class="btn" id="a-btn" type="submit">Apply for a place</button></div>
+      <p class="polyg" id="polyg">Apply in Arabic, French, German, Spanish or English. She reads all five herself.</p>
+      <p id="amsg" aria-live="polite"></p>
+    </form>
+    <div class="opendoor rev">
+      <p class="odh">Not applying? The reading is still yours.</p>
+      <p class="odb">The sixty-second read is open to everyone, free, today. The verdict it produces stays sealed until you claim it with an email; the claim holds a numbered place on the waiting list and starts a record that is yours to keep, export, or erase. The cohort is thirty places. The instrument's door is not.</p>
+      <a class="ghost" id="door-read3" href="#" rel="noopener">Take the free read →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── VI · FOUNDER ── -->
+<section id="founder" data-num="07">
+  <div class="col">
+    <div class="kick rev"><span class="n">07</span> Founder</div>
+    <div class="fgrid">
+      <figure class="rev">
+        <img src="assets/founder-bw.jpg" alt="Sabrine Hammami" loading="lazy" width="728" height="924">
+        <figcaption>Sabrine Hammami · Founder, The Areté Protocol</figcaption>
+      </figure>
+      <div class="fstory rev">
+        <p id="fs1">Areté exists because the most consequential system in any institution is the least examined one. Decisions that move companies, capital and people are signed by minds nobody measures. I watched it at close range: the worst calls in the room were made with the greatest conviction, and nothing flagged them. Not the data. Not the advisors. The failure was never information. It was state.</p>
+        <p id="fs2">I studied physics and philosophy at LMU Munich: one taught me what a measurement is, the other what a judgment is. I run my life in five languages, and I know what most software pretends not to: the same mind is not the same mind in each of them, on each day, at each hour. What institutions call character is largely <em>state</em>. It is measurable, it degrades on a rhythm, and every serious organization bets its future on it while refusing to look at it.</p>
+        <p id="fs3">So I built the instrument. Not a coach, not a wellness product. It does not flatter and it does not advise. It measures the operator, gates the irreversible, and keeps a record an institution can stand behind. It stands where an honest instrument has always stood: between your state and your signature.</p>
+        <div class="langs">Arabic · French · German · Spanish · English</div>
+        <div class="fsig" aria-hidden="true">Sabrine Hammami</div>
+        <a class="fmail" href="mailto:sabrine-hammami@areteprotocol.com">sabrine-hammami@areteprotocol.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- the one-screen version -->
+<div id="quick" role="dialog" aria-modal="true" aria-label="The one-screen version">
+  <div class="qcard">
+    <button id="qclose" aria-label="Close">×</button>
+    <div class="qk">Areté · The one-screen version</div>
+    <h3>Sixty seconds of reading. A gate before the big calls.</h3>
+    <ul>
+      <li>A daily <b>60-second reading</b> of your cognitive state, scored against <b>your own baseline</b>, never an average.</li>
+      <li>Before an irreversible call, <b>the Intercept</b> reads the decision's wording, names the reasoning fault, and issues a verdict: proceed, or hold.</li>
+      <li><b>Honest by construction:</b> panels stay locked until your data has earned them. The validation protocol is public. Results publish either way.</li>
+      <li><b>Private by construction:</b> signals, never content. Discreet at work. EU-resident. Yours to export or erase.</li>
+      <li><b>The sixty-second read is free for everyone</b>; the verdict is claimed with an email, and the claim is a numbered place on the waiting list. The full instrument is by application; the founding cohort of thirty pays in data and testimony instead.</li>
+      <li>An executive coach is inside the first witness cohort <b>now</b>; her unedited account publishes when the four weeks end.</li>
+    </ul>
+    <div class="qdoors">
+      <a class="btn" id="q-read" href="#" rel="noopener">Take the sixty-second read</a>
+      <button class="ghost qbtn" id="q-apply" type="button">Apply for a place →</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="col">
+    <div class="fbrand">Areté · The Cognitive Integrity Protocol</div>
+    <p class="fdisc"><b style="color:var(--ink2);font-weight:500">No analytics, no trackers, no cookies.</b> This page shows you everything it reads about you; nothing more is collected, and none of it leaves your tab. The instrument holds itself to the same rule.</p>
+    <p class="fdisc">An evolving cognitive-signature instrument for self-insight, not a clinical or diagnostic tool.</p>
+    <div class="flinks">
+      <a id="door-app" href="#" rel="noopener">The instrument</a>
+      <a id="door-read2" href="#" rel="noopener">The sixty-second read</a>
+      <a id="door-legal" href="#" rel="noopener">Privacy &amp; terms</a>
+      <a href="mailto:sabrine-hammami@areteprotocol.com">Contact</a>
+    </div>
+    <p class="fdisc">&copy; 2026 The Areté Protocol.</p>
+  </div>
+</footer>
 
 <script>
-/* present-on-enter + slide counter */
 (function(){
-  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
-  var cnum = document.getElementById('cnum');
-  if(!('IntersectionObserver' in window)){ slides.forEach(function(s){s.classList.add('in')}); return; }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.classList.add('in');
-        if(e.intersectionRatio >= 0.5 && cnum){
-          var i = slides.indexOf(e.target) + 1;
-          cnum.textContent = ('0'+i).slice(-2);
-        }
-      }
+'use strict';
+/* ── the one address to change when the domain moves ── */
+var APP = 'https://arete-rhs4.onrender.com';
+var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ═══ THE FIVE TONGUES · full DE + FR editions; AR/ES greet in the hero.
+   Static surfaces translate via MAP (selector → key); living lines via DYN. ═══ */
+var LANG = 'en';
+try { LANG = localStorage.getItem('arete_lang') || 'en'; } catch(e){}
+if (['en','de','fr','es','ar'].indexOf(LANG) < 0) LANG = 'en';
+
+var WORLD = [
+  'The check engine light for decision-making.',
+  'Le voyant moteur de la décision.',
+  'Die Motorkontrollleuchte für Entscheidungen.',
+  'La luz de control del motor para las decisiones.',
+  'ضوء فحص المحرّك لاتخاذ القرار.'
+];
+
+var I18N = { en: {}, de: {
+  navArg:'Das Argument', navMir:'Der Spiegel', navIns:'Das Instrument', navEvi:'Evidenz', navFou:'Gründerin',
+  hcta:'Das Instrument betreten',
+  hline:'Die Motorkontrollleuchte für Entscheidungen. Eine fortlaufende Messung kognitiver Integrität für Menschen, deren Entscheidungen sich nicht rückgängig machen lassen.',
+  doorRead:'Zur 60-Sekunden-Lesung', doorArg:'Mit dem Argument beginnen ↓', q60:'In Eile: die Ein-Seiten-Fassung',
+  freenote:'Die Lesung ist kostenlos · sechzig Sekunden · das Urteil bleibt versiegelt, bis Sie es einlösen',
+  byline:'Sabrine Hammami · Gründerin, The Areté Protocol',
+  tcap:'<span id="tclock">·</span> · Ihr lokaler Himmel · der Ring schließt sich beim Lesen',
+  kick1:'<span class="n">01</span> Das Argument', kick2:'<span class="n">02</span> Der Spiegel',
+  kick3:'<span class="n">03</span> Das Instrument', kick4:'<span class="n">04</span> Die Zeugin',
+  kick5:'<span class="n">05</span> Wo die Evidenz steht', kick6:'<span class="n">06</span> Zugang', kick7:'<span class="n">07</span> Gründerin',
+  h2arg:'Jede ernsthafte Disziplin bekam irgendwann ihr Instrument. Das Urteilsvermögen nie.',
+  ess1:'Das Geld bekam die Wirtschaftsprüfung. Die Luftfahrt bekam den Flugschreiber. Die Medizin bekam den Vitalzeichenmonitor. Das eine System, von dem alle drei abhängen, der Verstand der Person, die entscheidet, läuft bis heute ungemessen. Kapital wird gemessen. Abläufe werden gemessen. Der Verstand, der beides führt, nicht.',
+  ess2:'Sie sind nicht jeden Tag gleich intelligent. Sie wissen das. Was Sie von innen nicht wissen können, ist, <em>welcher Tag heute ist</em>, denn der Verfall kommt nicht als Nebel. Er kommt als Gewissheit: als Überzeugung, dieser Fall sei offensichtlich, er könne nicht warten, Sie hätten das alles schon gesehen. Ein kompromittierter Zustand fühlt sich nicht kompromittiert an. Genau das macht ihn teuer. Eine verfehlte Übernahme, eine falsche Führungsbesetzung, eine unumkehrbare Zusage im heißen Zustand: Jede davon kostet mehr als ein Jahrzehnt Messung. Und man braucht keinen Vorstandssaal, um die Form davon zu kennen. Jeder hat schon am falschen Tag etwas Unumkehrbares unterschrieben: eine Kündigung, eine Nachricht, einen Kauf, ein Versprechen. Der Einsatz skaliert; der Mechanismus nicht.',
+  pull:'Meine schlechtesten Entscheidungen und meine besten fühlten sich identisch an. Identisch.',
+  ess3:'Areté ist das Instrument für diese Lücke. Eine tägliche 60-Sekunden-Lesung Ihres kognitiven Zustands gegen Ihre eigene Baseline, nicht gegen einen Durchschnitt. Ein Tor, das Sie vor unumkehrbaren Entscheidungen befragen. Es sagt Ihnen nicht, was Sie entscheiden sollen. Es sagt Ihnen, <em>wer gerade entscheidet</em>.',
+  mhead:'Während Sie das Argument lasen, hat diese Seite <em class="hollow">Sie</em> gelesen.',
+  mafter1:'Minuten eines Fremden, gelesen aus einem Cursor. Es beweist genau eines: <b style="color:var(--ink);font-weight:500">Zustand ist von außen sichtbar.</b>',
+  honest:'Eine Seite kann einem Besucher begegnen. Einen Operator zu kennen verlangt ein Protokoll: Physiologie, Verhalten und ein Entscheidungsregister, gehalten gegen eine Baseline, die nur Ihnen gehört.',
+  mnote:'Berechnet in diesem Tab · übertragen <i>nirgendwohin</i>',
+  wserif:'Das älteste Bild des Urteilens ist eine Waage: ein Herz, gewogen gegen eine Feder, bevor das Urteil gesprochen wurde. Viertausend Jahre später baut Areté das Wiegen als Instrument neu.',
+  wcap:'Ma’at · Das Wägen des Herzens · ca. 1275 v. Chr.',
+  h2ins:'Kein Dashboard. Ein <em class="hollow">Urteil</em>.',
+  obligIns:'Die ganze Verpflichtung · 60 Sekunden beim Morgenkaffee · das Tor vor unumkehrbaren Entscheidungen · diskret am Arbeitsplatz',
+  b1a:'Die Lesung', b1b:'60 Sekunden · täglich', b1c:'gegen die eigene Baseline',
+  fkBase:'Ihre Baseline', fvDrift:'<b>&minus;16</b> · seit 3 Tagen wachsend',
+  fverd1:'UNTER DER BASELINE · HEUTE REVERSIBLE ENTSCHEIDUNGEN BEVORZUGEN',
+  b2a:'Der Intercept', b2b:'vor der Entscheidung, nicht danach',
+  fquote:'„Wir sollten die Position verdoppeln. Das kann nicht bis Montag warten."',
+  rose1:'Sunk Cost · Muster-Konf. 0,81', rose2:'Dringlichkeits-Inflation',
+  fcounter2:'<b>Der Konter:</b> Benennen Sie, was Sie entscheiden würden, wenn das bereits ausgegebene Geld einem Fremden gehörte. Ändert sich die Antwort, hält die Position Sie, nicht umgekehrt.',
+  fverd2:'URTEIL · 24 STUNDEN HALTEN',
+  b3a:'Die Praxis', b3b:'für Coaches und Berater', b3c:'nur mit namentlicher Einwilligung',
+  nmA:'Klient A', nmB:'Klient B', nmC:'Klient C', ps1:'Stabil', ps2:'Driftet', ps3:'Nahe der Linie',
+  fcounter3:'Das Cockpit eines Praktikers: der Zustand jedes Klienten, die Burnout-Linie und die Sitzungsvorbereitung, geschrieben aus seinem Register. Klienten treten mit ausdrücklicher, namentlicher Einwilligung bei. Der Praktiker sieht Signale und Vorbereitung, <b>nie ihre Antworten</b>: Diese Regel ist in Code erzwungen, nicht in einem Versprechen.',
+  fcap:'Illustrativer Rahmen · das Instrument selbst ist live',
+  fmh:'Die Formationen', fmsub:'Operatoren treten allein an, im Team oder in einer Kohorte.',
+  fm1k:'Der Operator', fm1:'Allein, gegen die eigene Baseline. Das volle Instrument, privat per Konstruktion.',
+  fm2k:'Das Team', fm2:'Eine Führungskraft liest die Formation: Bereitschaft, Verteilung, wer nahe der Linie ist. Aggregiert per Konstruktion; nie einzelne Antworten.',
+  fm3k:'Die Kohorte', fm3:'Eine Klasse, die gemeinsam beginnt und gemeinsam gelesen wird. Die dreißig Gründer sind eine.',
+  dfh:'Der Unterschied', dfsub:'Benachbarte Kategorien, und warum sie nicht dies sind.',
+  surfline:'Was diese Seite zeigt, ist die Oberfläche. Den Rest zeigt das Instrument nur von innen.',
+  surfgo:'Der Einstieg: die 60-Sekunden-Lesung →',
+  d1k:'Wearables', d1:'Lesen den Körper und enden am Hals. Areté liest das Urteilsvermögen.',
+  d2k:'Dashboards', d2:'Informieren die Entscheidung. Areté vermisst den Entscheider.',
+  d3k:'Coaching', d3:'Kommt nach der Entscheidung. Das Tor steht davor.',
+  d4k:'Wellness', d4:'Tröstet. Ein Instrument misst, sichert und steht hinter einem Register.',
+  ih:'Dashboards zeigen. Areté stellt aus.',
+  isub:'Neun Dokumente, die keine andere Software schreiben kann, weil keine andere Software den Urteilenden vermessen hat.',
+  dc1:'fortfahren oder warten, vor der Entscheidung.', dc2:'der Zustand des Urteilenden, aktenkundig bei Unterschrift.',
+  dc3:'das Scheitern, geschrieben bevor die Entscheidung es schreiben kann.', dc4:'der stärkste Fall gegen Sie, geführt von Ihrem Gegenüber.',
+  dc5:'die Entscheidung wandert; der kompromittierte Zustand nicht.', dc6:'die Woche, geschrieben von Ihrem Register.',
+  dc7:'Ihr Zustand an der Tür des Raums, Minuten davor.', dc8:'eine Entscheidung, vollständig gelesen. Das Flaggschiff.',
+  dc9:'kognitives Kapital, nur aggregiert, vorstandsfertig.',
+  numline:'Jeder Operator trägt eine Nummer, vom ersten Tag an auf seinem Register. Die Nummern eins bis dreißig gehören der Gründungsedition.',
+  h2evi:'Nie mehr behaupten, als die Evidenz trägt.',
+  lk1:'Signaturerkennung', lv1:'<b>71&ndash;84%</b> exakte Wiedererkennung in synthetischen Kohorten. <i>Als synthetisch ausgewiesen, weil sie es sind.</i>',
+  lk2:'Humanvalidierung', lv2:'<b>Läuft.</b> Eine vierwöchige Praktiker-Kohorte begann im August 2026 unter einem vorregistrierten Protokoll. Die Ergebnisse werden so oder so veröffentlicht.',
+  lk3:'Die Prognose', lv3:'<b>Gesperrt unter zehn Lesungen.</b> Das Instrument weigert sich zu raten, bevor es Ihren Rhythmus kennt.',
+  lk4:'Klinische Ansprüche', lv4:'<b>Keine.</b>',
+  edoor1:'Das lebende Evidenz-Register →', edoor2:'Das vorregistrierte Protokoll →',
+  govh:'Die Governance', govsub:'Geschrieben für Menschen, die zuerst fragen, wo die Daten liegen, und erst dann, was das Produkt tut.',
+  g1k:'Residenz', g1:'EU-gehostet, Frankfurt. Die Daten verlassen die Jurisdiktion nicht.',
+  g2k:'Zugriff', g2:'Führungskräfte und Praktiker sehen Signale, nie Antworten. Namentliche Einwilligung, im Code erzwungen.',
+  g3k:'Register', g3:'Zustand-bei-Unterschrift im Entscheidungsregister. Export und Löschung sind Rechte des Operators, keine Anfragen.',
+  g4k:'Telemetrie', g4:'Null Drittparteien. Null Tracker. Für Website und Instrument gilt dieselbe Regel.',
+  g5k:'Sovereign', g5:'Private Single-Tenant-Instanzen für Räte, Boards und Institutionen. Im Gespräch.',
+  creed:'Auch negative Ergebnisse werden veröffentlicht.<br>Die Ehrlichkeit ist das Produkt.',
+  h2acc:'Dreißig Plätze. Auf Bewerbung.',
+  obligAcc:'Für die Sitze, an denen Fehler sich verzinsen · Prinzipale · Gründer · Fonds · Boards · Leiter von Institutionen',
+  price:'Areté ist bepreist wie der Rat, den es ersetzt, nicht wie die Software, der es ähnelt. Die Konditionen werden im Gespräch festgelegt, nach der Bewerbung. Die Gründungskohorte tritt zu anderen Bedingungen ein: Sie zahlt in Daten und in Zeugnis, und sie wird im Validierungsbericht genannt, wenn sie es wünscht. <b>Jede Bewerbung wird persönlich gelesen.</b>',
+  roleOp:'Operator', rolePr:'Praktiker · Coach',
+  phCtx:'Ein Satz: Was entscheiden Sie, und was kostet ein Fehlgriff?',
+  letter:'<input type="checkbox" id="a-letter"> Schicken Sie mir The Letter: eine ehrliche Seite, wenn es etwas zu sagen gibt. Niemals Marketing.',
+  abtn:'Platz beantragen', polyg:'Bewerben Sie sich auf Arabisch, Französisch, Deutsch, Spanisch oder Englisch. Sie liest alle fünf selbst.',
+  crk:'Was diese Seite in Ihnen las', sealKeep:'Das Siegel behalten ↓', shareLine:'Schicken Sie das jemandem, der zu schnell entscheidet →',
+  crf:'Wie auch immer Sie entscheiden: Beachten Sie, dass etwas es beachtet hat.',
+  odh:'Keine Bewerbung? Die Lesung gehört trotzdem Ihnen.',
+  odb:'Die 60-Sekunden-Lesung steht allen offen, kostenlos, heute. Das Urteil bleibt versiegelt, bis Sie es mit einer E-Mail einlösen; die Einlösung hält einen nummerierten Platz auf der Warteliste und beginnt ein Register, das Ihnen gehört: zum Behalten, Exportieren oder Löschen. Die Kohorte hat dreißig Plätze. Die Tür des Instruments nicht.',
+  odg:'Zur kostenlosen Lesung →',
+  fs1:'Es gibt Areté, weil das folgenreichste System jeder Institution das am wenigsten geprüfte ist. Entscheidungen, die Unternehmen, Kapital und Menschen bewegen, werden von Köpfen unterschrieben, die niemand misst. Ich habe es aus nächster Nähe gesehen: Die schlechtesten Entscheidungen im Raum wurden mit der größten Überzeugung getroffen, und nichts schlug an. Nicht die Daten. Nicht die Berater. Das Versagen war nie die Information. Es war der Zustand.',
+  fs2:'Ich habe an der LMU München Physik und Philosophie studiert: Das eine lehrte mich, was eine Messung ist, das andere, was ein Urteil ist. Ich führe mein Leben in fünf Sprachen, und ich weiß, was die meiste Software zu übersehen vorgibt: Derselbe Verstand ist nicht derselbe Verstand in jeder von ihnen, an jedem Tag, zu jeder Stunde. Was Institutionen Charakter nennen, ist zum großen Teil <em>Zustand</em>. Er ist messbar, er verfällt in einem Rhythmus, und jede ernsthafte Organisation setzt ihre Zukunft auf ihn und weigert sich zugleich, ihn anzusehen.',
+  fs3:'Also habe ich das Instrument gebaut. Keinen Coach, kein Wellness-Produkt. Es schmeichelt nicht und es berät nicht. Es misst den Operator, sichert das Unumkehrbare und führt ein Register, hinter dem eine Institution stehen kann. Es steht, wo ein ehrliches Instrument immer stand: zwischen Ihrem Zustand und Ihrer Unterschrift.',
+  figcap:'Sabrine Hammami · Gründerin, The Areté Protocol',
+  fdisc1:'<b style="color:var(--ink2);font-weight:500">Keine Analytik, keine Tracker, keine Cookies.</b> Diese Seite zeigt Ihnen alles, was sie über Sie liest; mehr wird nicht erhoben, und nichts davon verlässt Ihren Tab. Das Instrument hält sich an dieselbe Regel.',
+  fdisc2:'Ein sich entwickelndes Instrument zur kognitiven Selbsteinsicht, kein klinisches oder diagnostisches Werkzeug.',
+  fl1:'Das Instrument', fl2:'Die 60-Sekunden-Lesung', fl3:'Datenschutz & Bedingungen', fl4:'Kontakt',
+  qk:'Areté · Die Ein-Seiten-Fassung',
+  qh3:'Sechzig Sekunden Lesung. Ein Tor vor den großen Entscheidungen.',
+  ql1:'Eine tägliche <b>60-Sekunden-Lesung</b> Ihres kognitiven Zustands, bewertet gegen <b>Ihre eigene Baseline</b>, nie gegen einen Durchschnitt.',
+  ql2:'Vor einer unumkehrbaren Entscheidung liest <b>der Intercept</b> deren Wortlaut, benennt den Denkfehler und fällt ein Urteil: fortfahren oder warten.',
+  ql3:'<b>Ehrlich per Konstruktion:</b> Panels bleiben gesperrt, bis Ihre Daten sie verdient haben. Das Validierungsprotokoll ist öffentlich. Ergebnisse erscheinen so oder so.',
+  ql4:'<b>Privat per Konstruktion:</b> Signale, nie Inhalte. Diskret am Arbeitsplatz. EU-gehostet. Zum Exportieren oder Löschen, jederzeit.',
+  ql5:'<b>Die 60-Sekunden-Lesung ist für alle kostenlos</b>; das Urteil wird mit einer E-Mail eingelöst, und die Einlösung ist ein nummerierter Platz auf der Warteliste. Das volle Instrument gibt es auf Bewerbung; die Gründungskohorte von dreißig zahlt stattdessen in Daten und Zeugnis.',
+  ql6:'Eine Executive-Coach ist <b>jetzt</b> in der ersten Zeugen-Kohorte; ihr unredigierter Bericht erscheint nach vier Wochen.',
+  qread:'Zur 60-Sekunden-Lesung', qapply:'Platz beantragen →'
+}, fr: {
+  navArg:"L'argument", navMir:'Le miroir', navIns:"L'instrument", navEvi:'Preuves', navFou:'Fondatrice',
+  hcta:"Entrer dans l'instrument",
+  hline:"Le voyant moteur de la décision. Une lecture continue de l'intégrité cognitive, pour celles et ceux dont les décisions ne se défont pas.",
+  doorRead:'Faire la lecture de 60 secondes', doorArg:"Commencer par l'argument ↓", q60:'Pressé : la version en un écran',
+  freenote:'La lecture est gratuite · soixante secondes · le verdict reste scellé jusqu’à ce que vous le réclamiez',
+  byline:'Sabrine Hammami · Fondatrice, The Areté Protocol',
+  tcap:'<span id="tclock">·</span> · Votre ciel local · l’anneau se ferme à mesure que vous lisez',
+  kick1:'<span class="n">01</span> L’argument', kick2:'<span class="n">02</span> Le miroir',
+  kick3:'<span class="n">03</span> L’instrument', kick4:'<span class="n">04</span> Le témoin',
+  kick5:'<span class="n">05</span> Où en est la preuve', kick6:'<span class="n">06</span> Accès', kick7:'<span class="n">07</span> Fondatrice',
+  h2arg:"Chaque domaine sérieux a fini par avoir son instrument. Le jugement, jamais.",
+  ess1:"L'argent a eu l'audit. L'aviation a eu l'enregistreur de vol. La médecine a eu le moniteur de signes vitaux. Le seul système dont tous dépendent, l'esprit de la personne qui décide, tourne encore sans mesure. Le capital est mesuré. Les opérations sont mesurées. L'esprit qui conduit les deux ne l'est pas.",
+  ess2:"Vous n'êtes pas également intelligent chaque jour. Vous le savez. Ce que vous ne pouvez pas savoir de l'intérieur, c'est <em>quel jour est celui-ci</em>, car la dégradation n'arrive pas comme un brouillard. Elle arrive comme une certitude : la conviction que la décision est évidente, qu'elle ne peut pas attendre, que vous avez déjà vu tout cela. Un état compromis ne se sent pas compromis. C'est ce qui le rend coûteux. Une acquisition mal datée, un mauvais recrutement au sommet, un engagement irréversible signé à chaud : chacun coûte plus qu'une décennie de mesure. Et il n'y a pas besoin d'un conseil d'administration pour connaître la forme de la chose. Tout le monde a déjà signé quelque chose d'irréversible le mauvais jour : une démission, un message, un achat, une promesse. Les enjeux changent d'échelle ; le mécanisme, non.",
+  pull:'Mes pires décisions et mes meilleures se ressemblaient exactement. Exactement.',
+  ess3:"Areté est l'instrument de cet écart. Une lecture quotidienne de soixante secondes de votre état cognitif, contre votre propre ligne de base, jamais contre une moyenne. Une porte que l'on consulte avant les décisions qui ne se défont pas. Il ne vous dit pas quoi décider. Il vous dit <em>qui décide</em>.",
+  mhead:"Pendant que vous lisiez l'argument, cette page <em class=\"hollow\">vous</em> lisait.",
+  mafter1:"Quelques minutes d'un inconnu, lues dans un curseur. Cela prouve une seule chose : <b style=\"color:var(--ink);font-weight:500\">l'état se voit de l'extérieur.</b>",
+  honest:"Une page peut rencontrer un visiteur. Connaître un opérateur demande un protocole : physiologie, comportement et un registre de décisions, tenus contre une ligne de base qui n'appartient qu'à vous.",
+  mnote:'Calculé dans cet onglet · transmis <i>nulle part</i>',
+  wserif:'La plus ancienne image du jugement est une balance : un cœur pesé contre une plume, avant que le verdict ne soit prononcé. Quatre mille ans plus tard, Areté reconstruit la pesée en instrument.',
+  wcap:'Maât · La pesée du cœur · v. 1275 av. J.-C.',
+  h2ins:'Pas un tableau de bord. Un <em class="hollow">verdict</em>.',
+  obligIns:"Toute l'obligation · 60 secondes au café du matin · la porte avant les décisions irréversibles · discret au travail",
+  b1a:'La lecture', b1b:'60 secondes · quotidien', b1c:'contre votre ligne de base',
+  fkBase:'Votre ligne de base', fvDrift:'<b>&minus;16</b> · en hausse depuis 3 jours',
+  fverd1:'SOUS LA LIGNE DE BASE · PRÉFÉRER AUJOURD’HUI LES DÉCISIONS RÉVERSIBLES',
+  b2a:"L'Intercept", b2b:'avant la décision, pas après',
+  fquote:'« Nous devrions doubler la position. Cela ne peut pas attendre lundi. »',
+  rose1:'Coût irrécupérable · conf. motif 0,81', rose2:"Inflation d'urgence",
+  fcounter2:"<b>Le contre :</b> dites ce que vous décideriez si l'argent déjà engagé appartenait à un inconnu. Si la réponse change, c'est la position qui vous tient, pas l'inverse.",
+  fverd2:'VERDICT · TENIR 24 HEURES',
+  b3a:'La pratique', b3b:'pour coachs et conseillers', b3c:'consentement nominatif uniquement',
+  nmA:'Client A', nmB:'Client B', nmC:'Client C', ps1:'Stable', ps2:'Dérive', ps3:'Près de la ligne',
+  fcounter3:"Le cockpit d'un praticien : l'état de chaque client, la ligne de burn-out et la préparation de séance, écrite depuis son registre. Les clients entrent par consentement explicite et nominatif. Le praticien voit des signaux et une préparation, <b>jamais leurs réponses</b> : cette règle est imposée dans le code, pas dans une promesse.",
+  fcap:"Cadre illustratif · l'instrument lui-même est en service",
+  fmh:'Les formations', fmsub:'Les opérateurs entrent seuls, en équipe ou en cohorte.',
+  fm1k:"L'opérateur", fm1:"Seul, contre sa propre ligne de base. L'instrument complet, privé par construction.",
+  fm2k:"L'équipe", fm2:'Un dirigeant lit la formation : préparation, distribution, qui est près de la ligne. Agrégé par construction ; jamais de réponses individuelles.',
+  fm3k:'La cohorte', fm3:'Une classe qui commence ensemble et se lit ensemble. Les trente fondateurs en sont une.',
+  dfh:'La différence', dfsub:'Les catégories voisines, et pourquoi elles ne sont pas ceci.',
+  surfline:"Ce que montre cette page est la surface. Le reste, l'instrument ne le montre que de l'intérieur.",
+  surfgo:'Entrer par la lecture de soixante secondes →',
+  d1k:'Wearables', d1:"Lisent le corps et s'arrêtent au cou. Areté lit le jugement.",
+  d2k:'Dashboards', d2:'Informent la décision. Areté mesure le décideur.',
+  d3k:'Coaching', d3:'Arrive après la décision. La porte se tient avant.',
+  d4k:'Bien-être', d4:"Console. Un instrument mesure, verrouille et répond d'un registre.",
+  ih:'Les dashboards montrent. Areté délivre.',
+  isub:"Neuf documents qu'aucun autre logiciel ne peut écrire, parce qu'aucun autre n'a mesuré le juge.",
+  dc1:'avancer ou tenir, avant la décision.', dc2:"l'état du juge, consigné à la signature.",
+  dc3:"l'échec, écrit avant que la décision ne l'écrive.", dc4:'le meilleur dossier contre vous, plaidé par votre opposé.',
+  dc5:"la décision se déplace ; l'état compromis, non.", dc6:'la semaine, écrite par votre registre.',
+  dc7:'votre état à la porte de la salle, quelques minutes avant.', dc8:'une décision, lue en entier. Le vaisseau amiral.',
+  dc9:'capital cognitif, agrégé seulement, prêt pour le conseil.',
+  numline:"Chaque opérateur porte un numéro, frappé sur son registre dès le premier jour. Les numéros un à trente appartiennent à l'édition fondatrice.",
+  h2evi:'Ne jamais affirmer plus que ce que la preuve porte.',
+  lk1:'Reconnaissance de signature', lv1:"<b>71&ndash;84%</b> de reconnaissance exacte sur cohortes synthétiques. <i>Étiquetées synthétiques, parce qu'elles le sont.</i>",
+  lk2:'Validation humaine', lv2:"<b>En cours.</b> Une cohorte de praticiens de quatre semaines a commencé en août 2026 sous protocole préenregistré. Les résultats seront publiés quoi qu'il arrive.",
+  lk3:'La prévision', lv3:"<b>Verrouillée sous dix lectures.</b> L'instrument refuse de deviner avant de connaître votre rythme.",
+  lk4:'Prétentions cliniques', lv4:'<b>Aucune.</b>',
+  edoor1:'Le registre de preuve en direct →', edoor2:'Le protocole préenregistré →',
+  govh:'La gouvernance', govsub:"Écrit pour ceux qui demandent où vivent les données avant de demander ce que fait le produit.",
+  g1k:'Résidence', g1:"Hébergé dans l'UE, à Francfort. Les données ne quittent pas la juridiction.",
+  g2k:'Accès', g2:'Dirigeants et praticiens voient des signaux, jamais des réponses. Consentement nominatif, imposé dans le code.',
+  g3k:'Registre', g3:"L'état à la signature, au registre des décisions. L'export et l'effacement sont des droits de l'opérateur, pas des requêtes.",
+  g4k:'Télémétrie', g4:"Zéro tiers. Zéro traceur. Le site et l'instrument suivent la même règle.",
+  g5k:'Sovereign', g5:'Instances privées mono-locataires pour conseils et institutions. En conversation.',
+  creed:"Les résultats négatifs se publient aussi.<br>L'honnêteté est le produit.",
+  h2acc:'Trente places. Sur candidature.',
+  obligAcc:"Pour les sièges où l'erreur se compose · dirigeants · fondateurs · fonds · conseils · têtes d'institutions",
+  price:"Areté est au prix du conseil qu'il remplace, pas du logiciel auquel il ressemble. Les conditions se fixent en conversation, après candidature. La cohorte fondatrice entre à d'autres conditions : elle paie en données et en témoignage, et elle est nommée dans le rapport de validation si elle le souhaite. <b>Chaque candidature est lue personnellement.</b>",
+  roleOp:'Opérateur', rolePr:'Praticien · coach',
+  phCtx:'Une phrase : que décidez-vous, et que coûte une erreur ?',
+  letter:'<input type="checkbox" id="a-letter"> Envoyez-moi The Letter : une page honnête, quand il y a quelque chose à dire. Jamais de marketing.',
+  abtn:'Demander une place', polyg:'Candidatez en arabe, français, allemand, espagnol ou anglais. Elle lit les cinq elle-même.',
+  crk:'La lecture que cette page a faite de vous', sealKeep:'Garder le sceau ↓', shareLine:'Envoyez ceci à quelqu’un qui décide trop vite →',
+  crf:"Quoi que vous décidiez, remarquez que quelque chose l'a remarqué.",
+  odh:'Pas de candidature ? La lecture est à vous quand même.',
+  odb:"La lecture de soixante secondes est ouverte à tous, gratuite, aujourd'hui. Le verdict reste scellé jusqu'à ce que vous le réclamiez avec un e-mail ; la réclamation tient une place numérotée sur la liste d'attente et ouvre un registre qui vous appartient : à garder, exporter ou effacer. La cohorte compte trente places. La porte de l'instrument, non.",
+  odg:'Faire la lecture gratuite →',
+  fs1:"Areté existe parce que le système le plus lourd de conséquences de toute institution est le moins examiné. Les décisions qui déplacent des entreprises, des capitaux et des vies sont signées par des esprits que personne ne mesure. Je l'ai vu de près : les pires décisions de la salle étaient prises avec la plus grande conviction, et rien ne s'allumait. Ni les données. Ni les conseillers. La défaillance n'a jamais été l'information. C'était l'état.",
+  fs2:"J'ai étudié la physique et la philosophie à la LMU de Munich : l'une m'a appris ce qu'est une mesure, l'autre ce qu'est un jugement. Je vis en cinq langues, et je sais ce que la plupart des logiciels feignent d'ignorer : le même esprit n'est pas le même esprit dans chacune d'elles, chaque jour, à chaque heure. Ce que les institutions appellent caractère est en grande partie de l'<em>état</em>. Il est mesurable, il se dégrade selon un rythme, et toute organisation sérieuse parie son avenir dessus en refusant de le regarder.",
+  fs3:"Alors j'ai construit l'instrument. Pas un coach, pas un produit de bien-être. Il ne flatte pas et ne conseille pas. Il mesure l'opérateur, verrouille l'irréversible et tient un registre qu'une institution peut assumer. Il se tient là où un instrument honnête s'est toujours tenu : entre votre état et votre signature.",
+  figcap:'Sabrine Hammami · Fondatrice, The Areté Protocol',
+  fdisc1:"<b style=\"color:var(--ink2);font-weight:500\">Pas d'analytique, pas de traceurs, pas de cookies.</b> Cette page vous montre tout ce qu'elle lit de vous ; rien de plus n'est collecté, et rien ne quitte votre onglet. L'instrument s'impose la même règle.",
+  fdisc2:'Un instrument évolutif de signature cognitive pour la connaissance de soi, ni clinique ni diagnostique.',
+  fl1:"L'instrument", fl2:'La lecture de soixante secondes', fl3:'Confidentialité et conditions', fl4:'Contact',
+  qk:'Areté · La version en un écran',
+  qh3:'Soixante secondes de lecture. Une porte avant les grandes décisions.',
+  ql1:'Une <b>lecture quotidienne de 60 secondes</b> de votre état cognitif, notée contre <b>votre propre ligne de base</b>, jamais contre une moyenne.',
+  ql2:"Avant une décision irréversible, <b>l'Intercept</b> lit sa formulation, nomme la faille de raisonnement et rend un verdict : avancer, ou tenir.",
+  ql3:'<b>Honnête par construction :</b> les panneaux restent verrouillés tant que vos données ne les ont pas mérités. Le protocole de validation est public. Les résultats paraissent quoi qu’il arrive.',
+  ql4:'<b>Privé par construction :</b> des signaux, jamais des contenus. Discret au travail. Hébergé dans l’UE. À exporter ou effacer, à tout moment.',
+  ql5:"<b>La lecture de soixante secondes est gratuite pour tous</b> ; le verdict se réclame avec un e-mail, et la réclamation est une place numérotée sur la liste d'attente. L'instrument complet est sur candidature ; la cohorte fondatrice de trente paie en données et en témoignage.",
+  ql6:'Une coach de dirigeants est dans la première cohorte témoin <b>en ce moment</b> ; son compte rendu non édité paraît au bout de quatre semaines.',
+  qread:'Faire la lecture de 60 secondes', qapply:'Demander une place →'
+}, es: {
+  navArg:'El argumento', navMir:'El espejo', navIns:'El instrumento', navEvi:'Evidencia', navFou:'Fundadora',
+  hcta:'Entrar al instrumento',
+  hline:'La luz de control del motor para las decisiones. Una lectura continua de la integridad cognitiva, para quienes toman decisiones que no se pueden deshacer.',
+  doorRead:'Hacer la lectura de 60 segundos', doorArg:'Empezar por el argumento ↓', q60:'¿Con prisa? La versión de una pantalla',
+  freenote:'La lectura es gratuita · sesenta segundos · el veredicto queda sellado hasta que usted lo reclame',
+  byline:'Sabrine Hammami · Fundadora, The Areté Protocol',
+  tcap:'<span id="tclock">·</span> · Su cielo local · el anillo se cierra mientras usted lee',
+  kick1:'<span class="n">01</span> El argumento', kick2:'<span class="n">02</span> El espejo',
+  kick3:'<span class="n">03</span> El instrumento', kick4:'<span class="n">04</span> La testigo',
+  kick5:'<span class="n">05</span> Dónde está la evidencia', kick6:'<span class="n">06</span> Acceso', kick7:'<span class="n">07</span> Fundadora',
+  h2arg:'Cada disciplina seria acabó teniendo su instrumento. El juicio, nunca.',
+  ess1:'El dinero tuvo la auditoría. La aviación tuvo la caja negra. La medicina tuvo el monitor de signos vitales. El único sistema del que dependen todos, la mente de quien decide, sigue funcionando sin medida. El capital se mide. Las operaciones se miden. La mente que dirige ambos, no.',
+  ess2:'Usted no es igual de inteligente todos los días. Lo sabe. Lo que no puede saber desde dentro es <em>qué día es hoy</em>, porque la degradación no llega como niebla. Llega como certeza: la convicción de que la decisión es obvia, de que no puede esperar, de que usted ya ha visto todo esto. Un estado comprometido no se siente comprometido. Eso es lo que lo hace caro. Una adquisición a destiempo, una mala contratación en la cúpula, un compromiso irreversible firmado en caliente: cualquiera de ellos cuesta más que una década de medición. Y no hace falta un consejo de administración para conocer la forma de esto. Todo el mundo ha firmado algo irreversible el día equivocado: una renuncia, un mensaje, una compra, una promesa. Lo que está en juego cambia de escala; el mecanismo, no.',
+  pull:'Mis peores decisiones y las mejores se sentían idénticas. Idénticas.',
+  ess3:'Areté es el instrumento para esa brecha. Una lectura diaria de sesenta segundos de su estado cognitivo, contra su propia línea de base, nunca contra un promedio. Una puerta que se consulta antes de las decisiones que no se deshacen. No le dice qué decidir. Le dice <em>quién está decidiendo</em>.',
+  mhead:'Mientras usted leía el argumento, esta página <em class="hollow">lo leía a usted</em>.',
+  mafter1:'Minutos de un desconocido, leídos en un cursor. Prueba una sola cosa: <b style="color:var(--ink);font-weight:500">el estado se ve desde fuera.</b>',
+  honest:'Una página puede conocer a un visitante. Conocer a un operador exige un protocolo: fisiología, comportamiento y un registro de decisiones, sostenidos contra una línea de base que es solo suya.',
+  mnote:'Calculado en esta pestaña · transmitido a <i>ninguna parte</i>',
+  wserif:'La imagen más antigua del juicio es una balanza: un corazón pesado contra una pluma, antes de pronunciar el veredicto. Cuatro mil años después, Areté reconstruye el pesaje como instrumento.',
+  wcap:'Maat · El pesaje del corazón · c. 1275 a. C.',
+  h2ins:'No un panel. Un <em class="hollow">veredicto</em>.',
+  obligIns:'Toda la obligación · 60 segundos con el café de la mañana · la puerta antes de las decisiones irreversibles · discreto en el trabajo',
+  b1a:'La lectura', b1b:'60 segundos · diaria', b1c:'contra su propia línea de base',
+  fkBase:'Su línea de base', fvDrift:'<b>&minus;16</b> · creciendo desde hace 3 días',
+  fverd1:'BAJO LA LÍNEA DE BASE · PREFIERA HOY DECISIONES REVERSIBLES',
+  b2a:'El Intercept', b2b:'antes de la decisión, no después',
+  fquote:'«Deberíamos doblar la posición. Esto no puede esperar al lunes.»',
+  rose1:'Coste hundido · conf. patrón 0,81', rose2:'Inflación de urgencia',
+  fcounter2:'<b>El contrapeso:</b> diga qué decidiría si el dinero ya gastado perteneciera a un desconocido. Si la respuesta cambia, la posición lo sostiene a usted, no al revés.',
+  fverd2:'VEREDICTO · ESPERAR 24 HORAS',
+  b3a:'La práctica', b3b:'para coaches y asesores', b3c:'solo con consentimiento nominal',
+  nmA:'Cliente A', nmB:'Cliente B', nmC:'Cliente C', ps1:'Estable', ps2:'A la deriva', ps3:'Cerca de la línea',
+  fcounter3:'La cabina de un profesional: el estado de cada cliente, la línea de burnout y la preparación de sesión, escrita desde su registro. Los clientes entran con consentimiento explícito y nominal. El profesional ve señales y preparación, <b>nunca sus respuestas</b>: esa regla está impuesta en el código, no en una promesa.',
+  fcap:'Marco ilustrativo · el instrumento mismo está en marcha',
+  fmh:'Las formaciones', fmsub:'Los operadores entran solos, en equipos o en cohortes.',
+  fm1k:'El operador', fm1:'Solo, contra su propia línea de base. El instrumento completo, privado por construcción.',
+  fm2k:'El equipo', fm2:'Un líder lee la formación: preparación, distribución, quién está cerca de la línea. Agregado por construcción; nunca respuestas individuales.',
+  fm3k:'La cohorte', fm3:'Una clase que empieza junta y se lee junta. Los treinta fundadores son una.',
+  dfh:'La diferencia', dfsub:'Categorías vecinas, y por qué no son esto.',
+  surfline:'Lo que muestra esta página es la superficie. El resto, el instrumento solo lo muestra desde dentro.',
+  surfgo:'Entrar por la lectura de sesenta segundos →',
+  d1k:'Wearables', d1:'Leen el cuerpo y se detienen en el cuello. Areté lee el juicio.',
+  d2k:'Paneles', d2:'Informan la decisión. Areté mide al decisor.',
+  d3k:'Coaching', d3:'Llega después de la decisión. La puerta está antes.',
+  d4k:'Bienestar', d4:'Consuela. Un instrumento mide, bloquea y responde con un registro.',
+  ih:'Los paneles muestran. Areté expide.',
+  isub:'Nueve documentos que ningún otro software puede escribir, porque ningún otro ha medido al juez.',
+  dc1:'avanzar o esperar, antes de la decisión.', dc2:'el estado del juez, en acta al firmar.',
+  dc3:'el fracaso, escrito antes de que la decisión lo escriba.', dc4:'el mejor caso en su contra, defendido por su opuesto.',
+  dc5:'la decisión se traslada; el estado comprometido, no.', dc6:'la semana, escrita por su registro.',
+  dc7:'su estado a la puerta de la sala, minutos antes.', dc8:'una decisión, leída por completo. El buque insignia.',
+  dc9:'capital cognitivo, solo agregado, listo para el consejo.',
+  numline:'Cada operador lleva un número, grabado en su registro desde el primer día. Los números uno a treinta pertenecen a la edición fundadora.',
+  h2evi:'Nunca afirmar más de lo que la evidencia sostiene.',
+  lk1:'Reconocimiento de firma', lv1:'<b>71&ndash;84%</b> de reconocimiento exacto en cohortes sintéticas. <i>Etiquetadas como sintéticas, porque lo son.</i>',
+  lk2:'Validación humana', lv2:'<b>En curso.</b> Una cohorte de profesionales de cuatro semanas comenzó en agosto de 2026 bajo protocolo prerregistrado. Los resultados se publican pase lo que pase.',
+  lk3:'El pronóstico', lv3:'<b>Bloqueado por debajo de diez lecturas.</b> El instrumento se niega a adivinar antes de conocer su ritmo.',
+  lk4:'Pretensiones clínicas', lv4:'<b>Ninguna.</b>',
+  edoor1:'El registro de evidencia en vivo →', edoor2:'El protocolo prerregistrado →',
+  govh:'La gobernanza', govsub:'Escrito para quienes preguntan dónde viven los datos antes de preguntar qué hace el producto.',
+  g1k:'Residencia', g1:'Alojado en la UE, Fráncfort. Los datos no salen de la jurisdicción.',
+  g2k:'Acceso', g2:'Líderes y profesionales ven señales, nunca respuestas. Consentimiento nominal, impuesto en el código.',
+  g3k:'Registro', g3:'Estado al firmar, en el registro de decisiones. Exportar y borrar son derechos del operador, no solicitudes.',
+  g4k:'Telemetría', g4:'Cero terceros. Cero rastreadores. El sitio y el instrumento siguen la misma regla.',
+  g5k:'Sovereign', g5:'Instancias privadas de un solo inquilino para consejos e instituciones. En conversación.',
+  creed:'Los resultados negativos también se publican.<br>La honestidad es el producto.',
+  h2acc:'Treinta plazas. Por solicitud.',
+  obligAcc:'Para los asientos donde el error se capitaliza · directores · fundadores · fondos · consejos · cabezas de instituciones',
+  price:'Areté tiene el precio del consejo que reemplaza, no del software al que se parece. Las condiciones se fijan en conversación, tras la solicitud. La cohorte fundadora entra en otros términos: paga en datos y en testimonio, y figura en el informe de validación si así lo desea. <b>Cada solicitud se lee personalmente.</b>',
+  roleOp:'Operador', rolePr:'Profesional · coach',
+  phCtx:'Una frase: ¿qué decide usted, y qué cuesta un error?',
+  letter:'<input type="checkbox" id="a-letter"> Envíenme The Letter: una página honesta, cuando haya algo que decir. Nunca marketing.',
+  abtn:'Solicitar una plaza', polyg:'Solicite en árabe, francés, alemán, español o inglés. Ella lee los cinco personalmente.',
+  crk:'La lectura que esta página hizo de usted',
+  crf:'Decida lo que decida, note que algo lo notó.',
+  sealKeep:'Conservar el sello ↓', shareLine:'Envíe esto a alguien que decide demasiado rápido →',
+  odh:'¿No va a solicitar? La lectura sigue siendo suya.',
+  odb:'La lectura de sesenta segundos está abierta a todos, gratis, hoy. El veredicto queda sellado hasta que usted lo reclama con un correo; la reclamación sostiene una plaza numerada en la lista de espera y abre un registro que le pertenece: para guardar, exportar o borrar. La cohorte tiene treinta plazas. La puerta del instrumento, no.',
+  odg:'Hacer la lectura gratuita →',
+  fs1:'Areté existe porque el sistema con más consecuencias de cualquier institución es el menos examinado. Las decisiones que mueven empresas, capital y personas las firman mentes que nadie mide. Lo vi de cerca: las peores decisiones de la sala se tomaban con la mayor convicción, y nada lo señalaba. Ni los datos. Ni los asesores. El fallo nunca fue la información. Era el estado.',
+  fs2:'Estudié física y filosofía en la LMU de Múnich: una me enseñó qué es una medición, la otra qué es un juicio. Vivo en cinco idiomas, y sé lo que la mayoría del software finge no ver: la misma mente no es la misma mente en cada uno de ellos, cada día, a cada hora. Lo que las instituciones llaman carácter es en gran parte <em>estado</em>. Es medible, se degrada con un ritmo, y toda organización seria apuesta su futuro a él mientras se niega a mirarlo.',
+  fs3:'Así que construí el instrumento. No un coach, no un producto de bienestar. No adula y no aconseja. Mide al operador, bloquea lo irreversible y lleva un registro que una institución puede sostener. Está donde siempre estuvo un instrumento honesto: entre su estado y su firma.',
+  figcap:'Sabrine Hammami · Fundadora, The Areté Protocol',
+  fdisc1:'<b style="color:var(--ink2);font-weight:500">Sin analítica, sin rastreadores, sin cookies.</b> Esta página le muestra todo lo que lee de usted; no se recoge nada más, y nada sale de su pestaña. El instrumento se impone la misma regla.',
+  fdisc2:'Un instrumento evolutivo de firma cognitiva para el autoconocimiento, no una herramienta clínica ni diagnóstica.',
+  fl1:'El instrumento', fl2:'La lectura de sesenta segundos', fl3:'Privacidad y condiciones', fl4:'Contacto',
+  qk:'Areté · La versión de una pantalla',
+  qh3:'Sesenta segundos de lectura. Una puerta antes de las grandes decisiones.',
+  ql1:'Una <b>lectura diaria de 60 segundos</b> de su estado cognitivo, puntuada contra <b>su propia línea de base</b>, nunca contra un promedio.',
+  ql2:'Antes de una decisión irreversible, <b>el Intercept</b> lee su formulación, nombra el fallo de razonamiento y emite un veredicto: avanzar o esperar.',
+  ql3:'<b>Honesto por construcción:</b> los paneles permanecen bloqueados hasta que sus datos los merecen. El protocolo de validación es público. Los resultados se publican pase lo que pase.',
+  ql4:'<b>Privado por construcción:</b> señales, nunca contenidos. Discreto en el trabajo. Alojado en la UE. Para exportar o borrar, en cualquier momento.',
+  ql5:'<b>La lectura de sesenta segundos es gratuita para todos</b>; el veredicto se reclama con un correo, y la reclamación es una plaza numerada en la lista de espera. El instrumento completo es por solicitud; la cohorte fundadora de treinta paga en datos y testimonio.',
+  ql6:'Una coach de directivos está <b>ahora</b> en la primera cohorte testigo; su relato sin editar se publica al cabo de cuatro semanas.',
+  qread:'Hacer la lectura de 60 segundos', qapply:'Solicitar una plaza →'
+}, ar: {
+  navArg:'الحجّة', navMir:'المرآة', navIns:'الأداة', navEvi:'الأدلّة', navFou:'المؤسِّسة',
+  hcta:'ادخل إلى الأداة',
+  hline:'ضوء فحص المحرّك لاتخاذ القرار. قراءة متواصلة للسلامة الإدراكية، لمن لا يمكن التراجع عن قراراتهم.',
+  doorRead:'خُذ قراءة الستين ثانية', doorArg:'ابدأ بالحجّة ↓', q60:'على عجلة؟ النسخة المختصرة',
+  freenote:'القراءة مجانية · ستون ثانية · يبقى الحكم مختوماً حتى تطالب به',
+  byline:'صابرين همّامي · مؤسِّسة The Areté Protocol',
+  tcap:'<span id="tclock">·</span> · سماؤك المحلية · تكتمل الحلقة كلما قرأت أكثر',
+  kick1:'<span class="n">01</span> الحجّة', kick2:'<span class="n">02</span> المرآة',
+  kick3:'<span class="n">03</span> الأداة', kick4:'<span class="n">04</span> الشاهدة',
+  kick5:'<span class="n">05</span> أين تقف الأدلّة', kick6:'<span class="n">06</span> الدخول', kick7:'<span class="n">07</span> المؤسِّسة',
+  h2arg:'كل مجالٍ جادّ حصل في النهاية على أداته. أمّا الحُكم فلم يحصل عليها قط.',
+  ess1:'المال حصل على التدقيق. الطيران حصل على مسجّل الرحلة. الطبّ حصل على شاشة العلامات الحيوية. أمّا النظام الوحيد الذي تعتمد عليه هذه جميعاً، عقلُ من يتّخذ القرار، فما زال يعمل بلا قياس. رأس المال يُقاس. العمليات تُقاس. العقل الذي يدير الاثنين لا يُقاس.',
+  ess2:'أنت لست بالذكاء نفسه كل يوم. أنت تعرف ذلك. ما لا يمكنك معرفته من الداخل هو <em>أيُّ يومٍ هو اليوم</em>، لأن التدهور لا يأتي كضباب. يأتي كيقين: كقناعةٍ بأن هذا القرار بديهي، وأنه لا يحتمل الانتظار، وأنك رأيت كل هذا من قبل. الحالة المختلّة لا تشعر بأنها مختلّة. وهذا ما يجعلها باهظة. استحواذٌ في التوقيت الخطأ، تعيينٌ قيادي خاطئ، التزامٌ لا رجعة فيه وُقِّع في لحظة انفعال: أيٌّ منها يكلّف أكثر من عقدٍ كامل من القياس. ولا تحتاج إلى مجلس إدارة لتعرف شكل هذا الأمر. كلّنا وقّعنا شيئاً لا رجعة فيه في اليوم الخطأ: استقالة، رسالة، شراء، وعد. الرهانات تتغيّر حجماً؛ أمّا الآلية فلا.',
+  pull:'أسوأ قراراتي وأفضلها كانت تُحسّ متطابقة. متطابقة.',
+  ess3:'أريتيه هي الأداة لتلك الفجوة. قراءة يومية من ستين ثانية لحالتك الإدراكية، مقابل خطّ أساسك أنت، لا مقابل متوسّطٍ ما. بابٌ تستشيره قبل القرارات التي لا تُردّ. لا تقول لك ماذا تقرّر. بل تقول لك <em>من الذي يقرّر الآن</em>.',
+  mhead:'بينما كنت تقرأ الحجّة، كانت هذه الصفحة تقرأ <em class="hollow">أنت</em>.',
+  mafter1:'دقائق من غريبٍ، قُرئت من مؤشّر فأرة. وهي تثبت شيئاً واحداً: <b style="color:var(--ink);font-weight:500">الحالة تُرى من الخارج.</b>',
+  honest:'صفحةٌ يمكنها أن تلتقي زائراً. أمّا معرفة مشغّلٍ فتتطلّب بروتوكولاً: فسيولوجيا وسلوكاً وسجلّ قرارات، تُمسك جميعاً مقابل خطّ أساسٍ هو لك وحدك.',
+  mnote:'يُحسب في هذا التبويب · ولا يُرسل إلى <i>أي مكان</i>',
+  wserif:'أقدم صورة للحُكم ميزان: قلبٌ يوزَن مقابل ريشة، قبل أن يُنطق بالحكم. بعد أربعة آلاف عام، تعيد أريتيه بناء ذلك الوزن أداةً.',
+  wcap:'ماعت · وزن القلب · نحو 1275 ق.م',
+  h2ins:'ليست لوحة بيانات. بل <em class="hollow">حُكم</em>.',
+  obligIns:'الالتزام كلّه · ٦٠ ثانية مع قهوة الصباح · الباب قبل القرارات التي لا تُردّ · بتكتّم في مكان العمل',
+  b1a:'القراءة', b1b:'٦٠ ثانية · يومياً', b1c:'مقابل خطّ أساسك أنت',
+  fkBase:'خطّ أساسك', fvDrift:'<b>&minus;16</b> · يتّسع منذ ٣ أيام',
+  fverd1:'تحت خطّ الأساس · فضّل اليوم القرارات القابلة للتراجع',
+  b2a:'الاعتراض', b2b:'قبل القرار، لا بعده',
+  fquote:'«يجب أن نضاعف المركز. هذا لا يحتمل الانتظار إلى الاثنين.»',
+  rose1:'التكلفة الغارقة · ثقة النمط 0.81', rose2:'تضخيم الاستعجال',
+  fcounter2:'<b>الحجّة المضادّة:</b> قل ماذا كنت ستقرّر لو كان المال المُنفَق يخصّ شخصاً غريباً. إن تغيّر الجواب، فالمركز هو الذي يمسك بك، لا العكس.',
+  fverd2:'الحُكم · انتظر ٢٤ ساعة',
+  b3a:'الممارسة', b3b:'للمدرّبين والمستشارين', b3c:'بموافقةٍ اسمية فقط',
+  nmA:'العميل أ', nmB:'العميل ب', nmC:'العميل ج', ps1:'ثابت', ps2:'ينجرف', ps3:'قرب الخطّ',
+  fcounter3:'قمرة قيادة الممارس: حالة كل عميل، وخطّ الاحتراق، وتحضير الجلسة مكتوباً من سجلّه. يدخل العملاء بموافقة صريحة واسمية. يرى الممارس إشاراتٍ وتحضيراً، <b>لا إجاباتهم أبداً</b>: هذه القاعدة مفروضة في الشيفرة، لا في وعد.',
+  fcap:'إطار توضيحي · الأداة نفسها تعمل الآن',
+  fmh:'التشكيلات', fmsub:'يدخل المشغّلون فرادى، أو في فرق، أو في مجموعات.',
+  fm1k:'المشغّل', fm1:'وحده، مقابل خطّ أساسه. الأداة كاملة، خاصةٌ بالبناء.',
+  fm2k:'الفريق', fm2:'يقرأ القائد التشكيل: الجاهزية، والتوزيع، ومن يقترب من الخطّ. مجمَّع بالبناء؛ لا إجابات فردية أبداً.',
+  fm3k:'المجموعة', fm3:'صفٌّ يبدأ معاً ويُقرأ معاً. الثلاثون المؤسِّسون واحدة منها.',
+  dfh:'الفرق', dfsub:'الفئات المجاورة، ولماذا ليست هذا.',
+  surfline:'ما تعرضه هذه الصفحة هو السطح. أمّا البقية فلا تعرضها الأداة إلا من الداخل.',
+  surfgo:'ادخل عبر قراءة الستين ثانية ←',
+  d1k:'الأجهزة القابلة للارتداء', d1:'تقرأ الجسد وتتوقف عند العنق. أريتيه تقرأ الحُكم.',
+  d2k:'لوحات البيانات', d2:'تُعلم القرار. أريتيه تقيس صاحب القرار.',
+  d3k:'التدريب', d3:'يصل بعد القرار. الباب يقف قبله.',
+  d4k:'الرفاهية', d4:'تواسي. الأداة تقيس وتُغلق وتقف خلف سجلّ.',
+  ih:'لوحات البيانات تعرض. أريتيه تُصدر.',
+  isub:'تسع وثائق لا يستطيع أي برنامج آخر كتابتها، لأن أحداً غيرها لم يقس القاضي.',
+  dc1:'المضيّ أو الانتظار، قبل القرار.', dc2:'حالة القاضي، مدوَّنة عند التوقيع.',
+  dc3:'الفشل، مكتوباً قبل أن يكتبه القرار.', dc4:'أقوى مرافعة ضدّك، يقدّمها نقيضك.',
+  dc5:'القرار ينتقل؛ أمّا الحالة المختلّة فلا.', dc6:'الأسبوع، مكتوباً بيد سجلّك.',
+  dc7:'حالتك على باب القاعة، قبل دقائق.', dc8:'قرار واحد، مقروء بالكامل. الوثيقة الرائدة.',
+  dc9:'رأس المال الإدراكي، مجمَّعاً فقط، جاهزاً للمجلس.',
+  numline:'كل مشغّل يحمل رقماً، مطبوعاً على سجلّه من اليوم الأول. الأرقام من واحد إلى ثلاثين تخصّ الإصدار المؤسِّس.',
+  h2evi:'لا تدّعِ أبداً أكثر مما تحتمله الأدلّة.',
+  lk1:'التعرّف على البصمة', lv1:'<b>71&ndash;84%</b> تعرّف دقيق في عيّنات اصطناعية. <i>موسومة اصطناعية، لأنها كذلك.</i>',
+  lk2:'التحقّق البشري', lv2:'<b>جارٍ الآن.</b> بدأت في أغسطس 2026 مجموعة ممارسين لأربعة أسابيع وفق بروتوكول مسجّل مسبقاً. النتائج تُنشر في الحالتين.',
+  lk3:'التنبّؤ', lv3:'<b>مقفل تحت عشر قراءات.</b> ترفض الأداة التخمين قبل أن تعرف إيقاعك.',
+  lk4:'ادّعاءات سريرية', lv4:'<b>لا شيء.</b>',
+  edoor1:'سجلّ الأدلّة الحيّ ←', edoor2:'البروتوكول المسجّل مسبقاً ←',
+  govh:'الحوكمة', govsub:'كُتبت لمن يسألون أين تُقيم البيانات قبل أن يسألوا ماذا يفعل المنتج.',
+  g1k:'الإقامة', g1:'استضافة في الاتحاد الأوروبي، فرانكفورت. البيانات لا تغادر الولاية القضائية.',
+  g2k:'الوصول', g2:'القادة والممارسون يرون إشارات، لا إجابات أبداً. موافقة اسمية، مفروضة في الشيفرة.',
+  g3k:'السجلّ', g3:'الحالة عند التوقيع في سجلّ القرارات. التصدير والمحو حقّان للمشغّل، لا طلبان.',
+  g4k:'القياس عن بُعد', g4:'صفر أطراف ثالثة. صفر متتبّعات. الموقع والأداة يخضعان للقاعدة نفسها.',
+  g5k:'Sovereign', g5:'نسخ خاصة أحادية المستأجر للمجالس والمؤسسات. عبر الحوار.',
+  creed:'النتائج السلبية تُنشر أيضاً.<br>الصدق هو المنتج.',
+  h2acc:'ثلاثون مقعداً. بالتقديم.',
+  obligAcc:'للمقاعد التي يتراكم فيها الخطأ · رؤساء · مؤسِّسون · صناديق · مجالس · قادة مؤسسات',
+  price:'سعر أريتيه كسعر المشورة التي تحلّ محلّها، لا كالبرنامج الذي تشبهه. تُحدَّد الشروط في حوار، بعد التقديم. تدخل المجموعة المؤسِّسة بشروط مختلفة: تدفع بالبيانات وبالشهادة، وتُذكر في تقرير التحقّق إن رغبت. <b>كل طلبٍ يُقرأ شخصياً.</b>',
+  roleOp:'مشغّل', rolePr:'ممارس · مدرّب',
+  phCtx:'جملة واحدة: ماذا تقرّر، وكم يكلّف الخطأ؟',
+  letter:'<input type="checkbox" id="a-letter"> أرسلوا لي The Letter: صفحة صادقة، حين يكون هناك ما يُقال. لا تسويق أبداً.',
+  abtn:'قدّم طلباً لمقعد', polyg:'قدّم بالعربية أو الفرنسية أو الألمانية أو الإسبانية أو الإنجليزية. هي تقرأ اللغات الخمس بنفسها.',
+  crk:'قراءة هذه الصفحة لك',
+  crf:'مهما قرّرت، لاحظ أن شيئاً ما قد لاحظ.',
+  sealKeep:'احتفظ بالختم ↓', shareLine:'أرسل هذا إلى من يقرّر بسرعة زائدة ←',
+  odh:'لن تقدّم طلباً؟ القراءة لك رغم ذلك.',
+  odb:'قراءة الستين ثانية مفتوحة للجميع، مجاناً، اليوم. يبقى الحكم مختوماً حتى تطالب به ببريدك؛ والمطالبة تحجز مقعداً مرقّماً على قائمة الانتظار وتفتح سجلاً يخصّك: تحتفظ به أو تصدّره أو تمحوه. المجموعة ثلاثون مقعداً. أمّا باب الأداة فليس كذلك.',
+  odg:'خُذ القراءة المجانية ←',
+  fs1:'وُجدت أريتيه لأن أخطر نظامٍ في أي مؤسسة هو أقلّها فحصاً. القرارات التي تحرّك الشركات ورؤوس الأموال والناس توقّعها عقولٌ لا يقيسها أحد. رأيت ذلك عن قرب: أسوأ قرارات الغرفة اتُّخذت بأعظم قناعة، ولم يُنذر شيء. لا البيانات، ولا المستشارون. لم يكن الخلل يوماً في المعلومة. كان في الحالة.',
+  fs2:'درستُ الفيزياء والفلسفة في جامعة ميونيخ LMU: علّمتني الأولى ما القياس، والثانية ما الحُكم. أعيش بخمس لغات، وأعرف ما تتظاهر معظم البرمجيات بتجاهله: العقل نفسه ليس العقل نفسه في كل لغة، في كل يوم، في كل ساعة. ما تسمّيه المؤسسات شخصيةً هو في معظمه <em>حالة</em>. وهي قابلة للقياس، وتتدهور على إيقاع، وكل منظمة جادة تراهن بمستقبلها عليها وترفض أن تنظر إليها.',
+  fs3:'فبنيتُ الأداة. لا مدرِّباً ولا منتجاً للرفاهية. لا تجامل ولا تنصح. تقيس المشغّل، وتغلق الباب أمام ما لا يُردّ، وتحفظ سجلاً تستطيع مؤسسة أن تقف خلفه. تقف حيث وقفت الأداة الصادقة دائماً: بين حالتك وتوقيعك.',
+  figcap:'صابرين همّامي · مؤسِّسة The Areté Protocol',
+  fdisc1:'<b style="color:var(--ink2);font-weight:500">لا تحليلات، لا متتبّعات، لا كوكيز.</b> تُريك هذه الصفحة كلَّ ما تقرأه عنك؛ ولا يُجمع شيء أكثر، ولا يغادر شيء تبويبك. والأداة تفرض على نفسها القاعدة ذاتها.',
+  fdisc2:'أداة متطوّرة لبصمة الإدراك ومعرفة الذات، ليست أداة سريرية ولا تشخيصية.',
+  fl1:'الأداة', fl2:'قراءة الستين ثانية', fl3:'الخصوصية والشروط', fl4:'تواصل',
+  qk:'أريتيه · النسخة المختصرة',
+  qh3:'ستون ثانية من القراءة. بابٌ قبل القرارات الكبرى.',
+  ql1:'<b>قراءة يومية من ٦٠ ثانية</b> لحالتك الإدراكية، تُقيَّم مقابل <b>خطّ أساسك أنت</b>، لا مقابل متوسّط.',
+  ql2:'قبل قرارٍ لا يُردّ، يقرأ <b>الاعتراض</b> صياغته، ويسمّي علّة الاستدلال، ويصدر حكماً: المضيّ أو الانتظار.',
+  ql3:'<b>صادقة بالبناء:</b> تبقى اللوحات مقفلة حتى تستحقّها بياناتك. بروتوكول التحقّق علني. والنتائج تُنشر في الحالتين.',
+  ql4:'<b>خاصة بالبناء:</b> إشارات، لا محتوى أبداً. بتكتّم في مكان العمل. مستضافة في الاتحاد الأوروبي. تصدّرها أو تمحوها متى شئت.',
+  ql5:'<b>قراءة الستين ثانية مجانية للجميع</b>؛ يُطالَب بالحكم بالبريد، والمطالبة مقعد مرقّم على قائمة الانتظار. الأداة الكاملة بالتقديم؛ والمجموعة المؤسِّسة من ثلاثين تدفع بالبيانات والشهادة.',
+  ql6:'مدرّبة تنفيذيين داخل مجموعة الشهود الأولى <b>الآن</b>؛ وتقريرها غير المحرَّر يُنشر بعد أربعة أسابيع.',
+  qread:'خُذ قراءة الستين ثانية', qapply:'قدّم طلباً لمقعد ←'
+}};
+
+var DYN = {
+  en: {
+    boot: function(hh,w,h){ return ['ARETÉ · BOOT','local time · '+hh,'viewport · '+w+' × '+h,'input · pointer channel open','reading · begins now']; },
+    liveD: function(s,m,r){ return 'READING YOU FOR <b>'+s+'S</b> · CURSOR <b>'+m+' M</b> TRAVELLED · <b>'+r+'</b> REVERSALS · NOTHING LEAVES THIS TAB'; },
+    liveM: function(s,d){ return 'READING YOU FOR <b>'+s+'S</b> · DEPTH <b>'+d+'%</b> · NOTHING LEAVES THIS TAB'; },
+    mins: function(s){ return s >= 90 ? Math.round(s/60)+' minutes' : s+' seconds'; },
+    mDwell: function(x){ return 'You have been here <b>'+x+'</b>.'; },
+    mTravel: function(m,r){ return 'Your cursor has travelled <b>'+m+' metres</b> and reversed direction <b>'+r+' times</b>. Reversal is what hesitation looks like from outside.'; },
+    mPaceF: function(a){ return 'The argument is a two-minute read. You crossed it in <b>'+a+' seconds</b>. Skimming is a reading too.'; },
+    mPaceS: function(x){ return 'You stayed inside the argument for <b>'+x+'</b>. You actually read it.'; },
+    mPaceN: 'You arrived here without crossing the argument. Straight to the mirror. Noted.',
+    mStill: function(s){ return 'Your longest stillness lasted <b>'+s+' seconds</b>. Stillness is where reading happens; the rest is motion.'; },
+    mAway0: 'You never left this tab. <b>Unbroken attention</b> is rarer than you think.',
+    mAway: function(n){ return 'You left this tab <b>'+n+(n===1?' time':' times')+'</b>. Every departure resets the mind more than it admits.'; },
+    wline:'The first witness is inside the protocol now.',
+    wsub:'An executive coach has been using the instrument daily since August 2026: one reading each morning, real decisions through the gate. Her account lands here, unedited, when the four weeks end. Whatever it says.',
+    wchip: function(wk,d){ return 'Week '+wk+' of 4 · her account lands in '+d+(d===1?' day':' days'); },
+    cr1: function(x,p){ return 'You have read for <b>'+x+'</b> and reached <b>'+p+'%</b> of this page.'; },
+    cr2: function(m,r){ return 'Your cursor travelled <b>'+m+' metres</b> and hesitated <b>'+r+' times</b> on the way to this door.'; },
+    cr3n:'You never left the tab. <b>This held you.</b>',
+    cr3: function(n){ return 'You stepped away <b>'+n+(n===1?' time':' times')+'</b> and came back. Coming back is the signal.'; },
+    seal: function(n){ return 'Your visit, drawn · Nº '+n; },
+    fInvalid:'A valid email is required.', fSending:'Sending…',
+    fOk:'Received. Every application is read personally.', fMail:'Opening your mail client instead.',
+    fGo:'Opening your mail. The application goes straight to the founder.', shareCopied:'Link copied. Aim it well.',
+    pulse: function(n,a,p){ return 'THE INSTRUMENT IS RUNNING NOW · <b>'+n+'</b> READINGS TAKEN IN THE LAST SEVEN DAYS · <b>'+a+'</b> APPLICATIONS · <b>'+p+'</b> PLACES'; }
+  },
+  de: {
+    boot: function(hh,w,h){ return ['ARETÉ · START','Ortszeit · '+hh,'Viewport · '+w+' × '+h,'Eingabe · Zeigerkanal offen','Lesung · beginnt jetzt']; },
+    liveD: function(s,m,r){ return 'ICH LESE SIE SEIT <b>'+s+'S</b> · CURSOR <b>'+m+' M</b> · <b>'+r+'</b> RICHTUNGSWECHSEL · NICHTS VERLÄSST DIESEN TAB'; },
+    liveM: function(s,d){ return 'ICH LESE SIE SEIT <b>'+s+'S</b> · TIEFE <b>'+d+'%</b> · NICHTS VERLÄSST DIESEN TAB'; },
+    mins: function(s){ return s >= 90 ? Math.round(s/60)+' Minuten' : s+' Sekunden'; },
+    mDwell: function(x){ return 'Sie sind seit <b>'+x+'</b> hier.'; },
+    mTravel: function(m,r){ return 'Ihr Cursor hat <b>'+m+' Meter</b> zurückgelegt und <b>'+r+' Mal</b> die Richtung gewechselt. Richtungswechsel ist, wie Zögern von außen aussieht.'; },
+    mPaceF: function(a){ return 'Das Argument ist eine Zwei-Minuten-Lektüre. Sie haben es in <b>'+a+' Sekunden</b> durchquert. Auch Überfliegen ist eine Lesung.'; },
+    mPaceS: function(x){ return 'Sie sind <b>'+x+'</b> im Argument geblieben. Sie haben es wirklich gelesen.'; },
+    mPaceN: 'Sie sind hier angekommen, ohne das Argument zu durchqueren. Direkt zum Spiegel. Notiert.',
+    mStill: function(s){ return 'Ihre längste Stille dauerte <b>'+s+' Sekunden</b>. In der Stille geschieht das Lesen; der Rest ist Bewegung.'; },
+    mAway0: 'Sie haben diesen Tab nie verlassen. <b>Ungebrochene Aufmerksamkeit</b> ist seltener, als Sie denken.',
+    mAway: function(n){ return 'Sie haben diesen Tab <b>'+n+' Mal</b> verlassen. Jede Abwesenheit setzt den Verstand mehr zurück, als er zugibt.'; },
+    wline:'Die erste Zeugin ist jetzt im Protokoll.',
+    wsub:'Eine Executive-Coach nutzt das Instrument täglich seit August 2026: jeden Morgen eine Lesung, echte Entscheidungen durch das Tor. Ihr Bericht erscheint hier, unredigiert, wenn die vier Wochen enden. Was immer er sagt.',
+    wchip: function(wk,d){ return 'Woche '+wk+' von 4 · ihr Bericht erscheint in '+d+(d===1?' Tag':' Tagen'); },
+    cr1: function(x,p){ return 'Sie haben <b>'+x+'</b> gelesen und <b>'+p+'%</b> dieser Seite erreicht.'; },
+    cr2: function(m,r){ return 'Ihr Cursor legte <b>'+m+' Meter</b> zurück und zögerte <b>'+r+' Mal</b> auf dem Weg zu dieser Tür.'; },
+    cr3n:'Sie haben den Tab nie verlassen. <b>Das hier hat Sie gehalten.</b>',
+    cr3: function(n){ return 'Sie sind <b>'+n+' Mal</b> kurz gegangen und wiedergekommen. Das Wiederkommen ist das Signal.'; },
+    seal: function(n){ return 'Ihr Besuch, gezeichnet · Nº '+n; },
+    fInvalid:'Eine gültige E-Mail-Adresse ist erforderlich.', fSending:'Wird gesendet…',
+    fOk:'Erhalten. Jede Bewerbung wird persönlich gelesen.', fMail:'Stattdessen öffnet sich Ihr E-Mail-Programm.',
+    fGo:'Ihr E-Mail-Programm öffnet sich. Die Bewerbung geht direkt an die Gründerin.', shareCopied:'Link kopiert. Zielen Sie gut.',
+    pulse: function(n,a,p){ return 'DAS INSTRUMENT LÄUFT JETZT · <b>'+n+'</b> LESUNGEN IN DEN LETZTEN SIEBEN TAGEN · <b>'+a+'</b> BEWERBUNGEN · <b>'+p+'</b> PLÄTZE'; }
+  },
+  fr: {
+    boot: function(hh,w,h){ return ['ARETÉ · AMORÇAGE','heure locale · '+hh,'fenêtre · '+w+' × '+h,'entrée · canal du pointeur ouvert','lecture · commence maintenant']; },
+    liveD: function(s,m,r){ return 'JE VOUS LIS DEPUIS <b>'+s+'S</b> · CURSEUR <b>'+m+' M</b> · <b>'+r+'</b> REVIREMENTS · RIEN NE QUITTE CET ONGLET'; },
+    liveM: function(s,d){ return 'JE VOUS LIS DEPUIS <b>'+s+'S</b> · PROFONDEUR <b>'+d+'%</b> · RIEN NE QUITTE CET ONGLET'; },
+    mins: function(s){ return s >= 90 ? Math.round(s/60)+' minutes' : s+' secondes'; },
+    mDwell: function(x){ return 'Vous êtes ici depuis <b>'+x+'</b>.'; },
+    mTravel: function(m,r){ return 'Votre curseur a parcouru <b>'+m+' mètres</b> et changé de direction <b>'+r+' fois</b>. Le revirement, c’est l’hésitation vue de l’extérieur.'; },
+    mPaceF: function(a){ return 'L’argument est une lecture de deux minutes. Vous l’avez traversé en <b>'+a+' secondes</b>. Survoler est aussi une lecture.'; },
+    mPaceS: function(x){ return 'Vous êtes resté dans l’argument pendant <b>'+x+'</b>. Vous l’avez vraiment lu.'; },
+    mPaceN: 'Vous êtes arrivé ici sans traverser l’argument. Droit au miroir. Noté.',
+    mStill: function(s){ return 'Votre plus longue immobilité a duré <b>'+s+' secondes</b>. C’est dans l’immobilité que la lecture a lieu ; le reste est mouvement.'; },
+    mAway0: 'Vous n’avez jamais quitté cet onglet. <b>Une attention ininterrompue</b> est plus rare que vous ne le pensez.',
+    mAway: function(n){ return 'Vous avez quitté cet onglet <b>'+n+' fois</b>. Chaque départ remet l’esprit à zéro plus qu’il ne l’admet.'; },
+    wline:'Le premier témoin est dans le protocole en ce moment.',
+    wsub:'Une coach de dirigeants utilise l’instrument chaque jour depuis août 2026 : une lecture chaque matin, de vraies décisions par la porte. Son compte rendu paraîtra ici, non édité, à la fin des quatre semaines. Quoi qu’il dise.',
+    wchip: function(wk,d){ return 'Semaine '+wk+' sur 4 · son compte rendu paraît dans '+d+(d===1?' jour':' jours'); },
+    cr1: function(x,p){ return 'Vous avez lu pendant <b>'+x+'</b> et atteint <b>'+p+'%</b> de cette page.'; },
+    cr2: function(m,r){ return 'Votre curseur a parcouru <b>'+m+' mètres</b> et hésité <b>'+r+' fois</b> en venant à cette porte.'; },
+    cr3n:'Vous n’avez jamais quitté l’onglet. <b>Ceci vous a tenu.</b>',
+    cr3: function(n){ return 'Vous êtes parti <b>'+n+' fois</b> et vous êtes revenu. Revenir, c’est le signal.'; },
+    seal: function(n){ return 'Votre visite, dessinée · Nº '+n; },
+    fInvalid:'Une adresse e-mail valide est requise.', fSending:'Envoi…',
+    fOk:'Reçu. Chaque candidature est lue personnellement.', fMail:'Votre client e-mail va s’ouvrir à la place.',
+    fGo:'Votre messagerie s’ouvre. La candidature part directement chez la fondatrice.', shareCopied:'Lien copié. Visez bien.',
+    pulse: function(n,a,p){ return 'L’INSTRUMENT TOURNE EN CE MOMENT · <b>'+n+'</b> LECTURES CES SEPT DERNIERS JOURS · <b>'+a+'</b> CANDIDATURES · <b>'+p+'</b> PLACES'; }
+  },
+  es: {
+    boot: function(hh,w,h){ return ['ARETÉ · ARRANQUE','hora local · '+hh,'ventana · '+w+' × '+h,'entrada · canal del puntero abierto','lectura · comienza ahora']; },
+    liveD: function(s,m,r){ return 'LEYÉNDOLO DESDE HACE <b>'+s+'S</b> · CURSOR <b>'+m+' M</b> · <b>'+r+'</b> CAMBIOS DE RUMBO · NADA SALE DE ESTA PESTAÑA'; },
+    liveM: function(s,d){ return 'LEYÉNDOLO DESDE HACE <b>'+s+'S</b> · PROFUNDIDAD <b>'+d+'%</b> · NADA SALE DE ESTA PESTAÑA'; },
+    mins: function(s){ return s >= 90 ? Math.round(s/60)+' minutos' : s+' segundos'; },
+    mDwell: function(x){ return 'Lleva usted aquí <b>'+x+'</b>.'; },
+    mTravel: function(m,r){ return 'Su cursor ha recorrido <b>'+m+' metros</b> y cambiado de dirección <b>'+r+' veces</b>. El cambio de rumbo es la duda vista desde fuera.'; },
+    mPaceF: function(a){ return 'El argumento es una lectura de dos minutos. Usted lo cruzó en <b>'+a+' segundos</b>. Hojear también es una lectura.'; },
+    mPaceS: function(x){ return 'Se quedó dentro del argumento durante <b>'+x+'</b>. Lo leyó de verdad.'; },
+    mPaceN: 'Llegó aquí sin cruzar el argumento. Directo al espejo. Anotado.',
+    mStill: function(s){ return 'Su quietud más larga duró <b>'+s+' segundos</b>. En la quietud ocurre la lectura; el resto es movimiento.'; },
+    mAway0: 'Nunca salió de esta pestaña. <b>La atención ininterrumpida</b> es más rara de lo que cree.',
+    mAway: function(n){ return 'Salió de esta pestaña <b>'+n+(n===1?' vez':' veces')+'</b>. Cada salida reinicia la mente más de lo que admite.'; },
+    wline:'La primera testigo está dentro del protocolo ahora.',
+    wsub:'Una coach de directivos usa el instrumento a diario desde agosto de 2026: una lectura cada mañana, decisiones reales por la puerta. Su relato aparecerá aquí, sin editar, al terminar las cuatro semanas. Diga lo que diga.',
+    wchip: function(wk,d){ return 'Semana '+wk+' de 4 · su relato llega en '+d+(d===1?' día':' días'); },
+    cr1: function(x,p){ return 'Ha leído durante <b>'+x+'</b> y alcanzado el <b>'+p+'%</b> de esta página.'; },
+    cr2: function(m,r){ return 'Su cursor recorrió <b>'+m+' metros</b> y dudó <b>'+r+' veces</b> de camino a esta puerta.'; },
+    cr3n:'Nunca salió de la pestaña. <b>Esto lo retuvo.</b>',
+    cr3: function(n){ return 'Se ausentó <b>'+n+(n===1?' vez':' veces')+'</b> y volvió. Volver es la señal.'; },
+    seal: function(n){ return 'Su visita, dibujada · Nº '+n; },
+    fInvalid:'Se requiere un correo válido.', fSending:'Enviando…',
+    fOk:'Recibido. Cada solicitud se lee personalmente.', fMail:'Se abrirá su cliente de correo en su lugar.',
+    fGo:'Se abre su correo. La solicitud va directa a la fundadora.', shareCopied:'Enlace copiado. Apunte bien.',
+    pulse: function(n,a,p){ return 'EL INSTRUMENTO ESTÁ EN MARCHA · <b>'+n+'</b> LECTURAS EN LOS ÚLTIMOS SIETE DÍAS · <b>'+a+'</b> SOLICITUDES · <b>'+p+'</b> PLAZAS'; }
+  },
+  ar: {
+    boot: function(hh,w,h){ return ['أريتيه · تشغيل','الوقت المحلي · '+hh,'النافذة · '+w+' × '+h,'الإدخال · قناة المؤشّر مفتوحة','القراءة · تبدأ الآن']; },
+    liveD: function(s,m,r){ return 'أقرؤك منذ <b>'+s+' ث</b> · المؤشّر <b>'+m+' م</b> · <b>'+r+'</b> انعطافة · لا شيء يغادر هذا التبويب'; },
+    liveM: function(s,d){ return 'أقرؤك منذ <b>'+s+' ث</b> · العمق <b>'+d+'%</b> · لا شيء يغادر هذا التبويب'; },
+    mins: function(s){ return s >= 90 ? Math.round(s/60)+' دقيقة' : s+' ثانية'; },
+    mDwell: function(x){ return 'أنت هنا منذ <b>'+x+'</b>.'; },
+    mTravel: function(m,r){ return 'قطع مؤشّرك <b>'+m+' متراً</b> وغيّر اتجاهه <b>'+r+' مرة</b>. الانعطاف هو شكل التردّد من الخارج.'; },
+    mPaceF: function(a){ return 'الحجّة قراءة دقيقتين. عبرتَها في <b>'+a+' ثانية</b>. التصفّح السريع قراءة أيضاً.'; },
+    mPaceS: function(x){ return 'بقيتَ داخل الحجّة <b>'+x+'</b>. لقد قرأتها حقاً.'; },
+    mPaceN: 'وصلتَ إلى هنا دون أن تعبر الحجّة. مباشرةً إلى المرآة. مسجَّل.',
+    mStill: function(s){ return 'أطول سكونٍ لك دام <b>'+s+' ثانية</b>. في السكون تحدث القراءة؛ والباقي حركة.'; },
+    mAway0: 'لم تغادر هذا التبويب قط. <b>الانتباه غير المنقطع</b> أندر مما تظن.',
+    mAway: function(n){ return 'غادرت هذا التبويب <b>'+n+' مرة</b>. كل مغادرة تعيد ضبط العقل أكثر مما يعترف.'; },
+    wline:'الشاهدة الأولى داخل البروتوكول الآن.',
+    wsub:'مدرّبة تنفيذيين تستخدم الأداة يومياً منذ أغسطس 2026: قراءة كل صباح، وقرارات حقيقية عبر الباب. يظهر تقريرها هنا، غير محرَّر، عند انتهاء الأسابيع الأربعة. مهما قال.',
+    wchip: function(wk,d){ return 'الأسبوع '+wk+' من 4 · يصل تقريرها بعد '+d+(d===1?' يوم':' أيام'); },
+    cr1: function(x,p){ return 'قرأتَ لمدة <b>'+x+'</b> وبلغت <b>'+p+'%</b> من هذه الصفحة.'; },
+    cr2: function(m,r){ return 'قطع مؤشّرك <b>'+m+' متراً</b> وتردّد <b>'+r+' مرة</b> في طريقه إلى هذا الباب.'; },
+    cr3n:'لم تغادر التبويب قط. <b>هذا أمسك بك.</b>',
+    cr3: function(n){ return 'غبتَ <b>'+n+' مرة</b> وعدت. العودة هي الإشارة.'; },
+    seal: function(n){ return 'زيارتك، مرسومة · رقم '+n; },
+    fInvalid:'مطلوب بريد إلكتروني صحيح.', fSending:'جارٍ الإرسال…',
+    fOk:'وصل الطلب. كل طلبٍ يُقرأ شخصياً.', fMail:'سيُفتح برنامج البريد لديك بدلاً من ذلك.',
+    fGo:'يُفتح بريدك الآن. يذهب الطلب مباشرةً إلى المؤسِّسة.', shareCopied:'نُسخ الرابط. صوّب جيداً.',
+    pulse: function(n,a,p){ return 'الأداة تعمل الآن · <b>'+n+'</b> قراءة في الأيام السبعة الأخيرة · <b>'+a+'</b> طلباً · <b>'+p+'</b> مقعداً'; }
+  }
+};
+function D(){ return DYN[LANG] || DYN.en; }
+
+/* selector → dictionary key; 'ph' entries translate the placeholder attribute */
+var MAP = [
+  ['nav a[href="#argument"]','navArg'],['nav a[href="#mirror"]','navMir'],['nav a[href="#instrument"]','navIns'],
+  ['nav a[href="#evidence"]','navEvi'],['nav a[href="#founder"]','navFou'],['#hd-app','hcta'],
+  ['.hline','hline'],['#door-read','doorRead'],['.doors a[href="#argument"]','doorArg'],['#q60','q60'],
+  ['.freenote','freenote'],['.byline','byline'],['.tcap','tcap'],
+  ['#argument .kick','kick1'],['#mirror .kick','kick2'],['#instrument .kick','kick3'],['#witness .kick','kick4'],
+  ['#evidence .kick','kick5'],['#access .kick','kick6'],['#founder .kick','kick7'],
+  ['#argument h2','h2arg'],['#ess1','ess1'],['#ess2','ess2'],['#essPull','pull'],['#ess3','ess3'],
+  ['.mhead','mhead'],['#maf1','mafter1'],['.mafter .honest','honest'],['.mnote','mnote'],
+  ['#wserif','wserif'],['#wcap','wcap'],
+  ['#instrument h2','h2ins'],['#instrument .oblig','obligIns'],
+  ['#f1 .badge:nth-of-type(1)','b1a'],['#f1 .badge:nth-of-type(2)','b1b'],['#f1 .badge:nth-of-type(3)','b1c'],
+  ['#f1 .frow:nth-of-type(1) .fk','fkBase'],['#f1 .frow:nth-of-type(2) .fv','fvDrift'],['#f1 .fverdict','fverd1'],
+  ['#f2 .fbadges:first-of-type .badge:nth-of-type(1)','b2a'],['#f2 .fbadges:first-of-type .badge:nth-of-type(2)','b2b'],
+  ['#f2 .fquote','fquote'],['#f2 .badge.rose:nth-of-type(1)','rose1'],['#f2 .badge.rose:nth-of-type(2)','rose2'],
+  ['#f2 .fcounter','fcounter2'],['#f2 .fverdict','fverd2'],
+  ['#f3 .badge:nth-of-type(1)','b3a'],['#f3 .badge:nth-of-type(2)','b3b'],['#f3 .badge:nth-of-type(3)','b3c'],
+  ['#f3 .prow:nth-of-type(1) .nm','nmA'],['#f3 .prow:nth-of-type(2) .nm','nmB'],['#f3 .prow:nth-of-type(3) .nm','nmC'],
+  ['#f3 .prow:nth-of-type(1) .pstate','ps1'],['#f3 .prow:nth-of-type(2) .pstate','ps2'],['#f3 .prow:nth-of-type(3) .pstate','ps3'],
+  ['#f3 .fcounter','fcounter3'],
+  ['#dfh','dfh'],['#dfsub','dfsub'],['#d1k','d1k'],['#d1','d1'],['#d2k','d2k'],['#d2','d2'],['#d3k','d3k'],['#d3','d3'],['#d4k','d4k'],['#d4','d4'],
+  ['#surfline','surfline'],['#door-read4','surfgo'],
+  ['#instrument .issue:not(#formations):not(#difference) .ih','ih'],['#instrument .issue:not(#formations):not(#difference) .isub','isub'],
+  ['#doc1 span','dc1'],['#doc2 span','dc2'],['#doc3 span','dc3'],['#doc4 span','dc4'],['#doc5 span','dc5'],
+  ['#doc6 span','dc6'],['#doc7 span','dc7'],['#doc8 span','dc8'],['#doc9 span','dc9'],
+  ['#numline','numline'],
+  ['#evidence h2','h2evi'],
+  ['#evidence .lrow:nth-of-type(1) .lk','lk1'],['#evidence .lrow:nth-of-type(1) .lv','lv1'],
+  ['#evidence .lrow:nth-of-type(2) .lk','lk2'],['#evidence .lrow:nth-of-type(2) .lv','lv2'],
+  ['#evidence .lrow:nth-of-type(3) .lk','lk3'],['#evidence .lrow:nth-of-type(3) .lv','lv3'],
+  ['#evidence .lrow:nth-of-type(4) .lk','lk4'],['#evidence .lrow:nth-of-type(4) .lv','lv4'],
+  ['#door-evidence','edoor1'],['#door-protocol','edoor2'],['.cb','creed'],
+  ['#govh','govh'],['#govsub','govsub'],
+  ['#g1k','g1k'],['#g1','g1'],['#g2k','g2k'],['#g2','g2'],['#g3k','g3k'],['#g3','g3'],
+  ['#g4k','g4k'],['#g4','g4'],['#g5k','g5k'],['#g5','g5'],
+  ['#access h2','h2acc'],['#access .oblig','obligAcc'],['#access .price','price'],
+  ['.role[data-r="Operator"]','roleOp'],['.role[data-r="Practitioner"]','rolePr'],
+  ['#a-ctx','phCtx','ph'],['.lchk','letter'],['#a-btn','abtn'],['#polyg','polyg'],
+  ['#close-read .crk','crk'],['#close-read .crf','crf'],['#sealbtn','sealKeep'],['#sharego','shareLine'],
+  ['.opendoor .odh','odh'],['.opendoor .odb','odb'],['#door-read3','odg'],
+  ['#fs1','fs1'],['#fs2','fs2'],['#fs3','fs3'],['#founder figcaption','figcap'],
+  ['footer .fdisc:nth-of-type(1)','fdisc1'],['footer .fdisc:nth-of-type(2)','fdisc2'],
+  ['#door-app','fl1'],['#door-read2','fl2'],['#door-legal','fl3'],['.flinks a[href^="mailto"]','fl4'],
+  ['.qcard .qk','qk'],['.qcard h3','qh3'],
+  ['.qcard li:nth-of-type(1)','ql1'],['.qcard li:nth-of-type(2)','ql2'],['.qcard li:nth-of-type(3)','ql3'],
+  ['.qcard li:nth-of-type(4)','ql4'],['.qcard li:nth-of-type(5)','ql5'],['.qcard li:nth-of-type(6)','ql6'],
+  ['#q-read','qread'],['#q-apply','qapply']
+];
+var enCaptured = false;
+function applyLang(l){
+  if (['en','de','fr','es','ar'].indexOf(l) < 0) l = 'en';
+  if (!enCaptured){
+    MAP.forEach(function(m){
+      var el = document.querySelector(m[0]); if (!el) return;
+      I18N.en[m[1]] = m[2] === 'ph' ? el.getAttribute('placeholder') : el.innerHTML;
     });
-  }, {threshold:[0.15,0.5]});
-  slides.forEach(function(s){ io.observe(s); });
+    enCaptured = true;
+  }
+  LANG = l;
+  try { localStorage.setItem('arete_lang', l); } catch(e){}
+  document.documentElement.lang = l;
+  document.documentElement.dir = (l === 'ar') ? 'rtl' : 'ltr';
+  var dict = I18N[l] || I18N.en;
+  MAP.forEach(function(m){
+    var el = document.querySelector(m[0]); if (!el) return;
+    var v = dict[m[1]] != null ? dict[m[1]] : I18N.en[m[1]];
+    if (v == null) return;
+    if (m[2] === 'ph') el.setAttribute('placeholder', v); else el.innerHTML = v;
+  });
+  document.querySelectorAll('#lang button').forEach(function(b){
+    b.classList.toggle('on', b.getAttribute('data-l') === l);
+  });
+  if (window.renderWitness) window.renderWitness();
+  if (window.renderPulse) window.renderPulse();
+}
+
+/* ── the referral thread: ?ref=CODE rides every door into the app and is
+   stamped on the application, so the Ledger Room knows who sent whom ── */
+var REF = '';
+try { REF = (new URLSearchParams(location.search).get('ref') || '').replace(/[^A-Za-z0-9_-]/g,'').slice(0,40); } catch(e){}
+
+/* doors */
+function door(id, path, carryRef){ var el=document.getElementById(id); if(el) el.href = APP + path + (carryRef && REF ? (path.indexOf('?')>=0?'&':'?') + 'ref=' + REF : ''); }
+door('hd-app','/app?theme=dark',true); door('door-read','/read',true); door('door-read2','/read',true);
+door('door-evidence','/evidence'); door('door-protocol','/protocol');
+door('door-app','/app?theme=dark',true); door('door-legal','/legal.html'); door('q-read','/read',true); door('door-read3','/read',true); door('door-read4','/read',true);
+
+/* the one-screen version (operator fast lane) */
+var quick = document.getElementById('quick'), qPrev = null;
+function qOpen(){ qPrev = document.activeElement; quick.classList.add('on'); document.getElementById('qclose').focus(); }
+function qClose(){ quick.classList.remove('on'); if (qPrev && qPrev.focus) qPrev.focus(); }
+/* focus stays inside the card while it is open */
+quick.addEventListener('keydown', function(e){
+  if (e.key !== 'Tab' || !quick.classList.contains('on')) return;
+  var f = quick.querySelectorAll('button,a[href]');
+  if (!f.length) return;
+  var first = f[0], last = f[f.length - 1];
+  if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+});
+/* the title notices when you leave — the mirror does not stop at the tab edge */
+var T0 = document.title;
+document.addEventListener('visibilitychange', function(){
+  document.title = document.hidden ? 'It noticed you left · ARETÉ' : T0;
+});
+document.getElementById('q60').addEventListener('click', qOpen);
+document.getElementById('qclose').addEventListener('click', qClose);
+quick.addEventListener('click', function(e){ if (e.target === quick) qClose(); });
+addEventListener('keydown', function(e){ if (e.key === 'Escape' && quick.classList.contains('on')) qClose(); });
+document.getElementById('q-apply').addEventListener('click', function(){
+  qClose(); document.getElementById('access').scrollIntoView({behavior:'smooth'});
+});
+
+/* ── THE WITNESS · fill this when the coach speaks. Leave quote empty until
+   then: the section keeps an honest, dated waiting state with a live week
+   counter. photo is optional (a path like 'assets/witness.jpg'). ── */
+var WITNESS = {
+  quote: '',                 /* e.g. 'It told me to wait twice. It was right twice.' */
+  name: '',                  /* e.g. 'Name Surname' */
+  title: '',                 /* e.g. 'Executive coach' */
+  photo: ''                  /* e.g. 'assets/witness.jpg' (optional) */
+};
+var COHORT_T0 = new Date('2026-08-12T00:00:00');
+window.renderWitness = function(){
+  var el = document.getElementById('wbody');
+  if (WITNESS.quote){
+    var who = '<div class="wwho">' + (WITNESS.photo ? '<img src="' + WITNESS.photo + '" alt="' + WITNESS.name + '">' : '')
+      + '<div><div class="wn">' + WITNESS.name + '</div><div class="wt">' + WITNESS.title + '</div></div></div>';
+    el.innerHTML = '<p class="wquote">' + WITNESS.quote + '"</p>' + who;
+  } else {
+    var wk = Math.min(4, Math.max(1, Math.floor((Date.now() - COHORT_T0.getTime()) / (7*86400e3)) + 1));
+    var days = Math.max(0, Math.ceil(28 - (Date.now() - COHORT_T0.getTime()) / 86400e3));
+    el.innerHTML = '<div class="wwait">'
+      + '<p class="wline">' + D().wline + '</p>'
+      + '<p class="wsub">' + D().wsub + '</p>'
+      + '<span class="wchip">' + D().wchip(wk, days) + '</span>'
+      + '</div>';
+  }
+};
+window.renderWitness();
+
+/* ── R · what this page can honestly observe ── */
+var R = { t0: Date.now(), px: 0, rev: 0, lastX: null, lastDX: 0, lastMove: Date.now(),
+          still: 0, away: 0, awayAt: 0, argT0: 0, argT1: 0, depth: 0 };
+addEventListener('pointermove', function(e){
+  if (R.lastX !== null){
+    var dx = e.clientX - R.lastX;
+    R.px += Math.abs(dx) + Math.abs(e.clientY - (R.lastY||e.clientY));
+    if (dx !== 0 && R.lastDX !== 0 && (dx > 0) !== (R.lastDX > 0)) R.rev++;
+    if (dx !== 0) R.lastDX = dx;
+  }
+  R.lastX = e.clientX; R.lastY = e.clientY;
+  var gap = (Date.now() - R.lastMove) / 1000;
+  if (gap > R.still) R.still = gap;
+  R.lastMove = Date.now();
+  FIELD.px = e.clientX; FIELD.py = e.clientY;
+}, {passive:true});
+function departed(){ var n = Date.now(); if (n - R.awayAt > 1000){ R.away++; R.awayAt = n; } }
+addEventListener('blur', departed);
+document.addEventListener('visibilitychange', function(){ if (document.hidden) departed(); });
+addEventListener('scroll', function(){
+  var d = (scrollY + innerHeight) / document.documentElement.scrollHeight;
+  if (d > R.depth) R.depth = d;
+}, {passive:true});
+
+/* ── the living line ── */
+var live = document.getElementById('live');
+var mobile = matchMedia('(max-width:700px)').matches;
+setInterval(function(){
+  var s = Math.floor((Date.now() - R.t0)/1000);
+  var m = (R.px * 0.0002646).toFixed(1);
+  live.innerHTML = mobile ? D().liveM(s, Math.round(R.depth*100)) : D().liveD(s, m, R.rev);
+}, 250);
+
+/* ── boot ── */
+var boot = document.getElementById('boot'), blog = document.getElementById('bootlog');
+function bootLines(){
+  var d = new Date(), hh = ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+  return D().boot(hh, innerWidth, innerHeight);
+}
+var bootDone = false;
+function bootLift(){
+  if (bootDone) return; bootDone = true;
+  boot.classList.add('off'); document.body.classList.add('lit');
+  try{ sessionStorage.setItem('arete_booted','1'); }catch(e){}
+}
+if (RM || sessionStorage.getItem('arete_booted')){ bootLift(); }
+else {
+  boot.addEventListener('click', bootLift); /* the impatient are respected */
+  var L = bootLines(), i = 0;
+  (function step(){
+    if (bootDone) return;
+    if (i < L.length){
+      var div = document.createElement('div');
+      div.textContent = L[i];
+      div.className = i === L.length-1 ? 'ice' : (i === 0 ? 'on' : '');
+      blog.appendChild(div); i++; setTimeout(step, 170);
+    } else setTimeout(bootLift, 420);
+  })();
+}
+
+/* ── header + progress ── */
+var hd = document.getElementById('hd'), prog = document.getElementById('prog');
+addEventListener('scroll', function(){
+  hd.classList.toggle('stuck', scrollY > 8);
+  var h = document.documentElement.scrollHeight - innerHeight;
+  prog.style.width = (h > 0 ? (scrollY/h)*100 : 0) + '%';
+}, {passive:true});
+
+/* ── reveals (threshold 0 + rootMargin: the tall-element trap) ── */
+var io = new IntersectionObserver(function(es){
+  var k = 0;
+  es.forEach(function(e){
+    if (!e.isIntersecting) return;
+    var el = e.target;
+    el.style.transitionDelay = Math.min(k * 70, 280) + 'ms'; k++;
+    el.classList.add('in'); io.unobserve(el);
+    setTimeout(function(){ el.style.transitionDelay = ''; }, 1400);
+  });
+}, {threshold: 0, rootMargin: '0px 0px -60px 0px'});
+document.querySelectorAll('.rev').forEach(function(el){ io.observe(el); });
+/* jump-scroll insurance: anything already passed (above the viewport) is revealed.
+   Instant jumps (keyboard End, reduced-motion nav) leap OVER elements, so the
+   observer never sees them intersect. */
+setInterval(function(){
+  document.querySelectorAll('.rev:not(.in)').forEach(function(el){
+    if (el.getBoundingClientRect().bottom < 80){ el.classList.add('in'); io.unobserve(el); }
+  });
+}, 700);
+
+/* argument crossing time */
+var arg = document.getElementById('argument');
+new IntersectionObserver(function(es,o){ es.forEach(function(e){ if (e.isIntersecting && !R.argT0){ R.argT0 = Date.now(); o.disconnect(); } }); },
+  {threshold: 0}).observe(arg);
+
+/* ── the mirror prints ── */
+function mirrorLines(){
+  var s = Math.floor((Date.now() - R.t0)/1000);
+  var m = (R.px * 0.0002646).toFixed(1);
+  var d = D(), lines = [];
+  lines.push(['dwell', d.mDwell(d.mins(s))]);
+  lines.push(['travel', d.mTravel(m, R.rev)]);
+  if (R.argT0){
+    var a = Math.round((Date.now() - R.argT0)/1000);
+    lines.push(['pace', a < 45 ? d.mPaceF(a) : d.mPaceS(d.mins(a))]);
+  } else lines.push(['pace', d.mPaceN]);
+  lines.push(['still', d.mStill(Math.round(R.still))]);
+  lines.push(['away', R.away === 0 ? d.mAway0 : d.mAway(R.away)]);
+  return lines;
+}
+var printed = false;
+new IntersectionObserver(function(es,o){
+  es.forEach(function(e){
+    if (!e.isIntersecting || printed) return;
+    printed = true; o.disconnect();
+    var data = mirrorLines();
+    var els = document.querySelectorAll('#mlines .ml');
+    data.forEach(function(pair, idx){
+      var el = els[idx]; if (!el) return;
+      if (RM){ el.innerHTML = pair[1]; el.classList.add('lit'); return; }
+      setTimeout(function(){
+        var html = pair[1], txt = html.replace(/<[^>]+>/g,''), n = 0;
+        el.classList.add('lit');
+        var t = setInterval(function(){
+          n += 2;
+          if (n >= txt.length){ clearInterval(t); el.innerHTML = html; }
+          else el.innerHTML = txt.slice(0,n) + '<span class="caret">▍</span>';
+        }, 14);
+      }, idx * 900);
+    });
+  });
+}, {threshold: 0}).observe(document.getElementById('msentinel'));
+
+/* ── the closing verdict: the page reads this visitor one last time, at the door ── */
+var crDone = false;
+new IntersectionObserver(function(es,o){
+  es.forEach(function(e){
+    if (!e.isIntersecting || crDone) return;
+    crDone = true; o.disconnect();
+    var s = Math.floor((Date.now() - R.t0)/1000);
+    var d = D(), L = [];
+    L.push(d.cr1(d.mins(s), Math.round(Math.max(R.depth, (scrollY+innerHeight)/document.documentElement.scrollHeight) * 100)));
+    L.push(d.cr2((R.px * 0.0002646).toFixed(1), R.rev));
+    L.push(R.away === 0 ? d.cr3n : d.cr3(R.away));
+    document.getElementById('crlines').innerHTML = L.join('<br>');
+    document.getElementById('close-read').style.display = 'block';
+    drawSeal();
+  });
+}, {threshold: 0}).observe(document.getElementById('crsentinel'));
+
+/* ── THE SEAL · a harmonograph of this visit. The Victorian instrument that
+   drew from pendulum motion, reborn: the pendulums are this visitor's own
+   numbers (dwell, travel, reversals, stillness), so every visit signs a
+   different figure, and the same visit always signs the same one. ── */
+function paintSeal(cx, S, seed0){
+  var C = S/2, seed = seed0 >>> 0;
+  function rnd(){ seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
+  var f1 = 2 + Math.floor(rnd() * 4), f2 = 3 + Math.floor(rnd() * 4);
+  if (f2 === f1) f2++;
+  var p1 = rnd() * Math.PI * 2, p2 = rnd() * Math.PI * 2, p3 = rnd() * Math.PI * 2;
+  var d1 = 0.0016 + rnd() * 0.0018, d2 = 0.0016 + rnd() * 0.0018;
+  var A = S * 0.36, k = S / 264;
+  cx.lineWidth = Math.max(1, k * 0.9);
+  var px0 = null, py0 = null;
+  for (var i = 0; i < 2400; i++){
+    var t = i * 0.028;
+    var ex1 = Math.exp(-d1 * i), ex2 = Math.exp(-d2 * i);
+    var x = C + (Math.sin(t * f1 + p1) * ex1 * 0.72 + Math.sin(t * (f2 + 0.012) + p3) * ex2 * 0.28) * A;
+    var y = C + (Math.sin(t * f2 + p2) * ex1 * 0.72 + Math.sin(t * (f1 + 0.008) + p1) * ex2 * 0.28) * A;
+    if (px0 !== null){
+      var fade = 1 - i / 2400;
+      cx.strokeStyle = i % 7 === 0
+        ? 'rgba(127,178,214,' + (0.05 + fade * 0.10) + ')'
+        : 'rgba(79,196,245,' + (0.04 + fade * 0.14) + ')';
+      cx.beginPath(); cx.moveTo(px0, py0); cx.lineTo(x, y); cx.stroke();
+    }
+    px0 = x; py0 = y;
+  }
+  cx.fillStyle = 'rgba(79,196,245,0.9)';
+  cx.beginPath(); cx.arc(px0, py0, 1.8 * k, 0, Math.PI * 2); cx.fill();
+}
+window.__sealSeed = null;
+function drawSeal(){
+  var cv = document.getElementById('seal'), cx = cv.getContext('2d');
+  var s = Math.floor((Date.now() - R.t0)/1000);
+  var seed = (s * 7 + R.rev * 13 + Math.floor(R.px) * 3 + R.away * 101 + Math.floor(R.still) * 17) >>> 0;
+  window.__sealSeed = seed;
+  cx.clearRect(0, 0, 264, 264);
+  paintSeal(cx, 264, seed);
+  document.getElementById('sealk').textContent = D().seal(seed % 9000 + 1000);
+}
+
+/* THE KEEPABLE SEAL — a 1080px art card of this visit, theirs to keep or send */
+function makeSealCard(){
+  var seed = window.__sealSeed; if (seed == null) return null;
+  var S = 1080, cv = document.createElement('canvas');
+  cv.width = S; cv.height = S;
+  var cx = cv.getContext('2d');
+  cx.fillStyle = '#0d1118'; cx.fillRect(0, 0, S, S);
+  var g = cx.createRadialGradient(S*0.2, S*0.12, 40, S*0.2, S*0.12, S*0.9);
+  g.addColorStop(0, 'rgba(79,196,245,0.10)'); g.addColorStop(1, 'rgba(13,17,24,0)');
+  cx.fillStyle = g; cx.fillRect(0, 0, S, S);
+  var fig = document.createElement('canvas'); fig.width = 720; fig.height = 720;
+  paintSeal(fig.getContext('2d'), 720, seed);
+  cx.drawImage(fig, (S - 720) / 2, 96);
+  cx.textAlign = 'center';
+  cx.fillStyle = '#f2f4f8'; cx.font = '400 74px Italiana, Georgia, serif';
+  cx.fillText('A R E T É', S/2, 878);
+  cx.fillStyle = '#9da0ac'; cx.font = '12px "DM Mono", monospace';
+  cx.fillText('T H E   A R E T É   P R O T O C O L', S/2, 916);
+  cx.fillStyle = '#6b6e7a';
+  cx.fillText((D().seal(seed % 9000 + 1000)).toUpperCase(), S/2, 968);
+  cx.fillStyle = '#7fb2d6';
+  cx.fillText('A R E T E P R O T O C O L . C O M', S/2, 1016);
+  var bars = [[30, '#7fb2d6'], [46, '#4fc4f5']];
+  var bx = 60, by = 1020;
+  bars.forEach(function(b, i){ cx.fillStyle = b[1]; cx.fillRect(bx + i*13, by - b[0], 8, b[0]); });
+  return cv;
+}
+document.getElementById('sealbtn').addEventListener('click', function(){
+  var cv = makeSealCard(); if (!cv) return;
+  cv.toBlob(function(blob){
+    if (!blob) return;
+    var f = new File([blob], 'arete-seal.png', { type: 'image/png' });
+    if (navigator.canShare && navigator.canShare({ files: [f] })){
+      navigator.share({ files: [f], title: 'Areté', url: 'https://areteprotocol.com' }).catch(function(){});
+    } else {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = 'arete-seal.png';
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1200);
+    }
+  }, 'image/png');
+});
+
+/* the aimed share: you do not share a site, you send it at someone */
+document.getElementById('sharego').addEventListener('click', function(){
+  var msg = document.getElementById('sharemsg');
+  var data = { title: 'Areté · The Cognitive Integrity Protocol',
+    text: WORLD[0], url: 'https://areteprotocol.com' };
+  if (navigator.share){
+    navigator.share(data).catch(function(){});
+  } else if (navigator.clipboard){
+    navigator.clipboard.writeText('https://areteprotocol.com').then(function(){
+      msg.textContent = D().shareCopied;
+    }).catch(function(){});
+  }
+});
+
+/* ── live pulse from the real instrument (shown only if it answers) ── */
+window.__pulse = null;
+window.renderPulse = function(){
+  var j = window.__pulse; if (!j) return;
+  var p = document.getElementById('pulse');
+  p.innerHTML = D().pulse((j.reads7d|0), (j.cohortApplied|0), ((j.cohortPlaces|0) || 30));
+  p.style.display = 'block';
+};
+try {
+  fetch(APP + '/pulse-public').then(function(r){ return r.ok ? r.json() : null; }).then(function(j){
+    if (!j) return;
+    window.__pulse = j; window.renderPulse();
+  }).catch(function(){});
+} catch(e){}
+
+/* ── the application form ── */
+var role = 'Operator';
+document.querySelectorAll('.role').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.role').forEach(function(x){ x.classList.remove('on'); });
+    b.classList.add('on'); role = b.getAttribute('data-r');
+  });
+});
+document.getElementById('aform').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  var email = document.getElementById('a-email').value.trim();
+  var ctx = document.getElementById('a-ctx').value.trim();
+  var letterEl = document.getElementById('a-letter');
+  var letter = !!(letterEl && letterEl.checked);
+  var msg = document.getElementById('amsg');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ msg.textContent = D().fInvalid; msg.className=''; return; }
+  /* a silent copy files itself in the Ledger Room; the application itself
+     travels by mail, straight to the founder */
+  try {
+    fetch(APP + '/access', { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email: email, role: role, context: ctx + (REF ? ' [ref:' + REF + ']' : ''), letter: letter }) }).catch(function(){});
+  } catch(e){}
+  var mbody = encodeURIComponent('Email: ' + email + '\nRole: ' + role + '\nContext: ' + ctx
+    + '\nThe Letter: ' + (letter ? 'yes' : 'no') + (REF ? '\nRef: ' + REF : ''));
+  location.href = 'mailto:sabrine-hammami@areteprotocol.com?subject='
+    + encodeURIComponent('Areté · Application (' + role + ')') + '&body=' + mbody;
+  msg.textContent = D().fGo; msg.className = 'ok';
+});
+
+/* ── the hero drifts up and yields as you descend ── */
+var heroIn = document.querySelector('.hero-in');
+addEventListener('scroll', function(){
+  if (RM) return;
+  var y = Math.min(scrollY, 640);
+  heroIn.style.transform = 'translateY(' + (y * 0.16) + 'px)';
+  heroIn.style.opacity = String(Math.max(0, 1 - y / 720));
+}, {passive:true});
+
+/* ── the reticle rides the pointer; a crosshair, not a cursor ── */
+var ret = document.getElementById('ret');
+if (ret && matchMedia('(pointer:fine)').matches && !RM){
+  addEventListener('pointermove', function(e){
+    ret.style.left = e.clientX + 'px'; ret.style.top = e.clientY + 'px';
+    ret.classList.add('live');
+    var t = e.target;
+    var typing = t.closest && t.closest('input,textarea');
+    var hot = t.closest && t.closest('a,button,.frame,#sky,label');
+    ret.classList.toggle('hot', !!hot && !typing);
+    ret.classList.toggle('off', !!typing);
+  }, {passive:true});
+  document.documentElement.addEventListener('mouseleave', function(){ ret.classList.remove('live'); });
+}
+
+/* ── the spine lights the chamber you are in ── */
+var spineLinks = document.querySelectorAll('#spine a');
+if (spineLinks.length){
+  var spineIO = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var id = '#' + e.target.id;
+      spineLinks.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === id); });
+    });
+  }, {threshold: 0, rootMargin: '-40% 0px -50% 0px'});
+  document.querySelectorAll('section[data-num]').forEach(function(s){ spineIO.observe(s); });
+}
+
+/* ── the tongues: switcher + the hero greeting the world ── */
+document.querySelectorAll('#lang button').forEach(function(b){
+  b.addEventListener('click', function(){ applyLang(b.getAttribute('data-l')); });
+});
+if (LANG !== 'en') applyLang(LANG);
+var wl = document.getElementById('worldline'), wli = 0;
+if (wl && !RM){
+  setInterval(function(){
+    wli = (wli + 1) % WORLD.length;
+    wl.style.opacity = '0';
+    setTimeout(function(){ wl.textContent = WORLD[wli]; wl.style.opacity = '1'; }, 700);
+  }, 5200);
+}
+
+/* ── the frames answer the hand (pointer-fine only) ── */
+if (matchMedia('(pointer:fine)').matches && !RM){
+  document.querySelectorAll('.frame').forEach(function(f){
+    f.addEventListener('pointermove', function(e){
+      var r = f.getBoundingClientRect();
+      var mx = (e.clientX - r.left) / r.width - 0.5, my = (e.clientY - r.top) / r.height - 0.5;
+      f.style.transform = 'translateY(-3px) rotateX(' + (-my * 2.2).toFixed(2) + 'deg) rotateY(' + (mx * 2.2).toFixed(2) + 'deg)';
+    });
+    f.addEventListener('pointerleave', function(){ f.style.transform = ''; });
+  });
+}
+
+/* ── the field · constellation canvas ── */
+var FIELD = { px: -1e4, py: -1e4 };
+(function(){
+  var cv = document.getElementById('field'), cx = cv.getContext('2d');
+  if (RM){ cv.style.display = 'none'; return; }
+  var DPR = Math.min(devicePixelRatio || 1, 1.6), W, H, N = [], count;
+  function size(){
+    W = innerWidth; H = innerHeight;
+    cv.width = W * DPR; cv.height = H * DPR; cv.style.width = W+'px'; cv.style.height = H+'px';
+    cx.setTransform(DPR,0,0,DPR,0,0);
+    count = W < 700 ? 26 : (W < 1200 ? 40 : 54);
+    N = [];
+    for (var i=0;i<count;i++) N.push({ x: Math.random()*W, y: Math.random()*H,
+      vx:(Math.random()-.5)*.16, vy:(Math.random()-.5)*.16, z:.4+Math.random()*.6 });
+  }
+  size(); addEventListener('resize', size);
+  var run = true;
+  document.addEventListener('visibilitychange', function(){ run = !document.hidden; if (run) tick(); });
+  function tick(){
+    if (!run) return;
+    cx.clearRect(0,0,W,H);
+    var sy = scrollY * 0.03;
+    for (var i=0;i<N.length;i++){
+      var n = N[i];
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < -20) n.x = W+20; if (n.x > W+20) n.x = -20;
+      if (n.y < -20) n.y = H+20; if (n.y > H+20) n.y = -20;
+      var dx = n.x - FIELD.px, dy = n.y - FIELD.py, d2 = dx*dx + dy*dy;
+      if (d2 < 16900 && d2 > 1){ var f = 14/Math.sqrt(d2); n.x += dx/Math.sqrt(d2)*f*.4; n.y += dy/Math.sqrt(d2)*f*.4; }
+      var ry = n.y - sy*n.z;
+      cx.fillStyle = 'rgba(127,178,214,' + (0.16 + n.z*0.16) + ')';
+      cx.fillRect(n.x, ((ry % H)+H)%H, 1.6, 1.6);
+    }
+    cx.strokeStyle = 'rgba(79,196,245,0.10)'; cx.lineWidth = 1;
+    for (var a=0;a<N.length;a++) for (var b=a+1;b<N.length;b++){
+      var ddx = N[a].x-N[b].x, ddy = N[a].y-N[b].y, dd = ddx*ddx+ddy*ddy;
+      if (dd < 13000){
+        var rya = N[a].y - sy*N[a].z, ryb = N[b].y - sy*N[b].z;
+        cx.beginPath(); cx.moveTo(N[a].x, ((rya%H)+H)%H); cx.lineTo(N[b].x, ((ryb%H)+H)%H); cx.stroke();
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
 })();
 
-/* access form */
+/* ── the orb · geodesic wireframe (frequency-2 icosphere) ── */
 (function(){
-  var input=document.getElementById('email'),btn=document.getElementById('submit'),note=document.getElementById('note');
-  if(!input||!btn||!note) return;
-  var re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  function submit(){
-    var v=input.value.trim();
-    if(!re.test(v)){ note.classList.remove('ok'); note.textContent='Enter a valid email address.'; input.focus(); return; }
-    note.classList.add('ok'); note.textContent='Opening your mail client\u2026';
-    var body=encodeURIComponent('I\u2019d like to request access to Aret\u00e9.\n\nContact: '+v);
-    window.location.href='mailto:sabrine-hammami@areteprotocol.com?subject=Aret%C3%A9%20%C2%B7%20Access%20request&body='+body;
-    input.value=''; input.placeholder=v;
+  var cv = document.getElementById('orb'); if (!cv) return;
+  if (RM){ cv.style.opacity = .25; }
+  var cx = cv.getContext('2d'), S = 560, R0 = 205;
+  var t = (1+Math.sqrt(5))/2, V = [], F = [];
+  [[-1,t,0],[1,t,0],[-1,-t,0],[1,-t,0],[0,-1,t],[0,1,t],[0,-1,-t],[0,1,-t],[t,0,-1],[t,0,1],[-t,0,-1],[-t,0,1]]
+    .forEach(function(v){ var l = Math.hypot(v[0],v[1],v[2]); V.push([v[0]/l,v[1]/l,v[2]/l]); });
+  var FI = [[0,11,5],[0,5,1],[0,1,7],[0,7,10],[0,10,11],[1,5,9],[5,11,4],[11,10,2],[10,7,6],[7,1,8],
+            [3,9,4],[3,4,2],[3,2,6],[3,6,8],[3,8,9],[4,9,5],[2,4,11],[6,2,10],[8,6,7],[9,8,1]];
+  var midc = {};
+  function mid(a,b){
+    var k = a<b ? a+'_'+b : b+'_'+a;
+    if (midc[k] !== undefined) return midc[k];
+    var m = [(V[a][0]+V[b][0])/2,(V[a][1]+V[b][1])/2,(V[a][2]+V[b][2])/2];
+    var l = Math.hypot(m[0],m[1],m[2]);
+    V.push([m[0]/l,m[1]/l,m[2]/l]); midc[k] = V.length-1; return midc[k];
   }
-  btn.addEventListener('click',submit);
-  input.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); submit(); }});
-  input.addEventListener('input',function(){ if(!note.classList.contains('ok')) note.textContent='Operators admitted in cohorts, on a rolling basis.'; });
+  FI.forEach(function(f){
+    var a=f[0],b=f[1],c=f[2],ab=mid(a,b),bc=mid(b,c),ca=mid(c,a);
+    F.push([a,ab,ca],[b,bc,ab],[c,ca,bc],[ab,bc,ca]);
+  });
+  var E = {}, edges = [];
+  F.forEach(function(f){ for (var i=0;i<3;i++){ var a=f[i],b=f[(i+1)%3],k=a<b?a+'_'+b:b+'_'+a;
+    if (!E[k]){ E[k]=1; edges.push([a,b]); } } });
+  var pulse = [2,9,17,23,31,38];
+  var rx = 0, rz = 0, run = true, vis = true, heat = 0;
+  addEventListener('pointermove', function(){ heat = Math.min(heat + 0.06, 2.2); }, {passive:true});
+  document.addEventListener('visibilitychange', function(){ run = !document.hidden; if (run && vis && !RM) draw(); });
+  /* the sphere only turns while the hero is on stage */
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){ var was = vis; vis = e.isIntersecting; if (vis && !was && run && !RM) draw(); });
+  }, {threshold: 0}).observe(document.getElementById('hero'));
+  function draw(){
+    cx.clearRect(0,0,S,S);
+    heat *= 0.985;
+    rx += 0.0016 * (1 + heat); rz += 0.0009 * (1 + heat);
+    var R1 = R0 * (1 + Math.sin(Date.now()/1000 * 0.35) * 0.012); /* it breathes */
+    var cr = Math.cos(rx), sr = Math.sin(rx), cz = Math.cos(rz), sz = Math.sin(rz);
+    var P = V.map(function(v){
+      var x = v[0]*cz - v[1]*sz, y = v[0]*sz + v[1]*cz, z = v[2];
+      var y2 = y*cr - z*sr, z2 = y*sr + z*cr;
+      return [S/2 + x*R1, S/2 + y2*R1, z2];
+    });
+    /* orbital ring */
+    cx.strokeStyle = 'rgba(127,178,214,0.14)'; cx.lineWidth = 1;
+    cx.beginPath(); cx.ellipse(S/2, S/2, R1*1.32, R1*0.42, -0.5, 0, Math.PI*2); cx.stroke();
+    edges.forEach(function(e){
+      var a = P[e[0]], b = P[e[1]], depth = (a[2]+b[2])/2;
+      var al = 0.05 + (depth+1)*0.10;
+      cx.strokeStyle = depth > 0.25 ? 'rgba(79,196,245,'+(al*1.15)+')' : 'rgba(127,178,214,'+al+')';
+      cx.beginPath(); cx.moveTo(a[0],a[1]); cx.lineTo(b[0],b[1]); cx.stroke();
+    });
+    var tt = Date.now()/1000;
+    pulse.forEach(function(pi,ix){
+      var p = P[pi]; if (p[2] < -0.2) return;
+      var g = 0.5 + 0.5*Math.sin(tt*1.4 + ix*1.1);
+      cx.fillStyle = 'rgba(79,196,245,' + (0.25 + g*0.55) + ')';
+      cx.beginPath(); cx.arc(p[0],p[1], 1.6 + g*1.4, 0, Math.PI*2); cx.fill();
+    });
+    if (run && vis && !RM) requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── THE TRANSIT · the app's sky band, keeping the visitor's local time.
+   Stars twinkle, the body crosses on the day arc, and the ring around it
+   closes with reading depth: the site's own "the ring closes as your record
+   grows". Hover shows the hour line, exactly like the instrument. ── */
+(function(){
+  var band = document.getElementById('transit'), cv = document.getElementById('sky');
+  if (!cv) return;
+  var cx = cv.getContext('2d'), DPR = Math.min(devicePixelRatio || 1, 2), W, H;
+  var stars = [], hoverX = -1, meteor = null;
+  function size(){
+    W = band.clientWidth; H = cv.clientHeight;
+    cv.width = W * DPR; cv.height = H * DPR; cx.setTransform(DPR,0,0,DPR,0,0);
+    stars = [];
+    for (var i = 0; i < 22; i++) stars.push({ x: (i + 0.5 + (i*7%5)*0.09) / 22 * W,
+      y: 14 + ((i*13) % 60), r: 0.7 + (i*11 % 10)/11, ph: i * 0.7 });
+  }
+  size(); addEventListener('resize', size);
+  cv.addEventListener('pointermove', function(e){ var r = cv.getBoundingClientRect(); hoverX = e.clientX - r.left; }, {passive:true});
+  cv.addEventListener('pointerleave', function(){ hoverX = -1; });
+  var run = true, vis = true;
+  document.addEventListener('visibilitychange', function(){ run = !document.hidden; if (run && vis && !RM) tick(); });
+  /* the sky only turns while the band is on stage */
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){ var was = vis; vis = e.isIntersecting; if (vis && !was && run && !RM) tick(); });
+  }, {threshold: 0}).observe(band);
+  function draw(){
+    cx.clearRect(0,0,W,H);
+    var d = new Date(), frac = (d.getHours()*60 + d.getMinutes())/1440;
+    var t = Date.now()/1000;
+    var ck = document.getElementById('tclock');
+    if (ck) ck.textContent = ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+    /* night wash, faintly warmer at the day's height */
+    var day = Math.sin(frac * Math.PI);
+    var g = cx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'rgba(30,42,68,'+(0.45+day*0.25)+')'); g.addColorStop(1,'rgba(13,17,24,0)');
+    cx.fillStyle = g; cx.fillRect(0,0,W,H);
+    /* stars */
+    for (var i=0;i<stars.length;i++){
+      var s0 = stars[i], tw = RM ? 0.7 : 0.45 + 0.55*Math.abs(Math.sin(t*0.9 + s0.ph));
+      cx.fillStyle = 'rgba(238,240,243,' + (0.14 + tw*0.32) + ')';
+      cx.fillRect(s0.x, s0.y, s0.r, s0.r);
+    }
+    /* a meteor, rarely — the sky rewards the patient */
+    if (!RM){
+      if (!meteor && Math.random() < 0.0005){
+        meteor = { x: 40 + Math.random() * (W - 200), y: 8 + Math.random() * 24,
+          vx: 3.4 + Math.random() * 2.2, vy: 1.1 + Math.random() * 0.7, life: 1 };
+      }
+      if (meteor){
+        meteor.life -= 0.022;
+        if (meteor.life <= 0 || meteor.x > W - 10) meteor = null;
+        else {
+          var mg = cx.createLinearGradient(meteor.x - meteor.vx*14, meteor.y - meteor.vy*14, meteor.x, meteor.y);
+          mg.addColorStop(0, 'rgba(79,196,245,0)'); mg.addColorStop(1, 'rgba(238,240,243,' + (0.65 * meteor.life) + ')');
+          cx.strokeStyle = mg; cx.lineWidth = 1.2;
+          cx.beginPath(); cx.moveTo(meteor.x - meteor.vx*14, meteor.y - meteor.vy*14); cx.lineTo(meteor.x, meteor.y); cx.stroke();
+          meteor.x += meteor.vx; meteor.y += meteor.vy;
+        }
+      }
+    }
+    /* the road */
+    var base = H - 40;
+    cx.strokeStyle = 'rgba(255,255,255,0.10)'; cx.lineWidth = 1;
+    cx.beginPath(); cx.moveTo(0, base); cx.lineTo(W, base); cx.stroke();
+    cx.strokeStyle = 'rgba(255,255,255,0.05)';
+    for (var x = 30; x < W - 20; x += (W-60)/23){
+      cx.beginPath(); cx.moveTo(x, base - 3); cx.lineTo(x, base + 3); cx.stroke();
+    }
+    /* the body on its transit */
+    var m = 44, bx = m + frac * (W - m*2);
+    var by = base - 26 - Math.sin(frac * Math.PI) * (H - 92);
+    cx.fillStyle = 'rgba(79,196,245,0.14)';
+    cx.beginPath(); cx.arc(bx, by, 13, 0, Math.PI*2); cx.fill();
+    cx.fillStyle = '#9fc9df';
+    cx.beginPath(); cx.arc(bx, by, 7, 0, Math.PI*2); cx.fill();
+    cx.fillStyle = 'rgba(10,14,20,0.55)';
+    cx.beginPath(); cx.arc(bx - 2.4, by - 1.6, 5.4, 0, Math.PI*2); cx.fill();
+    /* the ring: closes with reading depth */
+    cx.strokeStyle = 'rgba(79,196,245,0.85)'; cx.lineWidth = 1.6;
+    cx.beginPath(); cx.arc(bx, by, 13, -Math.PI/2, -Math.PI/2 + Math.max(0.06, R.depth) * Math.PI * 2); cx.stroke();
+    cx.strokeStyle = 'rgba(79,196,245,0.16)'; cx.lineWidth = 1;
+    cx.beginPath(); cx.arc(bx, by, 13, 0, Math.PI*2); cx.stroke();
+    /* hover hour line */
+    if (hoverX >= 0){
+      var hf = Math.min(1, Math.max(0, (hoverX - m) / (W - m*2)));
+      var hm = Math.round(hf * 1440), lbl = ('0'+Math.floor(hm/60)%24).slice(-2)+':'+('0'+(hm%60)).slice(-2);
+      cx.strokeStyle = 'rgba(79,196,245,0.35)';
+      cx.beginPath(); cx.moveTo(hoverX, 8); cx.lineTo(hoverX, base); cx.stroke();
+      cx.fillStyle = 'rgba(79,196,245,0.9)'; cx.font = '10px ui-monospace,monospace';
+      cx.fillText(lbl, Math.min(W - 40, Math.max(4, hoverX + 8)), 18);
+    }
+  }
+  function tick(){ if (!run || !vis) return; draw(); if (!RM) requestAnimationFrame(tick); }
+  tick(); if (RM) draw();
+})();
 })();
 </script>
 </body>

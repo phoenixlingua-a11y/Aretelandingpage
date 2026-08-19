@@ -1631,6 +1631,33 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   #pn-evidence .lrow{padding:7px 0 !important}
   #pn-evidence .lv{font-size:12.5px !important}
 }
+
+@media (min-width:701px){
+  /* the title carries the audience ink */
+  #pn-instrument h2{font-size:clamp(26px,2.9vw,42px) !important}
+  #pn-instrument h2 em{color:var(--gateink);-webkit-text-stroke:0;font-style:normal}
+  /* the pen */
+  .sigwrap{position:relative}
+  .rnib{position:absolute;width:17px;height:24px;left:8%;top:-4px;color:var(--ink3);
+    transform:rotate(18deg);transition:left .1s linear,transform .4s ease,opacity .5s ease,top .3s ease;
+    animation:nibhover 3.2s ease-in-out infinite}
+  @keyframes nibhover{0%,100%{margin-top:0}50%{margin-top:-6px}}
+  .rnib.down{animation:none;top:14px;transform:rotate(24deg);color:var(--gateink,var(--ice))}
+  .rnib.flee{animation:none;top:-34px;left:70% !important;transform:rotate(60deg);opacity:0}
+  /* the mechanism assembles on arrival */
+  .ritual.in .rcol{animation:armrise .9s cubic-bezier(.2,.7,.3,1) both}
+  .ritual.in .rcol:nth-child(3){animation-delay:.25s}
+  .ritual.in .rcol:nth-child(5){animation-delay:.5s}
+  .ritual.in .rlink{transform-origin:left center;animation:armlink .7s ease both}
+  .ritual.in .rlink:nth-child(2){animation-delay:.2s}
+  .ritual.in .rlink:nth-child(4){animation-delay:.45s}
+  @keyframes armrise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  @keyframes armlink{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @media (prefers-reduced-motion:reduce){
+    .rnib{animation:none}
+    .ritual.in .rcol,.ritual.in .rlink{animation:none}
+  }
+}
 </style>
 </head>
 <body>
@@ -1855,8 +1882,8 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
         <div class="rk">THE STATE</div>
         <svg viewBox="0 0 160 160" width="164" height="164" aria-hidden="true">
           <circle cx="80" cy="80" r="66" fill="none" stroke="var(--grid2)" stroke-width="3" pathLength="100" stroke-dasharray="75 25" transform="rotate(135 80 80)"/>
-          <circle cx="80" cy="80" r="66" fill="none" stroke="var(--gateink,var(--ice))" stroke-width="3" pathLength="100" stroke-dasharray="53 47" transform="rotate(135 80 80)" stroke-linecap="round" opacity=".9"/>
-          <text x="80" y="92" text-anchor="middle" font-family="DM Mono,ui-monospace,monospace" font-size="44" fill="currentColor">71</text>
+          <circle id="rarc" cx="80" cy="80" r="66" fill="none" stroke="var(--gateink,var(--ice))" stroke-width="3" pathLength="100" stroke-dasharray="53 47" transform="rotate(135 80 80)" stroke-linecap="round" opacity=".9"/>
+          <text id="rstate" x="80" y="92" text-anchor="middle" font-family="DM Mono,ui-monospace,monospace" font-size="44" fill="currentColor">71</text>
         </svg>
         <div class="rv">baseline 87 · drift −16</div>
       </div>
@@ -1875,12 +1902,18 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
       <span class="rlink" aria-hidden="true"><i class="i2"></i></span>
       <div class="rcol rsig">
         <div class="rk">THE SIGNATURE</div>
+        <div class="sigwrap">
+        <svg class="rnib" id="rnib" viewBox="0 0 24 34" aria-hidden="true">
+          <path d="M12 1 L18 18 L12 31 L6 18 Z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <line x1="12" y1="12" x2="12" y2="24" stroke="currentColor" stroke-width="1"/>
+        </svg>
         <svg id="sigsvg" viewBox="0 0 260 90" width="250" height="86" aria-hidden="true">
           <line x1="10" y1="70" x2="250" y2="70" stroke="var(--grid2)" stroke-width="1"/>
           <path id="sigpath" d="M18 62 C 40 20, 62 74, 88 46 S 140 18, 172 50 S 226 30, 246 44"
             fill="none" stroke="currentColor" stroke-width="1.8" pathLength="100"
             stroke-dasharray="100" stroke-dashoffset="100"/>
         </svg>
+        </div>
         <span id="rstamp" aria-hidden="true">HOLD · 24 HOURS</span>
         <div class="rverdict" id="rverdict">The line stays empty until the gate agrees.</div>
       </div>
@@ -4328,16 +4361,19 @@ var FIELD = { px: -1e4, py: -1e4 };
       lbl=document.getElementById('holdlbl'), vd=document.getElementById('rverdict');
   var RMq=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var prog=0, raf=null, holding=false, done=false;
+  var nib=document.getElementById('rnib');
   function step(){
     if(!holding) return;
     prog=Math.min(100,prog+2.2);
     ring.style.strokeDashoffset=100-prog;
     sig.style.strokeDashoffset=Math.max(84,100-prog*0.18);
+    if(nib) nib.style.left=(8+prog*0.10)+'%';
     if(prog>=100){ deny(); return; }
     raf=requestAnimationFrame(step);
   }
   function deny(){
     holding=false; done=true;
+    if(nib){ nib.classList.remove('down'); nib.classList.add('flee'); }
     btn.classList.add('denied');
     var rs=document.querySelector('.rsig'); if(rs) rs.classList.add('stamped');
     lbl.innerHTML='THE GATE<br>REFUSES';
@@ -4358,12 +4394,15 @@ var FIELD = { px: -1e4, py: -1e4 };
     ring.style.strokeDashoffset=100; sig.style.strokeDashoffset=100;
     lbl.innerHTML='PRESS AND HOLD<br>TO SIGN';
     vd.textContent='The line stays empty until the gate agrees.';
+    if(nib){ nib.classList.remove('flee'); nib.style.left='8%'; }
   }
   function down(e){ if(done) return; e.preventDefault(); holding=true;
+    if(nib) nib.classList.add('down');
     if(RMq){ prog=100; ring.style.strokeDashoffset=0; deny(); return; }
     raf=requestAnimationFrame(step); }
   function up(){ if(done) return; holding=false; if(raf)cancelAnimationFrame(raf);
-    prog=0; ring.style.strokeDashoffset=100; sig.style.strokeDashoffset=100; }
+    prog=0; ring.style.strokeDashoffset=100; sig.style.strokeDashoffset=100;
+    if(nib){ nib.classList.remove('down'); nib.style.left='8%'; } }
   btn.addEventListener('pointerdown',down);
   addEventListener('pointerup',up); btn.addEventListener('pointerleave',up);
   btn.addEventListener('keydown',function(e){ if(e.key===' '||e.key==='Enter'){ down(e); }});
@@ -4497,5 +4536,23 @@ var FIELD = { px: -1e4, py: -1e4 };
 })();
 </script>
 <script>(function(){var ps=document.querySelectorAll(".fpaper");ps.forEach(function(p){p.addEventListener("click",function(){var was=p.classList.contains("open");ps.forEach(function(x){x.classList.remove("open");x.setAttribute("aria-expanded","false");});if(!was){p.classList.add("open");p.setAttribute("aria-expanded","true");}});});})();</script>
+
+<script>
+/* the state breathes */
+(function(){
+  var t=document.getElementById('rstate'), a=document.getElementById('rarc');
+  if(!t||!a) return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ph=0;
+  setInterval(function(){
+    if(document.hidden) return;
+    ph+=0.25;
+    var v=71+Math.round(Math.sin(ph)*1.6);
+    t.textContent=v;
+    var arc=v*0.75;
+    a.setAttribute('stroke-dasharray',arc+' '+(100-arc));
+  },900);
+})();
+</script>
 </body>
 </html>

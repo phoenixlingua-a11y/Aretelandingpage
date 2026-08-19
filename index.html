@@ -3459,6 +3459,10 @@ try {
 } catch(e){}
 
 /* ── the application form ── */
+setTimeout(function(){
+var __aform=document.getElementById('aform');
+if(!__aform) return;
+
 var role = 'Operator';
 document.querySelectorAll('.role').forEach(function(b){
   b.addEventListener('click', function(){
@@ -3486,6 +3490,7 @@ document.getElementById('aform').addEventListener('submit', function(ev){
     + encodeURIComponent('Areté · Application (' + role + ')') + '&body=' + mbody;
   msg.textContent = D().fGo; msg.className = 'ok';
 });
+}, 0);
 
 /* ── the hero drifts up and yields as you descend ── */
 var heroIn = document.querySelector('.hero-in');

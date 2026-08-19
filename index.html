@@ -1605,6 +1605,32 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   @keyframes rkpulse{0%{color:var(--gateink);text-shadow:0 0 14px var(--gateink)}100%{color:var(--ink4);text-shadow:none}}
   .rgate:hover #holdlbl,#holdbtn:hover{color:var(--gateink)}
 }
+
+@media (min-width:701px){
+  #pn-evidence .col{display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;align-items:center;max-width:1100px}
+  #pn-evidence .col>.kick{grid-column:1/-1}
+  .evh2{font-size:clamp(32px,3.8vw,56px) !important;line-height:1.1;margin-bottom:0}
+  #pn-evidence .ledger{position:relative;padding:20px 26px 22px}
+  #pn-evidence .ledger .ph{display:flex;justify-content:space-between;gap:12px;
+    font-family:var(--mono);font-size:8.5px;letter-spacing:.24em;color:var(--ink4);
+    border-bottom:1px solid var(--grid2);padding-bottom:10px;margin-bottom:4px}
+  #pn-evidence .lrow{display:grid;grid-template-columns:150px 1fr auto;gap:16px;align-items:center;
+    padding:10px 0;border-bottom:1px solid var(--grid)}
+  #pn-evidence .lrow:last-child{border-bottom:0}
+  .lseal{font-family:var(--mono);font-size:8px;letter-spacing:.2em;padding:4px 8px;border-radius:3px;
+    border:1.5px solid currentColor;transform:rotate(-2deg);white-space:nowrap}
+  .lseal.ice{color:var(--ice)}
+  .lseal.steel{color:var(--steel)}
+  .lseal.none{color:var(--ink4)}
+  /* the drawer papers swell open */
+  .fpaper{transition:box-shadow .3s,transform .45s cubic-bezier(.2,1.4,.4,1),width .35s ease}
+  .fpaper.open{transform:rotate(0deg) scale(1.12)}
+}
+@media (min-width:701px) and (max-height:720px){
+  .evh2{font-size:clamp(26px,3vw,42px) !important}
+  #pn-evidence .lrow{padding:7px 0 !important}
+  #pn-evidence .lv{font-size:12.5px !important}
+}
 </style>
 </head>
 <body>
@@ -2054,15 +2080,17 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
 <section id="evidence" data-num="05">
   <div class="col">
     <div class="kick rev"><span class="n">05</span> Where the evidence stands</div>
-    <h2 class="rev">Never claim more than the evidence carries.</h2>
+    <h2 class="rev evh2">Never claim more than the <em class="hollow">evidence</em> carries.</h2>
     <div class="ledger rev">
-      <div class="lrow"><div class="lk">Signature recovery</div><div class="lv"><b>71&ndash;84%</b> exact recovery across synthetic cohorts. <i>Labelled synthetic, because it is.</i></div></div>
-      <div class="lrow"><div class="lk">Human validation</div><div class="lv"><b>Underway.</b> A four-week practitioner cohort began in August 2026 under a pre-registered protocol.</div></div>
-      <div class="lrow"><div class="lk">The forecast</div><div class="lv"><b>Locked below ten readings.</b> The instrument refuses to guess before it has your rhythm.</div></div>
-      <div class="lrow"><div class="lk">Clinical claims</div><div class="lv"><b>None.</b></div></div>
-      <div class="lrow"><div class="lk">Residency</div><div class="lv"><b>Frankfurt.</b> The data does not leave the jurisdiction.</div></div>
-      <div class="lrow"><div class="lk">Consent</div><div class="lv"><b>Named, enforced in code.</b> Practitioners see signals, never answers.</div></div>
-      <div class="lrow"><div class="lk">Telemetry</div><div class="lv"><b>Zero trackers.</b> Here and in the product.</div></div>
+      <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+      <div class="ph"><span>ARETÉ · THE EVIDENCE LEDGER</span><span>UPDATED AUGUST 2026</span></div>
+      <div class="lrow"><div class="lk">Signature recovery</div><div class="lv"><b>71–84%</b> exact recovery across synthetic cohorts. <i>Labelled synthetic, because it is.</i></div><span class="lseal ice">MEASURED</span></div>
+      <div class="lrow"><div class="lk">Human validation</div><div class="lv"><b>Underway.</b> A four-week practitioner cohort began in August 2026 under a pre-registered protocol.</div><span class="lseal steel">UNDERWAY</span></div>
+      <div class="lrow"><div class="lk">The forecast</div><div class="lv"><b>Locked below ten readings.</b> The instrument refuses to guess before it has your rhythm.</div><span class="lseal steel">LOCKED</span></div>
+      <div class="lrow"><div class="lk">Clinical claims</div><div class="lv"><b>None.</b></div><span class="lseal none">NONE</span></div>
+      <div class="lrow"><div class="lk">Residency</div><div class="lv"><b>Frankfurt.</b> The data does not leave the jurisdiction.</div><span class="lseal ice">EU</span></div>
+      <div class="lrow"><div class="lk">Consent</div><div class="lv"><b>Named, enforced in code.</b> Practitioners see signals, never answers.</div><span class="lseal ice">IN CODE</span></div>
+      <div class="lrow"><div class="lk">Telemetry</div><div class="lv"><b>Zero trackers.</b> Here and in the product.</div><span class="lseal ice">ZERO</span></div>
     </div>
   </div>
 </section>

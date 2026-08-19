@@ -1583,6 +1583,18 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   .rkflip{animation:rkpulse .9s ease}
   @keyframes rkpulse{0%{color:var(--ice);text-shadow:0 0 14px rgba(79,196,245,.8)}100%{color:var(--ink4);text-shadow:none}}
 }
+
+@media (min-width:701px){
+  button.fpaper{cursor:pointer;text-align:left;font:inherit;transition:box-shadow .3s}
+  .fpaper:hover{box-shadow:0 20px 55px rgba(0,0,0,.16);opacity:1}
+  .fpaper:focus-visible{outline:1px solid var(--ice);outline-offset:3px}
+  .fpaper.open{width:240px;z-index:6;opacity:1;animation-play-state:paused;
+    border-color:var(--ice-border);box-shadow:0 24px 70px rgba(0,0,0,.2)}
+  .fpaper.open b{color:var(--ice)}
+  .fpaper.open i{display:none}
+  .fdesc{display:none;font-family:var(--serif);font-size:13px;line-height:1.55;color:var(--ink2)}
+  .fpaper.open .fdesc{display:block}
+}
 </style>
 </head>
 <body>
@@ -1880,12 +1892,12 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
 <div class="pane" id="pn-drawer">
 <section aria-label="The drawer">
   <div class="drawerstage">
-      <div class="fpaper" style="left:8%;top:16%;--rot:-7deg;animation-delay:0s"><b>THE PRE-MORTEM</b><i></i><i></i><i></i></div>
-      <div class="fpaper" style="left:74%;top:12%;--rot:5deg;animation-delay:0.7s"><b>THE COUNTERWEIGHT</b><i></i><i></i><i></i></div>
-      <div class="fpaper" style="left:14%;top:62%;--rot:4deg;animation-delay:1.4s"><b>THE HANDOVER BRIEF</b><i></i><i></i><i></i></div>
-      <div class="fpaper" style="left:78%;top:58%;--rot:-5deg;animation-delay:2.0999999999999996s"><b>THE WEEKLY LETTER</b><i></i><i></i><i></i></div>
-      <div class="fpaper" style="left:30%;top:8%;--rot:2deg;animation-delay:2.8s"><b>THE CONDITION CARD</b><i></i><i></i><i></i></div>
-      <div class="fpaper" style="left:60%;top:70%;--rot:-3deg;animation-delay:3.5s"><b>THE BOARD MEMO</b><i></i><i></i><i></i></div>
+      <button type="button" class="fpaper" style="left:8%;top:16%;--rot:-7deg;animation-delay:0s" aria-expanded="false"><b>THE PRE-MORTEM</b><i></i><i></i><i></i><span class="fdesc">Before you decide, it writes how this could fail. If the failure story sounds familiar, you needed it.</span></button>
+      <button type="button" class="fpaper" style="left:72%;top:12%;--rot:5deg;animation-delay:0.7s" aria-expanded="false"><b>THE COUNTERWEIGHT</b><i></i><i></i><i></i><span class="fdesc">The strongest case against your decision, argued as if by your sharpest opponent.</span></button>
+      <button type="button" class="fpaper" style="left:12%;top:60%;--rot:4deg;animation-delay:1.4s" aria-expanded="false"><b>THE HANDOVER BRIEF</b><i></i><i></i><i></i><span class="fdesc">When a decision changes hands, the state travels with it. The next person knows what signed.</span></button>
+      <button type="button" class="fpaper" style="left:76%;top:56%;--rot:-5deg;animation-delay:2.0999999999999996s" aria-expanded="false"><b>THE WEEKLY LETTER</b><i></i><i></i><i></i><span class="fdesc">Your week, written back to you by your own record.</span></button>
+      <button type="button" class="fpaper" style="left:30%;top:8%;--rot:2deg;animation-delay:2.8s" aria-expanded="false"><b>THE CONDITION CARD</b><i></i><i></i><i></i><span class="fdesc">Your state at the door of the room, minutes before the meeting that matters.</span></button>
+      <button type="button" class="fpaper" style="left:58%;top:68%;--rot:-3deg;animation-delay:3.5s" aria-expanded="false"><b>THE BOARD MEMO</b><i></i><i></i><i></i><span class="fdesc">Cognitive capital for the board. Aggregate only, no individual exposed.</span></button>
       <p class="drawerword rev">And six more, already <em>written</em>.</p>
       <p class="drawertag rev">No other software can write them, because no other software has measured the judge.</p>
   </div>
@@ -4443,5 +4455,6 @@ var FIELD = { px: -1e4, py: -1e4 };
   });
 })();
 </script>
+<script>(function(){var ps=document.querySelectorAll(".fpaper");ps.forEach(function(p){p.addEventListener("click",function(){var was=p.classList.contains("open");ps.forEach(function(x){x.classList.remove("open");x.setAttribute("aria-expanded","false");});if(!was){p.classList.add("open");p.setAttribute("aria-expanded","true");}});});})();</script>
 </body>
 </html>

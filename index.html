@@ -1752,6 +1752,14 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   .lfoot{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
     color:var(--ink4);margin-top:14px;line-height:1.9}
 }
+
+@media (min-width:701px){
+  #pn-colophon .enddoorwrap{flex-direction:row;gap:80px;align-items:center;justify-content:center;padding-top:0}
+  #pn-colophon .seal{display:flex;flex-direction:column;align-items:center;gap:8px}
+  #pn-colophon #seal{width:190px;height:190px}
+  #pn-colophon .sk{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink4)}
+  #pn-colophon{padding-top:96px}
+}
 </style>
 </head>
 <body>
@@ -2307,8 +2315,7 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
       <div class="crk">This page's read of you</div>
       <div class="crbody">
         <div class="crl" id="crlines"></div>
-        <div class="seal"><canvas id="seal" width="264" height="264"></canvas><div class="sk" id="sealk">Your visit, drawn</div>
-          <button class="sealbtn" id="sealbtn" type="button">Keep the seal ↓</button></div>
+        
       </div>
       <div class="crf">Whatever you decide, notice that something noticed.</div>
       <button class="sharego qbtn" id="sharego" type="button">Send this to someone who decides too fast →</button>
@@ -2368,7 +2375,10 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
 </div>
 
 <div class="pane" id="pn-colophon">
-<div class="enddoorwrap"><a class="enddoor" id="enddoor" href="#access">ACCESS</a></div>
+<div class="enddoorwrap">
+<div class="seal"><canvas id="seal" width="264" height="264"></canvas><div class="sk" id="sealk">Your visit, drawn</div>
+          <button class="sealbtn" id="sealbtn" type="button">Keep the seal ↓</button></div>
+<a class="enddoor" id="enddoor" href="#access">ACCESS</a></div>
 <footer>
   <div class="col">
     <div class="fbrand">Areté · The Cognitive Integrity Protocol</div>
@@ -3376,6 +3386,12 @@ function paintSeal(cx, S, seed0){
   cx.beginPath(); cx.arc(px0, py0, 1.8 * k, 0, Math.PI * 2); cx.fill();
 }
 window.__sealSeed = null;
+try{
+  var __sealEl=document.getElementById('seal');
+  if(__sealEl) new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ try{ drawSeal(); }catch(_){} } });
+  },{threshold:0}).observe(__sealEl);
+}catch(e){}
 function drawSeal(){
   var cv = document.getElementById('seal'), cx = cv.getContext('2d');
   var s = Math.floor((Date.now() - R.t0)/1000);

@@ -1575,6 +1575,14 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   @media (prefers-reduced-motion:reduce){.fpaper{animation:none}}
 }
 @media (max-width:700px){.fpaper{display:none}}
+
+@media (min-width:701px){
+  .wline{font-size:17px !important;border-left:2px solid var(--ice);padding-left:16px;min-height:3.4em}
+  .wcaret{color:var(--ice);animation:wblink .7s steps(1) infinite}
+  @keyframes wblink{50%{opacity:0}}
+  .rkflip{animation:rkpulse .9s ease}
+  @keyframes rkpulse{0%{color:var(--ice);text-shadow:0 0 14px rgba(79,196,245,.8)}100%{color:var(--ink4);text-shadow:none}}
+}
 </style>
 </head>
 <body>
@@ -4318,6 +4326,7 @@ var FIELD = { px: -1e4, py: -1e4 };
   var chips=document.querySelectorAll('.wf'); if(!chips.length) return;
   var wline=document.getElementById('wline');
   var rks=document.querySelectorAll('#pn-instrument .rk');
+  var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W=[
     {line:'Your call, your signature. The gate holds it for a day when your own baseline says you are not the one signing.',
      a:'THE STATE',b:'THE SIGNATURE'},
@@ -4325,14 +4334,26 @@ var FIELD = { px: -1e4, py: -1e4 };
      a:'THE SEAT',b:'THE COMMITMENT'},
     {line:'Your client presses this gate between sessions. You arrive to what it recorded: evidence, not recollection.',
      a:'THE CLIENT',b:'THE SESSION'}];
-  chips.forEach(function(c){
-    c.addEventListener('click',function(){
-      var i=+c.dataset.w;
-      chips.forEach(function(x){var on=x===c;x.classList.toggle('on',on);x.setAttribute('aria-selected',on);});
-      wline.textContent=W[i].line;
-      if(rks.length>=2){rks[0].textContent=W[i].a;rks[1].textContent=W[i].b;}
-    });
-  });
+  var typing=null;
+  function flip(el,txt){
+    el.classList.remove('rkflip'); void el.offsetWidth;
+    el.textContent=txt; el.classList.add('rkflip');
+  }
+  function pick(c){
+    var i=+c.dataset.w;
+    chips.forEach(function(x){var on=x===c;x.classList.toggle('on',on);x.setAttribute('aria-selected',on);});
+    if(rks.length>=2){flip(rks[0],W[i].a);flip(rks[1],W[i].b);}
+    if(typing)clearInterval(typing);
+    if(rm){wline.textContent=W[i].line;return;}
+    var t=W[i].line,n=0;
+    wline.innerHTML='<span class="wcaret">▍</span>';
+    typing=setInterval(function(){
+      n+=3;
+      if(n>=t.length){clearInterval(typing);typing=null;wline.textContent=t;}
+      else wline.innerHTML=t.slice(0,n)+'<span class="wcaret">▍</span>';
+    },12);
+  }
+  chips.forEach(function(c){c.addEventListener('click',function(){pick(c);});});
   var seeit=document.getElementById('seeit');
   if(seeit) seeit.addEventListener('click',function(e){
     e.preventDefault();

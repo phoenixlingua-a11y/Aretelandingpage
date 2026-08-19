@@ -1760,6 +1760,23 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   #pn-colophon .sk{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink4)}
   #pn-colophon{padding-top:96px}
 }
+
+@media (min-width:701px){
+  #pn-colophon .enddoorwrap{flex-direction:column;gap:18px;padding-top:0}
+  .sealhead{font-family:var(--display);font-size:clamp(30px,3.6vw,52px);color:var(--ink);text-align:center;margin:0}
+  #pn-colophon .seal{position:relative;gap:12px}
+  #pn-colophon .seal::before{content:'';position:absolute;left:50%;top:110px;transform:translate(-50%,-50%);
+    width:340px;height:340px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,rgba(79,196,245,.14),transparent 65%);
+    animation:sealbreath 5s ease-in-out infinite}
+  @keyframes sealbreath{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.07)}}
+  #pn-colophon #seal{width:220px;height:220px;position:relative}
+  #pn-colophon .sk{font-size:10px;letter-spacing:.3em;color:var(--ink3)}
+  #pn-colophon .sealbtn{font-size:10.5px;letter-spacing:.24em;padding:12px 26px;border:1px solid var(--ice-border);
+    border-radius:4px;background:var(--ice-dim);color:var(--ice);cursor:pointer;transition:all .3s}
+  #pn-colophon .sealbtn:hover{background:var(--ice);color:var(--bg2);box-shadow:0 0 30px rgba(79,196,245,.35)}
+  @media (prefers-reduced-motion:reduce){#pn-colophon .seal::before{animation:none}}
+}
 </style>
 </head>
 <body>
@@ -2376,9 +2393,10 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
 
 <div class="pane" id="pn-colophon">
 <div class="enddoorwrap">
+<p class="sealhead rev">Your visit, <em class="hollow">drawn</em>.</p>
 <div class="seal"><canvas id="seal" width="264" height="264"></canvas><div class="sk" id="sealk">Your visit, drawn</div>
           <button class="sealbtn" id="sealbtn" type="button">Keep the seal ↓</button></div>
-<a class="enddoor" id="enddoor" href="#access">ACCESS</a></div>
+</div>
 <footer>
   <div class="col">
     <div class="fbrand">Areté · The Cognitive Integrity Protocol</div>

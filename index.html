@@ -1723,6 +1723,28 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   .wline{margin-top:22px !important}
   #pn-instrument .rv{font-size:10px;letter-spacing:.14em;color:var(--ink4)}
 }
+
+@media (min-width:701px){
+  /* the gate slide: three zones that breathe */
+  #pn-instrument .col{display:grid !important;
+    grid-template-columns:170px 1fr 190px;
+    grid-template-areas:'t t t' 'chips stage sigs' 'w w w' 'd d d';
+    gap:10px 34px;align-items:center;justify-items:center;max-width:1120px;text-align:center}
+  #pn-instrument h2{grid-area:t;margin-bottom:14px}
+  .whofor{grid-area:chips;flex-direction:column;align-items:stretch;gap:10px;margin:0;justify-self:end}
+  .whofor .wf{text-align:left;width:150px}
+  #pn-instrument .ritual{grid-area:stage;margin:0 !important}
+  .twosig{grid-area:sigs;flex-direction:column;align-items:center;gap:18px;margin:0;justify-self:start}
+  .tamp{display:none}
+  .tsig svg{width:160px;height:40px}
+  .wline{grid-area:w;margin-top:16px !important}
+  #seeit{grid-area:d;margin-top:2px}
+}
+@media (min-width:701px) and (max-height:720px){
+  #pn-instrument .col{gap:6px 26px}
+  #pn-instrument h2{margin-bottom:6px}
+  .tsig svg{width:140px;height:35px}
+}
 </style>
 </head>
 <body>

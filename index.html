@@ -1595,6 +1595,16 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   .fdesc{display:none;font-family:var(--serif);font-size:13px;line-height:1.55;color:var(--ink2)}
   .fpaper.open .fdesc{display:block}
 }
+
+@media (min-width:701px){
+  #pn-instrument{--gateink:var(--ice)}
+  .wline{border-left:0 !important;padding-left:0 !important;font-size:17.5px !important}
+  .wcaret{color:var(--gateink)}
+  .wf.on{color:var(--gateink) !important;border-color:var(--gateink) !important;background:transparent !important}
+  .wf:hover{color:var(--gateink)}
+  @keyframes rkpulse{0%{color:var(--gateink);text-shadow:0 0 14px var(--gateink)}100%{color:var(--ink4);text-shadow:none}}
+  .rgate:hover #holdlbl,#holdbtn:hover{color:var(--gateink)}
+}
 </style>
 </head>
 <body>
@@ -1819,7 +1829,7 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
         <div class="rk">THE STATE</div>
         <svg viewBox="0 0 160 160" width="164" height="164" aria-hidden="true">
           <circle cx="80" cy="80" r="66" fill="none" stroke="var(--grid2)" stroke-width="3" pathLength="100" stroke-dasharray="75 25" transform="rotate(135 80 80)"/>
-          <circle cx="80" cy="80" r="66" fill="none" stroke="var(--ice)" stroke-width="3" pathLength="100" stroke-dasharray="53 47" transform="rotate(135 80 80)" stroke-linecap="round" opacity=".9"/>
+          <circle cx="80" cy="80" r="66" fill="none" stroke="var(--gateink,var(--ice))" stroke-width="3" pathLength="100" stroke-dasharray="53 47" transform="rotate(135 80 80)" stroke-linecap="round" opacity=".9"/>
           <text x="80" y="92" text-anchor="middle" font-family="DM Mono,ui-monospace,monospace" font-size="44" fill="currentColor">71</text>
         </svg>
         <div class="rv">baseline 87 · drift −16</div>
@@ -1829,7 +1839,7 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
         <button type="button" id="holdbtn" aria-label="Press and hold to sign">
           <svg viewBox="0 0 120 120" aria-hidden="true">
             <circle cx="60" cy="60" r="52" fill="none" stroke="var(--grid2)" stroke-width="2"/>
-            <circle id="ringfill" cx="60" cy="60" r="52" fill="none" stroke="var(--ice)" stroke-width="2.5"
+            <circle id="ringfill" cx="60" cy="60" r="52" fill="none" stroke="var(--gateink,var(--ice))" stroke-width="2.5"
               pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-90 60 60)" stroke-linecap="round"/>
           </svg>
           <span id="holdlbl">PRESS AND HOLD<br>TO SIGN</span>
@@ -4351,8 +4361,11 @@ var FIELD = { px: -1e4, py: -1e4 };
     el.classList.remove('rkflip'); void el.offsetWidth;
     el.textContent=txt; el.classList.add('rkflip');
   }
+  var INK=['var(--ice)','var(--steel)','var(--crit)'];
   function pick(c){
     var i=+c.dataset.w;
+    var plate=document.getElementById('pn-instrument');
+    if(plate) plate.style.setProperty('--gateink',INK[i]);
     chips.forEach(function(x){var on=x===c;x.classList.toggle('on',on);x.setAttribute('aria-selected',on);});
     if(rks.length>=2){flip(rks[0],W[i].a);flip(rks[1],W[i].b);}
     if(typing)clearInterval(typing);

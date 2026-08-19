@@ -1808,6 +1808,116 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   #pn-colophon footer *{margin-top:3px !important;margin-bottom:3px !important}
   #pn-colophon .fdisc{font-size:10.5px !important}
 }
+
+/* ═══ THE PHONE CARRIES THE SAME DECK ═══ */
+/* retired plates stay retired on every screen */
+#pn-witness,#pn-evidence-2,#pn-creed,#pn-access{display:none !important}
+
+@media (max-width:700px){
+  /* the living verbs */
+  .vviz{height:60px;display:flex;align-items:center;margin-bottom:8px}
+  .vviz svg{height:60px;width:auto;color:var(--ink)}
+  .vpaper{position:relative;width:48px;height:58px;background:var(--bg2);border:1px solid var(--grid2);
+    border-radius:3px;padding:8px 7px}
+  .vpaper i{display:block;height:2px;background:var(--grid2);margin-bottom:5px;border-radius:1px}
+  .vstamp{position:absolute;right:2px;bottom:5px;font-family:var(--mono);font-style:normal;
+    font-size:7px;letter-spacing:.1em;color:var(--crit);border:1.5px solid var(--crit);
+    border-radius:2px;padding:1px 3px;transform:rotate(-10deg);opacity:.95}
+  /* the gate ritual, stacked */
+  .ritual{display:flex;flex-direction:column;align-items:center;gap:20px;margin-top:18px}
+  .rlink{display:none}
+  .rcol{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;color:var(--ink)}
+  .rk,.rgk{font-family:var(--mono);font-size:9px;letter-spacing:.28em;color:var(--ink4)}
+  .rgk{display:none}
+  .rv{font-family:var(--mono);font-size:10px;color:var(--ink3)}
+  #holdbtn{position:relative;width:120px;height:120px;background:none;border:0;color:var(--ink3)}
+  #holdbtn svg{position:absolute;inset:0;width:100%;height:100%}
+  #holdlbl{position:relative;font-family:var(--mono);font-size:8px;letter-spacing:.2em;line-height:1.8;color:currentColor}
+  #ringfill{transition:stroke-dashoffset .12s linear}
+  #holdbtn.denied #ringfill{stroke:var(--crit)}
+  .sigwrap{position:relative}
+  .rnib{position:absolute;width:15px;height:21px;left:8%;top:22px;color:var(--ink3);transform:rotate(18deg)}
+  .rnib.down{top:34px;color:var(--ice)}
+  .rnib.flee{top:-24px;left:70%;opacity:0;transition:all .5s}
+  #rstamp{position:absolute;top:30%;left:50%;transform:translate(-50%,-50%) rotate(-8deg);
+    font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--crit);
+    border:2px solid var(--crit);border-radius:4px;padding:5px 10px;opacity:0;transition:opacity .3s}
+  .rsig.stamped #rstamp{opacity:.92}
+  .rverdict{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--ink3);max-width:260px;line-height:1.7;min-height:0}
+  .rverdict b{font-family:var(--mono);font-style:normal;color:var(--crit)}
+  .whofor{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:12px 0 4px}
+  .wf{background:none;border:1px solid var(--grid2);border-radius:4px;padding:6px 10px;
+    font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;color:var(--ink3)}
+  .wf.on{color:var(--ice);border-color:var(--ice-border);background:var(--ice-dim)}
+  .wline{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ink2);
+    text-align:center;max-width:34ch;margin:14px auto 0;min-height:0}
+  .wcaret{color:var(--ice)}
+  /* the twin signatures */
+  .twosig{display:flex;align-items:flex-end;justify-content:center;gap:16px;margin:8px 0 2px}
+  .tsig{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink2)}
+  .tsig svg{width:130px;height:32px;display:block}
+  .tsig b{font-family:var(--mono);font-size:7px;letter-spacing:.22em;color:var(--ink4)}
+  .tsig.state{color:var(--ice)}
+  .tsig.state b{color:var(--ice)}
+  .tamp{display:none}
+  .tstroke{stroke-dashoffset:0 !important}
+  /* the drawer, as a hand of cards */
+  #pn-drawer section{padding-top:80px !important}
+  .drawerstage{position:static;display:flex;flex-direction:column;align-items:center;gap:12px;padding:0 18px}
+  .fpaper{display:block !important;position:static !important;width:100%;max-width:340px;
+    transform:none !important;animation:none !important;opacity:1;
+    background:var(--bg2);border:1px solid var(--grid2);border-radius:6px;padding:14px 16px;text-align:left}
+  .fpaper b{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--ink3);margin-bottom:8px}
+  .fpaper i{display:block;height:2px;background:var(--grid2);border-radius:1px;margin-bottom:6px}
+  .fpaper.open i{display:none}
+  .fpaper.open b{color:var(--ice)}
+  .fdesc{display:none;font-family:var(--serif);font-size:13.5px;line-height:1.55;color:var(--ink2)}
+  .fpaper.open .fdesc{display:block}
+  .drawerword{font-family:var(--display);font-size:clamp(26px,7vw,34px);color:var(--ink);text-align:center;margin-top:6px}
+  .drawerword em{font-style:italic;color:var(--ice)}
+  .drawertag{font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink4);text-align:center;line-height:1.8;padding:0 20px}
+  /* the evidence ledger */
+  .evh2{font-size:clamp(26px,7.4vw,34px) !important}
+  #pn-evidence .ledger{position:relative;background:var(--bg2);border:1px solid var(--grid2);
+    border-radius:8px;padding:14px 16px;margin-top:16px}
+  #pn-evidence .ledger .ph{display:flex;justify-content:space-between;gap:8px;
+    font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;color:var(--ink4);
+    border-bottom:1px solid var(--grid2);padding-bottom:8px}
+  #pn-evidence .lrow{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:10px 0;
+    border-bottom:1px solid var(--grid);align-items:center}
+  #pn-evidence .lk{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ice);grid-column:1}
+  #pn-evidence .lv{font-size:13px;line-height:1.55;grid-column:1/-1}
+  #pn-evidence .lrow .lseal{grid-column:2;grid-row:1}
+  .lseal{font-family:var(--mono);font-size:7.5px;letter-spacing:.16em;padding:3px 6px;border-radius:3px;
+    border:1.5px solid currentColor;transform:rotate(-2deg)}
+  .lseal.ice{color:var(--ice)} .lseal.steel{color:var(--steel)} .lseal.none{color:var(--ink4)}
+  .lfoot{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink4);margin-top:10px;line-height:1.8}
+  /* curious + the stamp */
+  .curiouscol{display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center}
+  .curioush{font-family:var(--display);font-size:clamp(44px,15vw,72px) !important;line-height:1}
+  .enddoorwrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .enddoor{font-family:var(--mono);font-size:20px;letter-spacing:.34em;color:var(--crit);
+    border:2.5px solid var(--crit);border-radius:6px;padding:13px 24px 13px 32px;
+    text-decoration:none;transform:rotate(-4deg)}
+  /* the finale seal */
+  .sealhead{font-family:var(--display);font-size:clamp(26px,8vw,36px);text-align:center;margin:0 0 6px}
+  #pn-colophon .seal{display:flex;flex-direction:column;align-items:center;gap:8px}
+  #pn-colophon #seal{width:158px;height:158px;background:#0d1118;border-radius:50%;
+    border:1px solid var(--ice-border);padding:5px}
+  #pn-colophon .sk{font-family:var(--mono);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3)}
+  #pn-colophon .sealbtn{font-size:10px;letter-spacing:.2em;padding:10px 20px;border:1px solid var(--ice-border);
+    border-radius:4px;background:var(--ice-dim);color:var(--ice)}
+  #pn-colophon .enddoorwrap{padding:26px 0 10px}
+  /* the laptop exhibit */
+  .lscreen img{max-height:32vh}
+  .drcap{font-size:14px;text-align:center}
+  .drstamp{text-align:center}
+  /* the intake + verdict papers */
+  .inpaper .bigin{font-size:15px}
+  #bpaper{padding:16px 16px 44px}
+}
 </style>
 </head>
 <body>
@@ -4409,7 +4519,8 @@ var FIELD = { px: -1e4, py: -1e4 };
       plates[k].scrollIntoView({behavior:'smooth',inline:'start',block:'nearest'});
     } else {
       var ids=['hero','argument','mirror','instrument','witness','evidence','access','founder'];
-      var secs=ids.map(function(i){return document.getElementById(i);}).filter(Boolean);
+      var secs=ids.map(function(i){return document.getElementById(i);}).filter(Boolean)
+        .filter(function(el){ return el.offsetParent !== null; });
       var mid=window.scrollY+innerHeight*0.4, c=0;
       for(var i=0;i<secs.length;i++){
         if(secs[i].getBoundingClientRect().top+window.scrollY<=mid) c=i;

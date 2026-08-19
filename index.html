@@ -1710,6 +1710,19 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   .tsig svg{width:170px;height:42px}
 }
 @media (max-width:700px){.twosig{display:none}}
+
+@media (min-width:701px){
+  /* the gate slide, cleaned: fewer labels, more silence */
+  #pn-instrument .col>.kick{display:none}
+  #pn-instrument .rgk{display:none}
+  #pn-instrument .rverdict:empty{display:none}
+  #pn-instrument .ritual{margin-top:26px}
+  #pn-instrument h2{margin-bottom:4px}
+  .twosig{margin:10px 0 4px}
+  .whofor{margin:12px 0 0}
+  .wline{margin-top:22px !important}
+  #pn-instrument .rv{font-size:10px;letter-spacing:.14em;color:var(--ink4)}
+}
 </style>
 </head>
 <body>
@@ -1983,7 +1996,7 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
         </svg>
         </div>
         <span id="rstamp" aria-hidden="true">HOLD · 24 HOURS</span>
-        <div class="rverdict" id="rverdict">The line waits for the gate.</div>
+        <div class="rverdict" id="rverdict"></div>
       </div>
     </div>
     <p class="wline rev" id="wline">When the state is not you, the gate holds the pen.</p>
@@ -4461,7 +4474,7 @@ var FIELD = { px: -1e4, py: -1e4 };
     var rs=document.querySelector('.rsig'); if(rs) rs.classList.remove('stamped');
     ring.style.strokeDashoffset=100; sig.style.strokeDashoffset=100;
     lbl.innerHTML='PRESS AND HOLD<br>TO SIGN';
-    vd.textContent='The line waits for the gate.';
+    vd.textContent='';
     if(nib){ nib.classList.remove('flee'); nib.style.left='8%'; }
   }
   function down(e){ if(done) return; e.preventDefault(); holding=true;

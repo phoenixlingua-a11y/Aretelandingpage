@@ -1531,6 +1531,30 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
 }
 @media (min-width:701px){#pn-access{display:none !important}}
 @media (min-width:701px){#pn-creed{display:none !important}}
+
+#apply{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center}
+#apply[hidden]{display:none}
+.apback{position:absolute;inset:0;background:rgba(10,12,16,.55);backdrop-filter:blur(6px)}
+.appanel{position:relative;background:var(--bg2);border:1px solid var(--ice-border);border-radius:10px;
+  max-width:960px;width:min(94vw,960px);max-height:88vh;overflow-y:auto;padding:34px 38px;
+  box-shadow:0 40px 120px rgba(0,0,0,.4)}
+.appanel .kick{margin-bottom:6px}
+#apclose{position:absolute;top:14px;right:16px;background:none;border:0;cursor:pointer;
+  font-size:26px;line-height:1;color:var(--ink3);padding:6px}
+#apclose:hover{color:var(--ink)}
+#apclose:focus-visible{outline:1px solid var(--ice);outline-offset:2px}
+@media (min-width:701px){
+  .appanel .col,.appanel form{max-width:none}
+  #apply .appanel{display:block}
+  /* the evidence, dressed as an issued ledger */
+  #pn-evidence .ledger{background:var(--bg2);border:1px solid var(--grid2);border-radius:8px;
+    padding:10px 26px;box-shadow:0 18px 50px rgba(0,0,0,.10);max-width:880px}
+  #pn-evidence .lrow{display:grid;grid-template-columns:190px 1fr;gap:18px;align-items:start}
+  #pn-evidence .lk{font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ice);padding-top:3px}
+  #pn-evidence .lv{font-size:13.5px;line-height:1.6}
+  #pn-evidence h2{margin-bottom:10px}
+}
 </style>
 </head>
 <body>
@@ -1788,14 +1812,7 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
 </section>
 </div>
 
-<div class="pane" id="pn-curious">
-<section aria-label="Curious">
-  <div class="col curiouscol">
-    <h2 class="rev curioush">Curious<em class="hollow">?</em></h2>
-    <div class="enddoorwrap rev"><a class="enddoor" id="curiousdoor" href="#access">ACCESS</a><span class="enddoorsub">Thirty places · by application</span></div>
-  </div>
-</section>
-</div>
+
 
 
 <div class="pane" id="pn-instrument-b">
@@ -1967,6 +1984,16 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
 </section>
 </div>
 
+<div class="pane" id="pn-curious">
+<section aria-label="Curious">
+  <div class="col curiouscol">
+    <h2 class="rev curioush">Curious<em class="hollow">?</em></h2>
+    <div class="enddoorwrap rev"><a class="enddoor" id="curiousdoor" href="#access">ACCESS</a><span class="enddoorsub">Thirty places · by application</span></div>
+  </div>
+</section>
+</div>
+
+
 <div class="pane" id="pn-evidence-2">
 <section aria-label="The evidence, continued">
   <div class="col">
@@ -2042,33 +2069,7 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
 </section>
 </div>
 
-<div class="pane" id="pn-access-2">
-<section id="application" aria-label="Access, continued">
-  <div class="col">
-    <div class="kick rev"><span class="n">06</span> Access</div>
-    <h2 class="rev">The <em class="hollow">application</em>.</h2>
-    <p class="oblig rev">One page. What you decide, and what a wrong call costs. Answered personally.</p>
-    <form class="form rev" id="aform" novalidate>
-      <div class="roles" role="group" aria-label="I am applying as">
-        <button type="button" class="role on" data-r="Operator">Operator</button>
-        <button type="button" class="role" data-r="Practitioner">Practitioner · coach</button>
-      </div>
-      <input class="fi" id="a-email" type="email" autocomplete="email" placeholder="you@company.com" aria-label="Email">
-      <textarea class="fi" id="a-ctx" maxlength="500" placeholder="One sentence: what do you decide, and what does a wrong call cost?" aria-label="Context"></textarea>
-      <label class="lchk"><input type="checkbox" id="a-letter"> Send me The Letter: one honest page, when there is something to say. No marketing, ever.</label>
-      <div><button class="btn" id="a-btn" type="submit">Apply for a place</button></div>
-      <p class="polyg" id="polyg">Apply in Arabic, French, German, Spanish or English. She reads all five herself.</p>
-      <p id="amsg" aria-live="polite"></p>
-    </form>
-    <div class="opendoor rev">
-      <p class="odh">Not applying? The reading is still yours.</p>
-      <p class="odb">The sixty-second read is open to everyone, free, today. The verdict it produces stays sealed until you claim it with an email; the claim holds a numbered place on the waiting list and starts a record that is yours to keep, export, or erase. The cohort is thirty places. The instrument's door is not.</p>
-      <a class="ghost" id="door-read3" href="#" rel="noopener">Take the free read →</a>
-    </div>
-  </div>
-</section>
 
-</div>
 
 <!-- ── VI · FOUNDER ── -->
 <div class="pane" id="pn-founder">
@@ -4327,5 +4328,53 @@ var FIELD = { px: -1e4, py: -1e4 };
 <script>(function(){var b=document.getElementById("door-readm"),d=document.getElementById("door-read");if(b&&d){b.href=d.href;b.addEventListener("click",function(e){if(d.getAttribute("href")==="#"){e.preventDefault();d.click();}});}})();</script>
 <script>(function(){var d=document.getElementById("enddoor");if(d)d.addEventListener("click",function(e){e.preventDefault();var t=document.getElementById("pn-access-2");if(t)t.scrollIntoView({behavior:"smooth",inline:"start"});});})();</script>
 <script>(function(){var d=document.getElementById("curiousdoor");if(d)d.addEventListener("click",function(e){e.preventDefault();var t=document.getElementById("pn-access-2");if(t)t.scrollIntoView({behavior:"smooth",inline:"start"});});})();</script>
+
+<div id="apply" role="dialog" aria-modal="true" aria-label="The application" hidden>
+  <div class="apback" id="apback"></div>
+  <div class="appanel">
+    <button type="button" id="apclose" aria-label="Close the application">×</button>
+
+    <div class="kick rev"><span class="n">06</span> Access</div>
+    <h2 class="rev">The <em class="hollow">application</em>.</h2>
+    <p class="oblig rev">One page. What you decide, and what a wrong call costs. Answered personally.</p>
+    <form class="form rev" id="aform" novalidate>
+      <div class="roles" role="group" aria-label="I am applying as">
+        <button type="button" class="role on" data-r="Operator">Operator</button>
+        <button type="button" class="role" data-r="Practitioner">Practitioner · coach</button>
+      </div>
+      <input class="fi" id="a-email" type="email" autocomplete="email" placeholder="you@company.com" aria-label="Email">
+      <textarea class="fi" id="a-ctx" maxlength="500" placeholder="One sentence: what do you decide, and what does a wrong call cost?" aria-label="Context"></textarea>
+      <label class="lchk"><input type="checkbox" id="a-letter"> Send me The Letter: one honest page, when there is something to say. No marketing, ever.</label>
+      <div><button class="btn" id="a-btn" type="submit">Apply for a place</button></div>
+      <p class="polyg" id="polyg">Apply in Arabic, French, German, Spanish or English. She reads all five herself.</p>
+      <p id="amsg" aria-live="polite"></p>
+    </form>
+    <div class="opendoor rev">
+      <p class="odh">Not applying? The reading is still yours.</p>
+      <p class="odb">The sixty-second read is open to everyone, free, today. The verdict it produces stays sealed until you claim it with an email; the claim holds a numbered place on the waiting list and starts a record that is yours to keep, export, or erase. The cohort is thirty places. The instrument's door is not.</p>
+      <a class="ghost" id="door-read3" href="#" rel="noopener">Take the free read →</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var ov=document.getElementById('apply'); if(!ov) return;
+  function open(e){ if(e) e.preventDefault(); ov.hidden=false;
+    var f=ov.querySelector('input,textarea,button.role,#apclose'); }
+  function close(){ ov.hidden=true; }
+  document.getElementById('apclose').addEventListener('click',close);
+  document.getElementById('apback').addEventListener('click',close);
+  addEventListener('keydown',function(e){ if(e.key==='Escape'&&!ov.hidden) close(); });
+  ['curiousdoor','enddoor'].forEach(function(id){
+    var d=document.getElementById(id);
+    if(d){ var n=d.cloneNode(true); d.parentNode.replaceChild(n,d); n.addEventListener('click',open); }
+  });
+  document.querySelectorAll('a[href="#application"]').forEach(function(a){
+    a.addEventListener('click',open);
+  });
+})();
+</script>
 </body>
 </html>

@@ -877,7 +877,7 @@ section[data-num]{min-height:100svh;display:flex;flex-direction:column;justify-c
 section[data-num] .col{width:100%}
 section[data-num]::before{top:96px}
 #instrument{justify-content:flex-start}
-@media (min-width:701px){
+@media (min-width:0px){
   body{overflow:hidden}
   #deck{display:flex;height:100svh;overflow-x:auto;overflow-y:hidden;
     scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
@@ -890,10 +890,7 @@ section[data-num]::before{top:96px}
   /* plates keep their own vertical rhythm inside */
   #pn-hero #hero{min-height:calc(100svh - 120px)}
 }
-@media (max-width:700px){
-  #deck{display:block}
-  .pane{height:auto}
-}
+
 
 /* ── mobile pacing: chapters, not a scroll of text ── */
 @media (max-width:700px){
@@ -4382,7 +4379,7 @@ var FIELD = { px: -1e4, py: -1e4 };
 
   /* ── the deck driver: the wheel and the arrows turn the plates ── */
   var deck = document.getElementById('deck');
-  function horiz(){ return matchMedia('(min-width:701px)').matches; }
+  function horiz(){ return true; }
   if (deck){
     var plates = Array.prototype.slice.call(deck.children).filter(function(el){
       return el.classList.contains('pane') || el.classList.contains('veil');
@@ -4558,7 +4555,7 @@ var FIELD = { px: -1e4, py: -1e4 };
   var L=document.getElementById('fleche-l'), R=document.getElementById('fleche-r'),
       deck=document.getElementById('deck');
   if(!L||!R||!deck) return;
-  function horiz(){ return matchMedia('(min-width:701px)').matches; }
+  function horiz(){ return true; }
   var plates=Array.prototype.slice.call(deck.children).filter(function(el){
     return el.classList.contains('pane')||el.classList.contains('veil');
   });

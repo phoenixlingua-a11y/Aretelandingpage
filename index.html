@@ -1899,7 +1899,7 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   <div class="col">
     <div class="kick rev"><span class="n">03</span> The instrument</div>
     <h2 class="rev">Between your <em class="hollow">state</em> and your signature.</h2>
-    <p class="isub rev" id="gateplain">Every irreversible decision is signed twice: by a person, and by the state that person is in. Areté reads the second signer, and holds the pen when it must. Press the gate.</p>
+    <p class="isub rev" id="gateplain">Every decision is signed twice: by you, and by your state.</p>
     <div class="whofor rev" role="tablist" aria-label="Who this is for">
       <button class="wf on" role="tab" aria-selected="true" data-w="0">FOR THE OPERATOR</button>
       <button class="wf" role="tab" aria-selected="false" data-w="1">FOR THE COMPANY</button>
@@ -1944,11 +1944,11 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
         </svg>
         </div>
         <span id="rstamp" aria-hidden="true">HOLD · 24 HOURS</span>
-        <div class="rverdict" id="rverdict">The line stays empty until the gate agrees.</div>
+        <div class="rverdict" id="rverdict">The line waits for the gate.</div>
       </div>
     </div>
-    <p class="wline rev" id="wline">Your call, your signature. The gate holds it for a day when your own baseline says you are not the one signing.</p>
-    <a class="ghost rev" id="seeit" href="#" >See this inside the instrument →</a>
+    <p class="wline rev" id="wline">When the state is not you, the gate holds the pen.</p>
+    <a class="ghost rev" id="seeit" href="#" >See it inside →</a>
 
 
     <!-- ── THE GALLERY · real screens from the live product ── -->
@@ -4407,7 +4407,7 @@ var FIELD = { px: -1e4, py: -1e4 };
     var rs=document.querySelector('.rsig'); if(rs) rs.classList.add('stamped');
     lbl.innerHTML='THE GATE<br>REFUSES';
     sig.style.strokeDashoffset=84;
-    var full='<b>HOLD · 24 HOURS.</b> At 71 against a baseline of 87, the state would sign first, and today it is not you. Illustrative frame.';
+    var full='<b>HOLD · 24 HOURS.</b> The state would sign. Not you.';
     if(RMq){ vd.innerHTML=full; }
     else{
       var plain=full.replace(/<[^>]+>/g,''), i=0;
@@ -4422,7 +4422,7 @@ var FIELD = { px: -1e4, py: -1e4 };
     var rs=document.querySelector('.rsig'); if(rs) rs.classList.remove('stamped');
     ring.style.strokeDashoffset=100; sig.style.strokeDashoffset=100;
     lbl.innerHTML='PRESS AND HOLD<br>TO SIGN';
-    vd.textContent='The line stays empty until the gate agrees.';
+    vd.textContent='The line waits for the gate.';
     if(nib){ nib.classList.remove('flee'); nib.style.left='8%'; }
   }
   function down(e){ if(done) return; e.preventDefault(); holding=true;
@@ -4446,11 +4446,11 @@ var FIELD = { px: -1e4, py: -1e4 };
   var rks=document.querySelectorAll('#pn-instrument .rk');
   var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var W=[
-    {line:'Your call, your signature. The gate holds it for a day when your own baseline says you are not the one signing.',
+    {line:'When the state is not you, the gate holds the pen.',
      a:'THE STATE',b:'THE SIGNATURE'},
-    {line:'Deployed to the few seats where one signature moves the company. The state of the seat, on the record at every irreversible commitment.',
+    {line:'The few seats that move the company, read before they sign.',
      a:'THE SEAT',b:'THE COMMITMENT'},
-    {line:'Your client presses this gate between sessions. You arrive to what it recorded: evidence, not recollection.',
+    {line:'Your client presses it between sessions. You arrive to evidence.',
      a:'THE CLIENT',b:'THE SESSION'}];
   var typing=null;
   function flip(el,txt){

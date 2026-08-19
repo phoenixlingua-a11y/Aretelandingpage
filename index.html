@@ -1555,6 +1555,26 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   #pn-evidence .lv{font-size:13.5px;line-height:1.6}
   #pn-evidence h2{margin-bottom:10px}
 }
+
+@media (min-width:701px){
+  #pn-drawer section{position:relative;display:block !important;min-height:100% !important;padding:0 !important}
+  .drawerstage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;overflow:hidden}
+  .fpaper{position:absolute;width:150px;background:var(--bg2);border:1px solid var(--grid2);border-radius:4px;
+    padding:12px 14px 16px;box-shadow:0 14px 40px rgba(0,0,0,.10);
+    transform:rotate(var(--rot));animation:fdrift 7s ease-in-out infinite;opacity:.85}
+  .fpaper b{display:block;font-family:var(--mono);font-size:8px;letter-spacing:.22em;color:var(--ink3);
+    font-weight:500;margin-bottom:9px}
+  .fpaper i{display:block;height:2px;background:var(--grid2);border-radius:1px;margin-bottom:6px}
+  .fpaper i:nth-child(3){width:72%}
+  .fpaper i:nth-child(4){width:86%}
+  @keyframes fdrift{0%,100%{transform:rotate(var(--rot)) translateY(0)}50%{transform:rotate(var(--rot)) translateY(-14px)}}
+  .drawerword{font-family:var(--display);font-size:clamp(30px,4.4vw,58px);color:var(--ink);text-align:center;z-index:1}
+  .drawerword em{font-style:italic;color:var(--ice)}
+  .drawertag{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ink3);text-align:center;max-width:44em;line-height:1.9;z-index:1}
+  @media (prefers-reduced-motion:reduce){.fpaper{animation:none}}
+}
+@media (max-width:700px){.fpaper{display:none}}
 </style>
 </head>
 <body>
@@ -1877,6 +1897,23 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   </div>
 </section>
 </div>
+
+<div class="pane" id="pn-drawer">
+<section aria-label="The drawer">
+  <div class="drawerstage">
+      <div class="fpaper" style="left:8%;top:16%;--rot:-7deg;animation-delay:0s"><b>THE PRE-MORTEM</b><i></i><i></i><i></i></div>
+      <div class="fpaper" style="left:74%;top:12%;--rot:5deg;animation-delay:0.7s"><b>THE COUNTERWEIGHT</b><i></i><i></i><i></i></div>
+      <div class="fpaper" style="left:14%;top:62%;--rot:4deg;animation-delay:1.4s"><b>THE HANDOVER BRIEF</b><i></i><i></i><i></i></div>
+      <div class="fpaper" style="left:78%;top:58%;--rot:-5deg;animation-delay:2.0999999999999996s"><b>THE WEEKLY LETTER</b><i></i><i></i><i></i></div>
+      <div class="fpaper" style="left:30%;top:8%;--rot:2deg;animation-delay:2.8s"><b>THE CONDITION CARD</b><i></i><i></i><i></i></div>
+      <div class="fpaper" style="left:60%;top:70%;--rot:-3deg;animation-delay:3.5s"><b>THE BOARD MEMO</b><i></i><i></i><i></i></div>
+      <p class="drawerword rev">And six more, already <em>written</em>.</p>
+      <p class="drawertag rev">No other software can write them, because no other software has measured the judge.</p>
+  </div>
+</section>
+</div>
+
+
 
 <div class="pane" id="pn-instrument-2">
 <section aria-label="The instrument, continued">

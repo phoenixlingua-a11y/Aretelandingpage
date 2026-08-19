@@ -1941,6 +1941,37 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   .drawerstage{gap:9px}
   .drawerword{margin-bottom:6px}
 }
+
+/* the phone drawer floats like the web drawer */
+@media (max-width:700px){
+  #pn-drawer section{position:relative;min-height:92svh;padding-top:70px !important}
+  .drawerstage{position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:10px;overflow:hidden;padding:0}
+  .fpaper{position:absolute !important;display:block !important;width:118px;max-width:none;
+    padding:9px 10px 12px;border-radius:4px;border:1px solid var(--grid2);border-left:1px solid var(--grid2);
+    background:var(--bg2);box-shadow:0 8px 22px rgba(0,0,0,.10);
+    transform:rotate(var(--rot)) !important;animation:fdrift 7s ease-in-out infinite !important;opacity:.92}
+  .fpaper b{display:block;font-size:6.5px;letter-spacing:.16em;color:var(--ink3);margin-bottom:6px}
+  .fpaper b::after{content:none}
+  .fpaper i{display:block;height:1.5px;background:var(--grid2);border-radius:1px;margin-bottom:4px}
+  .fpaper i:nth-child(3){width:70%}
+  .fpaper i:nth-child(4){width:85%}
+  .fpaper:nth-of-type(1){left:4% !important;top:8% !important}
+  .fpaper:nth-of-type(2){left:62% !important;top:5% !important}
+  .fpaper:nth-of-type(3){left:2% !important;top:64% !important}
+  .fpaper:nth-of-type(4){left:64% !important;top:66% !important}
+  .fpaper:nth-of-type(5){left:34% !important;top:2% !important}
+  .fpaper:nth-of-type(6){left:32% !important;top:76% !important}
+  .fpaper.open{position:fixed !important;left:50% !important;top:50% !important;
+    transform:translate(-50%,-50%) rotate(0) !important;width:250px;z-index:60;
+    animation:none !important;opacity:1;padding:16px 18px;
+    border-left:3px solid var(--ice);box-shadow:0 30px 80px rgba(0,0,0,.3)}
+  .fpaper.open b{font-size:9.5px;letter-spacing:.2em;color:var(--ice);margin-bottom:9px}
+  .fpaper.open i{display:none}
+  .fpaper.open .fdesc{display:block;font-size:13.5px}
+  .drawerword{z-index:1;position:relative}
+  .drawertag{z-index:1;position:relative}
+}
 </style>
 </head>
 <body>

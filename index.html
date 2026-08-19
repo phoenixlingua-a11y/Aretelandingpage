@@ -1658,6 +1658,16 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
     .ritual.in .rcol,.ritual.in .rlink{animation:none}
   }
 }
+
+@media (min-width:701px){
+  .enddoor{cursor:pointer !important;position:relative;z-index:5}
+  .enddoor:hover{background:var(--crit);color:var(--bg2) !important;
+    transform:rotate(-4deg) scale(1.06);box-shadow:0 0 40px rgba(180,83,95,.45)}
+  .enddoor::after{content:'PRESS TO APPLY';position:absolute;left:50%;bottom:-30px;
+    transform:translateX(-50%);font-size:9px;letter-spacing:.3em;color:var(--ink4);
+    opacity:0;transition:opacity .3s;white-space:nowrap}
+  .enddoor:hover::after{opacity:1}
+}
 </style>
 </head>
 <body>

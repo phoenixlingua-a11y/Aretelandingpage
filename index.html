@@ -1250,6 +1250,16 @@ section[data-num]::before{top:96px}
 @media (max-width:820px){.chairs{grid-template-columns:1fr}}
 
 .laptop{max-width:820px;margin:6px auto 0}
+/* the plain-words plate keeps the one-screen law: the frame hugs the shot (16:10) */
+#plain .laptop{width:min(92%, calc(30vh * 1.6));max-width:640px}
+#plain .lscreen img{max-height:30vh}
+@media (max-height:720px){
+  #plain .laptop{width:min(92%, calc(22vh * 1.6))}
+  #plain .lscreen img{max-height:22vh !important}
+  #plain .oblig{font-size:14.5px;margin-top:8px}
+  #plain h2{margin-bottom:6px}
+  #plain .drstamp{margin-top:6px}
+}
 .lscreen{border:2px solid #23272e;border-bottom:0;border-radius:14px 14px 0 0;background:#0b0d10;
   padding:12px 12px 10px;box-shadow:0 30px 80px rgba(0,0,0,.22)}
 .lscreen img{display:block;width:100%;height:auto;max-height:38vh;object-fit:contain;border-radius:6px;transition:opacity .45s ease}
@@ -1305,6 +1315,9 @@ section[data-num]::before{top:96px}
   .chairs{margin:14px 0 10px;gap:14px}
   .chair{padding:14px 16px}
   .crow{padding:6px 0}
+  #pn-instrument-b .oblig{font-size:14px;margin-top:6px}
+  #pn-instrument-b h2{margin-bottom:4px}
+  #pn-instrument-b .crow{padding:5px 0}
   .ritual{margin-top:10px !important}
   #pn-instrument .rcol svg[viewBox="0 0 160 160"]{width:112px;height:112px}
   #holdbtn{width:108px;height:108px}
@@ -2111,6 +2124,22 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
   <a href="#founder" data-label="Founder">07</a>
 </nav>
 
+<!-- ── 00 · IN PLAIN WORDS · the clarity plate: what it is, shown once, plainly ── -->
+<div class="pane" id="pn-plain">
+<section id="plain" aria-label="Areté, in plain words">
+  <div class="col">
+    <div class="kick rev"><span class="n">00</span> In plain words</div>
+    <h2 class="rev">What Areté <em class="hollow">is</em>.</h2>
+    <p class="oblig rev" id="pw1">Areté is an instrument for people whose decisions cannot be undone. It begins with a sixty-second morning reading of your cognitive state, scored against your own baseline, and it stands between you and the calls you are about to sign on a compromised day. You get the daily reading, a gate before irreversible decisions, and a record of the state that signed each one.</p>
+    <div class="laptop rev">
+      <div class="lscreen"><img id="pwimg" src="assets/shots/standing-dark.webp" alt="Areté, the morning Standing, live product" decoding="async"></div>
+      <div class="lbase"><span></span></div>
+    </div>
+    <p class="drstamp rev">The morning Standing · live product · demo account</p>
+  </div>
+</section>
+</div>
+
 <!-- ── I · THE ARGUMENT ── -->
 <div class="pane" id="pn-argument">
 <section id="argument" data-num="01">
@@ -2322,6 +2351,7 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
       </div>
     </div>
     <p class="oblig rev">Signals travel. Answers never do. Enforced in code, not in a promise.</p>
+    <p class="oblig rev" id="prax">For coaches and advisory firms: the second chair is your chair. Your client's drift, visible before the session, their answers never shared. Practitioners run the same eight-week pilot, on their own account first, then beside a client. <a class="ghost" id="door-practitioner" href="#application">Apply as a practitioner →</a></p>
   </div>
 </section>
 </div>
@@ -2559,8 +2589,9 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
     <div class="kick rev"><span class="n">06</span> Access</div>
     <h2 class="rev">Thirty places. By application.</h2>
     <p class="oblig rev">For the seats where error compounds · principals · founders · funds · boards · heads of institutions</p>
-    <p class="price rev">Areté is priced like the counsel it replaces, not the software it resembles. Terms are set in conversation, after application. The founding cohort enters on different terms: they pay in data and in testimony, and they are named in the validation report if they choose to be. <b>Every application is read personally.</b></p>
-    <p class="numline rev" id="numline">Priced as counsel, not as software. Every operator carries a number stamped on their record from day one. Numbers one to thirty belong to the founding edition, and they are not sold twice. The sixty-second read is free. The instrument is by application.</p>
+    <p class="price rev">Areté enters service through a paid pilot: eight weeks on the full instrument, your baseline established, the gate armed, the record yours. £750 in the United Kingdom · €850 in the European Union · CHF 900 in Switzerland. One price, no subscription until you have seen eight weeks of your own record. <b>Every application is read personally, and answered within a day.</b></p>
+    <p class="numline rev" id="numline">Priced as counsel, not as software. Every operator carries a number stamped on their record from day one. Numbers one to thirty belong to the founding edition, claimed in order by pilot operators who stay, and they are not sold twice. The sixty-second morning read is free. The instrument is by application.</p>
+    <a class="ghost rev" id="door-pilotmail" href="mailto:sabrine-hammami@areteprotocol.com?subject=Areté · The pilot" style="display:inline-block;margin-top:14px">Ask about the pilot by email →</a>
     <div id="crsentinel" style="height:1px"></div>
     <div id="close-read" aria-live="polite">
       <div class="crk">This page's read of you</div>
@@ -2612,8 +2643,7 @@ html[data-theme="light"] .aseal circle{stroke:#33607e}
       <li>Before an irreversible call, <b>the Intercept</b> reads the decision's wording, names the reasoning fault, and issues a verdict: proceed, or hold.</li>
       <li><b>Honest by construction:</b> panels stay locked until your data has earned them. The validation protocol is public.</li>
       <li><b>Private by construction:</b> signals, never content. Discreet at work. EU-resident. Yours to export or erase.</li>
-      <li><b>The sixty-second read is free for everyone</b>; the verdict is claimed with an email, and the claim is a numbered place on the waiting list. The full instrument is by application; the founding cohort of thirty pays in data and testimony instead.</li>
-      <li>An executive coach is inside the first witness cohort <b>now</b>; her unedited account publishes when the four weeks end.</li>
+      <li><b>The sixty-second morning read is free for everyone</b>; the verdict is claimed with an email, and the claim is a numbered place on the waiting list. The full instrument enters service through an <b>eight-week paid pilot: £750 UK · €850 EU · CHF 900 CH</b>. Thirty founding numbers, claimed in order, never sold twice.</li>
     </ul>
     <div class="qdoors">
       <a class="btn" id="q-read" href="#" rel="noopener">Take the sixty-second read</a>
@@ -3728,8 +3758,9 @@ try {
   }).catch(function(){});
 } catch(e){}
 
-/* ── the application form ── */
-setTimeout(function(){
+/* ── the application form · bound once the document is fully parsed,
+      never on a timer that can beat the parser to the overlay ── */
+(function(fn){ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',fn); } else { fn(); } })(function(){
 var __aform=document.getElementById('aform');
 if(!__aform) return;
 
@@ -3748,19 +3779,29 @@ document.getElementById('aform').addEventListener('submit', function(ev){
   var letter = !!(letterEl && letterEl.checked);
   var msg = document.getElementById('amsg');
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ msg.textContent = D().fInvalid; msg.className=''; return; }
-  /* a silent copy files itself in the Ledger Room; the application itself
-     travels by mail, straight to the founder */
+  /* the application tries the Ledger Room first; if the cross-origin door is
+     closed, it travels by mail, straight to the founder */
+  var done = false;
+  function byMail(){
+    if (done) return; done = true;
+    var mbody = encodeURIComponent('Email: ' + email + '\nRole: ' + role + '\nContext: ' + ctx
+      + '\nThe Letter: ' + (letter ? 'yes' : 'no') + (REF ? '\nRef: ' + REF : ''));
+    location.href = 'mailto:sabrine-hammami@areteprotocol.com?subject='
+      + encodeURIComponent('Areté · Application (' + role + ')') + '&body=' + mbody;
+    msg.textContent = D().fGo; msg.className = 'ok';
+  }
   try {
     fetch(APP + '/access', { method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ email: email, role: role, context: ctx + (REF ? ' [ref:' + REF + ']' : ''), letter: letter }) }).catch(function(){});
-  } catch(e){}
-  var mbody = encodeURIComponent('Email: ' + email + '\nRole: ' + role + '\nContext: ' + ctx
-    + '\nThe Letter: ' + (letter ? 'yes' : 'no') + (REF ? '\nRef: ' + REF : ''));
-  location.href = 'mailto:sabrine-hammami@areteprotocol.com?subject='
-    + encodeURIComponent('Areté · Application (' + role + ')') + '&body=' + mbody;
-  msg.textContent = D().fGo; msg.className = 'ok';
+      body: JSON.stringify({ email: email, role: role, context: ctx + (REF ? ' [ref:' + REF + ']' : '') + ' [site:pilot]', letter: letter }) })
+    .then(function(r){
+      if (r && r.ok){ done = true; msg.textContent = 'Received. You will hear from Sabrine within a day.'; msg.className = 'ok'; }
+      else byMail();
+    }).catch(byMail);
+  } catch(e){ byMail(); }
+  /* if the network answers nothing at all, the mail door still opens */
+  setTimeout(byMail, 4000);
 });
-}, 0);
+});
 
 /* ── the hero drifts up and yields as you descend ── */
 var heroIn = document.querySelector('.hero-in');
@@ -4880,6 +4921,7 @@ var FIELD = { px: -1e4, py: -1e4 };
     <div class="kick rev"><span class="n">06</span> Access</div>
     <h2 class="rev">The <em class="hollow">application</em>.</h2>
     <p class="oblig rev">One page. What you decide, and what a wrong call costs. Answered personally.</p>
+    <p class="oblig rev" id="apterms">Eight weeks, full instrument, paid pilot: £750 UK · €850 EU · CHF 900 CH. Applications answered personally within a day.</p>
     <form class="form rev" id="aform" novalidate>
       <div class="roles" role="group" aria-label="I am applying as">
         <button type="button" class="role on" data-r="Operator">Operator</button>
@@ -4893,6 +4935,8 @@ var FIELD = { px: -1e4, py: -1e4 };
       <p id="amsg" aria-live="polite"></p>
     </form>
     <div class="opendoor rev">
+      <p class="odh">Rather write first?</p>
+      <p class="odb"><a class="ghost" id="door-pilotmail2" href="mailto:sabrine-hammami@areteprotocol.com?subject=Areté · The pilot">Ask about the pilot by email →</a></p>
       <p class="odh">Not applying? The reading is still yours.</p>
       <p class="odb">The sixty-second read is open to everyone, free, today. The verdict it produces stays sealed until you claim it with an email; the claim holds a numbered place on the waiting list and starts a record that is yours to keep, export, or erase. The cohort is thirty places. The instrument's door is not.</p>
       <a class="ghost" id="door-read3" href="#" rel="noopener">Take the free read →</a>
@@ -4917,6 +4961,22 @@ var FIELD = { px: -1e4, py: -1e4 };
   document.querySelectorAll('a[href="#application"]').forEach(function(a){
     a.addEventListener('click',open);
   });
+  /* the practitioner door opens the application with the second chair already chosen */
+  var dp=document.getElementById('door-practitioner');
+  if(dp){ dp.addEventListener('click',function(){
+    var pb=document.querySelector('.role[data-r="Practitioner"]');
+    if(pb) pb.click();
+  }); }
+})();
+</script>
+<script>
+/* the plain-words plate: its screenshot keeps the visitor's face */
+(function(){
+  var im=document.getElementById('pwimg'); if(!im) return;
+  function face(){ try{ return (window.THEME&&THEME.pal&&THEME.pal().light)?'light':'dark'; }catch(e){ return 'dark'; } }
+  function set(){ im.src='assets/shots/standing-'+face()+'.webp'; }
+  set();
+  if(window.THEME&&THEME.on) THEME.on(set);
 })();
 </script>
 <script>(function(){var ps=document.querySelectorAll(".fpaper");ps.forEach(function(p){p.addEventListener("click",function(){var was=p.classList.contains("open");ps.forEach(function(x){x.classList.remove("open");x.setAttribute("aria-expanded","false");});if(!was){p.classList.add("open");p.setAttribute("aria-expanded","true");}});});})();</script>
